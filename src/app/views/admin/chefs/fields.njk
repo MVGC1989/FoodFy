@@ -1,0 +1,52 @@
+
+<button class= "button_save" type="submit"> Salvar Chef</button> 
+
+<div class="item">
+    <h2>Nome:</h2>
+    <div>
+        <input 
+            type="text" 
+            name="name" 
+            placeholder="Nome do chef..." 
+            value="{{chef.name}}">
+    </div>
+</div>
+
+
+<div class="item">
+    <h2>Avatar:</h2>
+    {% if files %}
+        <input 
+            type="text" 
+            name="path" 
+            value="{{files[0].path}}">
+    {% endif %}
+</div>
+    
+<div class="item">
+    <div class="avatar_upload">
+            <input 
+                id="avatar_input"
+                type="file"
+                name="avatar"
+                accept="image/*"
+                onchange="Avatar_Upload.handle_file_input(event)">
+                <p>Enviar Avatar</p>
+        </div>
+
+    <div class="avatar_preview">
+            {% if files %}
+                    <div class="photo" id="{{image.id}}">
+                        <img src="{{files[0].src}}" alt="{{chef.name}}">
+                            <i 
+                                class="material-icons"
+                                onclick="Avatar_Upload.remove_old_photo(event)"
+                                >close
+                            </i>
+                    </div>
+                <input type="hidden" name="removed_files">
+                <input type="hidden" name="file_id" value="{{chef.file_id}}">
+            {% endif %}
+        </div>
+</div>
+

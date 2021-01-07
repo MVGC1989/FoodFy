@@ -1,0 +1,27 @@
+{% extends "layoutAdmin.njk" %}
+
+{% block content %}
+
+<form action="/admin/chefs?_method=PUT" method="post" enctype="multipart/form-data">
+<!-- esse fomr=delete serve para link o botão com o seu respectivo forma através de um id delete-->
+    <h3 class="edit">Editando Chef
+        <button 
+            form="delete" 
+            class="button_delete"
+            id="del">Deletar
+        </button>
+    </h3>
+            {% include "admin/chefs/fields.njk"%}
+    <input 
+        type="hidden" 
+        name="id" 
+        value="{{chef.id}}">
+</form>
+
+<form id="delete" action="/admin/chefs?_method=DELETE" method="post">
+        <input 
+            type="hidden" 
+            name="id" 
+            value="{{chef.id}}">
+</form>
+{% endblock %}

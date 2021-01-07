@@ -1,0 +1,242 @@
+/*PHOTOS UPLOAD*/
+
+/*===AVATAR CHEF===*/
+
+form .item .avatar_upload{
+    position: relative;
+    display: block;
+    overflow: hidden;
+    width: 140px;
+    margin-left: 230px;
+    margin-top: 10px;
+    margin-bottom: 64px;
+}
+form .item .avatar_upload p{
+    padding: 8px 16px;
+    border-radius: 4px;
+    box-shadow: 0 2px 2px -6px #333;
+    background-color:#6558C3;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+}
+
+
+form .item #avatar_input{ 
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.avatar_preview img{
+    border-radius: 50%;
+    box-shadow: 0px 4px 8px 4px  #6558C3;
+    height: 200px;
+    width: 200px;
+    margin-left: 600px;
+}
+
+.avatar_preview .photo{
+    position: relative;
+    margin-top: 32px;
+    width: 250px;
+    height: 250px;
+    margin-bottom: 64px;
+}
+
+.avatar_preview .photo i{
+    position: absolute;
+    bottom: 25px;
+    left: 575px;
+    background-color: rgba(255,255, 255, 0.3);
+    color: red;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    font-size: 600%;
+    cursor: pointer;
+    transition: opacity 200ms;
+    opacity: 0;
+}
+
+.avatar_preview .photo:hover i{
+    opacity: 1;
+}
+
+/*=== PHOTOS RECIPES ===*/
+
+.photos_loading{
+    width: 800px;
+    height: 150px;
+    display: grid;
+    grid-template-columns: 150px, 1fr;
+}
+
+form .item .photos_upload{
+    position: relative;
+    margin: 10px 0 30px 230px;
+    width: 150px;
+    height: 150px;
+}
+form .item .photos_upload i{
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 4px;
+    width: 150px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    font-weight: bold;
+    color: #777777 ;
+}
+
+form .item #photos_input{ 
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    overflow: hidden;
+    width: 150px;
+    height: 150px;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.photos_preview{
+    position: relative;
+    left: 395px;
+    bottom: 180px;
+    max-height: 150px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.photos_preview img {
+    height: 150px;
+    width: 150px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid #dddddd;
+    object-fit: cover;
+}
+
+.photos_preview .photo{
+    position: relative;
+    width: 150px;
+}
+
+.photos_preview .photo i{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(255,255, 255, 0.3);
+    color: red;
+    width: 155px;
+    height: 155px;
+    display: flex;
+    align-items: center; /*centraliza na vertical*/
+    justify-content: center; /*centraliza na horizontal*/
+    font-size: 500%;
+    cursor: pointer;
+    transition: opacity 200ms;
+    opacity: 0;
+}
+
+.photos_preview .photo:hover i{
+    opacity: 1;
+}
+
+
+/* RECIPES GALLERY */
+
+.gallery{
+    width: 300px
+}
+.highlight > img{
+    width: 940px; 
+    height: 280px;
+    border-radius: 15px;
+    margin-left: 230px;
+    margin-top: 24px;
+    cursor: zoom-in;
+}
+
+.gallery_preview{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap:10px;
+    margin-left: 230px;
+    margin-top: 8px;
+}
+
+.gallery_preview img{
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    opacity: 0.6;
+    cursor: pointer;
+    transition: 200ms;
+    border-radius: 4px;
+}
+
+.gallery_preview img:hover,
+.gallery_preview img.active{
+    opacity: 1;
+}
+
+/*LIGHTBOX GALLERY*/
+
+.highlight .lightbox_target{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    overflow:hidden;
+    z-index: 100;
+    left: 0;
+    top:-100%;
+    opacity: 0;
+    transition: opacity 400ms;   
+}
+
+.highlight .lightbox_target img{
+    margin: auto;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: white;
+    border-radius: 15px;
+    width: 90%;
+    height: 90%;
+    object-fit: cover;
+}
+
+.highlight a.lightbox_close{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: white;
+    color: red;
+    font-weight: bold;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 400ms;
+    position: absolute;
+    right: 90px;
+    margin-top: 50px;
+}

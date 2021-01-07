@@ -1,0 +1,58 @@
+{% extends "layout.njk" %}
+
+{% block head %}
+    <title>FoodFy - Admin - Chef: {{chef.name}}</title>
+{% endblock %}
+
+{% block content %}
+
+
+<section>
+    <div class="img_chef_show" >
+        {% if not files %}
+            <p>Chefe sem foto!</p>
+        {% else %}
+        <img 
+            src="{{files[0].src}}" 
+            alt="Foto de:{{chef.name}} ." 
+            srcset="">
+        {% endif %}
+    </div>
+
+    <div class="name_chef">
+        <h2>{{chef.name}}</h2>
+    </div>
+</section>
+
+{% if chef.total_recipes == 0 %}
+
+<div>
+    <button class = "button_create_recipe"
+    onclick="window.location.href='/admin/recipes/create'">
+    Cadastre uma Receita
+    </button>
+</div>
+
+{% else %}
+<h3 class="chef_recipe">Receitas</h3>
+
+<div class="index_cards">
+    {% for recipe in recipes %}
+        <div class="cardindex">
+            <div>
+                <img class="img_recipe"
+                    src="{{recipe.image}}" 
+                    alt="{{recipe.title}}" 
+                    srcset="">
+            </div>
+                <div>
+                    <h1>{{recipe.title}}</h1>
+                    <h2>por {{chef.name}}</h2>
+                    <a href="/recipe/{{recipe.id}}">Visualizar</a>
+                </div>
+        </div>
+    {% endfor %}
+</div> 
+{% endif %}
+
+{% endblock %}

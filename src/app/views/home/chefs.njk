@@ -1,0 +1,39 @@
+{% extends "layout.njk" %}
+
+{% block content %}
+
+
+<div class="index_cards_chefs">
+    {% for chef in chefs %}
+        <div class="cardindex_chefs">
+            <div>
+                <a href="/show_chef/{{chef.id}}">
+                <img class="avatar_chefs" 
+                    src="{{chef.image}}"
+                    alt="{{chef.name}}">
+                </a>
+            </div>
+                <div>
+                    <h1>{{chef.name}}</h1>
+                    <p>
+                        {% if chef.total_recipes == 0 %}
+                            <p>Sem Receita</p>
+                        {% elseif chef.total_recipes == 1 %}
+                            <p>{{chef.total_recipes}} Receita</p>
+                        {%else%}
+                            <p>{{chef.total_recipes}} Receitas</p>
+                        {% endif %} 
+                    </p>
+                </div>
+        </div>
+    {% endfor %}
+</div> 
+
+<div 
+    class="pagination"
+    data-page={{pagination.page}}
+    data-total={{pagination.total}}
+    data-filter={{filter}}>
+</div>
+
+{% endblock %}

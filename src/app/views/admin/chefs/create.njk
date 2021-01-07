@@ -1,0 +1,10 @@
+{% extends "layoutAdmin.njk" %}
+
+{% block content %}
+
+<form method="POST" action="/admin/chefs" enctype="multipart/form-data" >
+    <h3 class="create">Cadastrar Novo Chefe</h3>
+        {% include "admin/chefs/fields.njk" %}
+</form>
+
+{% endblock content%}

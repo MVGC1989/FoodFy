@@ -1,0 +1,283 @@
+/* === PÁGINA INICIAL ===*/
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+body{
+    min-height: 100vh;
+    background-color: white;
+    font-family: "Roboto", sans-serif;
+    color: #111111;
+    width: 1400px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+/*=== LAYOUT HOMEPAGE ===*/
+
+.layout{
+    background-color: white;
+    width: 1400px;
+    padding-top: 32px;
+
+}
+.links img{
+    width: 90;
+    height: 26px;
+    margin-left: 231px;
+    position: relative;
+    top: 10px;
+
+}
+.links a {
+    font-size: 16px;
+    text-decoration: none;
+    color: black;
+}
+
+.links a:hover{
+    font-weight: bold;
+}
+
+
+.about{
+    margin-left: 120px;
+}
+.recipes,
+.chefs,
+.admin1{
+    margin-left: 30px;
+}
+
+.active{
+    font-weight: bold;
+    border-bottom: 2px solid black;
+}
+
+.rodape{
+    width: 1400px;
+    padding: 32px;
+    margin-top: auto;
+    text-align: center;
+    color: #999999;
+    background-color:#EEEEEE;
+} 
+
+/*=== FILTER ===*/
+
+.search form input{
+    width: 246px;
+    height: 37px;
+    margin-left: 825px;
+    border: 1px solid #DDDDDD;
+    position: relative;
+    bottom: 28px;
+}
+
+.search form button{
+    width: 91px;
+    height: 37px;
+    background-color: #6558C3;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+    bottom: 28px;
+}
+
+input::placeholder{
+    margin-left: 15px;
+    font-size: 14px;
+}
+
+/*=== HOMEPAGE ===*/
+.megacard{
+    width: 940px;
+    height: 366px;
+    background-color: #fbdfdb;
+    border-radius: 30px;
+    margin-left: 230px;
+    position: relative; 
+}
+.titlecard h1{
+    font-size: 32px;
+    color: #111111;
+    position:absolute;
+    left: 60px;
+    top:117px
+}
+.titlecard h2{
+    font-size: 18px;
+    line-height: 28px;
+    opacity: 0.7;
+    position: absolute;
+    left: 60px;
+    top: 165px;
+    text-align:justify;
+    width:316px;
+    height: 84px;
+}
+.imgchef{
+    width: 216px;
+    height: 300px;
+    position: absolute;
+    right: 100px;
+    top: 66px;
+}
+.titlemore h3{
+    font-family: "Roboto", bold;
+    font-size: 24px;
+    margin-left: 230px;
+    margin-top: 50px;
+}
+
+/* === CARD MAIS ACESSADOS ===*/
+
+.cards{
+    width: 940px;
+    margin-top: 20px;
+    margin-left: 230px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+}
+.card{
+    background-color: white;
+    cursor: pointer;
+}  
+.cardimg_container img{
+    width: 300px;
+    height: 140px;
+    border-radius: 15px;
+}
+.nome_receita{
+    margin-top: 20px;
+    font-size: 18px;
+}
+.autor{
+    margin-top: 5px;
+    margin-bottom: 30px;
+    font-size: 14px;
+    color: #777777;
+}
+
+/* === PAGINA DE RECEITAS ===*/
+
+.cards1{
+    width: 940px;
+    margin-top: 50px;
+    margin-left: 230px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px; 
+}
+
+/* === PÁGINA SOBRE === */
+
+.sobre h3{
+    font-size: 24px;
+    font-family: "Roboto-bold", sans-serif;
+    margin-left: 220px;
+    margin-top: 50px;
+}
+
+.comeco h3{
+    margin-top: 30px;
+    margin-left: 220px;
+    font-size: 20px;
+    font-family: "Roboto-bold", sans-serif;
+}
+.nossa_receita h3{
+    margin-top: 30px;
+    margin-left: 220px;
+    font-size: 20px;
+    font-family: "Roboto-bold", sans-serif;
+}
+.text p{
+    font-size: 18px;
+    color:#444444;
+    text-align: justify;
+    margin-top: 20px;
+    line-height: 28px;
+    margin-left: 220px; 
+    margin-right: 220px;
+}
+.bottom{
+    margin-bottom: 50px;
+}
+
+/* === DETALHE DA RECEITA === */
+
+.img_recipe_show img{
+    border-radius: 15px;
+    margin-left: 230px;
+    margin-top: 24px;
+    width: 940px;
+    height: 280px;
+}
+
+.title_recipe h2,
+.name_chef{
+    width: 1400px;
+    text-align: center;
+    font-size: 36px
+}
+.author p{
+    font-size: 20px;
+    color: #777777;
+    text-align: center;
+    margin-top: 4px;
+}
+.ingredients h2{
+    font-size: 24px;
+    margin-left: 230px;
+    margin-top: 50px;
+}
+.show_ingredients {
+    color: #444444 ;
+    margin: 20px 230px 0 230px;
+    text-align: left;
+    font-size: 18px;
+    line-height: 28px;
+}
+.preparation h2{
+    font-size: 24px;
+    margin-left: 230px;
+    margin-top: 50px;
+}
+.show_preparation{
+    color: #444444 ;
+    margin: 20px 230px 0 230px;
+    text-align: left;
+    font-size: 18px;
+    line-height: 28px;
+}
+.infos h2{
+    font-size: 24px;
+    margin-left: 220px;
+    margin-top: 50px;
+}
+.show_infos {
+    color: #444444 ;
+    text-align:justify ;
+    margin: 20px 230px 50px 230px;
+    font-size: 18px;
+    line-height: 28px;   
+}
+
+/*=== BOTÕES ESCONDER/MOSTRAR ===*/
+
+.hide{
+    font-size: 12px;
+    color: #999999;
+    font-family: 'Roboto', bold;
+    cursor: pointer;
+}

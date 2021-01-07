@@ -1,0 +1,93 @@
+{% extends "layout.njk" %}
+
+{% block head %}
+
+<title>FoodFy -{{recipe.title}}</title>
+
+{% endblock %}
+
+{% block content %}
+
+<section>
+    <div class="gallery">
+        <div class="highlight">
+            {% if not files[0] %} {#se não houver imagem #}
+                <img src="http://placehold.it/500x500?text=PRODUTO SEM FOTO">
+            {% else %}
+                <img 
+                    src="{{files[0].src}}" 
+                    alt="{{files[0].name}}"
+                    onclick="Lightbox.open()">
+            {% endif %}
+
+            <div class="lightbox_target">
+                <img 
+                src="{{files[0].src}}" 
+                alt="{{files[0].name}}">
+
+                <a 
+                    href="#" 
+                    class="lightbox_close"
+                    onclick = "Lightbox.close()">
+                        <i class="material-icons">close</i>
+                </a>
+            </div>
+
+        </div>
+
+        <div class="gallery_preview">
+            {% for image in files %}
+            <img 
+                src="{{image.src}}" 
+                alt="{{image.name}}"
+                {% if loop.index == 0 %}
+                class="active"
+                {% endif %}
+                onclick="Image_Gallery.set_image(event)"
+                >
+            {% endfor %}
+        </div>
+    </div>
+
+
+    <div class="title_recipe">
+        <h2>{{recipe.title}}</h2>
+    </div>
+
+    <div class="author">
+        <p>por {{recipe.chef_name}}</p>
+    </div>
+
+    <div class="ingredients">
+        <h2>Ingredientes 
+            <a class="hide">ESCONDER</a>
+        </h2>
+            <div class="show_ingredients content">
+                {% for ingredient in recipe.ingredients %}
+                    <li>{{ingredient}}</li><!-- esse ingredient pega recipe por recipe do array-->
+                {% endfor %}
+            </div>
+    </div>
+
+    <div class="preparation">
+        <h2>Modo de Preparo
+            <a class="hide">ESCONDER</a>
+        </h2>
+            <div class="show_preparation content">
+                {% for prepare in recipe.preparation %}
+                    <li>{{prepare}}</li>
+                {% endfor %}
+            </div>
+    </div>
+
+    <div class="infos">
+        <h2>Informações Adicionais
+            <a class="hide">ESCONDER</a>
+        </h2>
+            <div class="show_infos content">
+                <p>{{recipe.information}}</p>
+            </div>
+    </div>
+</section>
+
+{% endblock %}

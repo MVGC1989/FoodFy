@@ -1,0 +1,37 @@
+{% extends "layoutadmin.njk" %}
+
+{% block content %}
+
+<h3 class="index">Gerenciar Receitas 
+    <button 
+        class="button_new_recipe" 
+        onclick="location.href='/admin/recipes/create'">Nova Receita
+    </button>
+</h3>
+
+<div class="index_cards">
+    {% for recipe in recipes %}
+        <div class="cardindex">
+            <div>
+                <img class="img_recipe"
+                    src="{{recipe.image}}" 
+                    alt="{{recipe.title}}" 
+                    srcset="">
+            </div>
+                <div>
+                    <h1>{{recipe.title}}</h1>
+                    <h2>por {{recipe.chef_name}}</h2>
+                    <a href="/admin/recipes/{{recipe.id}}">Visualizar</a>
+                </div>
+        </div>
+    {% endfor %}
+</div> 
+
+<div 
+    class="pagination"
+    data-page={{pagination.page}}
+    data-total={{pagination.total}}
+    data-filter={{filter}}>
+</div>
+
+{% endblock %}

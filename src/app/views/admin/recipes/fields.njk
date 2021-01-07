@@ -1,0 +1,132 @@
+
+<button class= "button_save" type="submit"> Salvar Receita</button> <!--o submit permite que o formulário seja enviado ao servidor
+        por estar dentro do form-->
+
+<div class="item">
+    <h2>Imagem da Receita</h2>
+    <div class="photos_loading">
+            <div class="photos_upload">
+                <input 
+                    id="photos_input"
+                    type="file"
+                    name="photos"
+                    multiple 
+                    accept="image/*"
+                    onchange="Photos_Upload.handle_file_input(event)">
+                <i class="material-icons">add</i>
+            </div>
+
+            <div class="photos_preview">
+                {% if files %}
+                    {% for image in files %}
+                        <div class="photo" id="{{image.file_id}}">
+                            <img src="{{image.src}}" alt="{{image.name}}">
+                                <i class="material-icons"
+                                onclick="Photos_Upload.remove_old_photo(event)"
+                                >close
+                            </i>
+                        </div>
+                    {% endfor %}
+                    <input type="hidden" name="removed_files">
+                {% endif %}
+            </div>
+    </div>
+</div>
+
+<div class="item">
+    <h2>Nome da Receita</h2>
+    <div>
+        <input 
+            type="text" 
+            name="title" 
+            placeholder="Nome da receita..." 
+            value="{{recipes.title}}">
+    </div>
+</div>
+
+<div class="item">
+    <h2>Chef</h2>
+    <div>
+        <select name="chef_id"  placeholder="Selecione um Chef">
+            {% for chef in chef_selection %}
+                <option value="{{chef.id}}"
+                    {% if recipes.chef_id == chef.id %} 
+                        selected  
+                    {% endif %}>
+                    {{chef.name}}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+</div>
+
+
+<div class="item">
+        <h2>Ingredientes</h2>
+        <div id="ingredients">
+            {% if recipes.ingredients %}<!-- se tiver ingredientes aparece a lista de ingredientes-->
+                {% for ingredient in recipes.ingredients %}
+                    <div class="ingredient">
+                        <input  
+                            type="text" 
+                            name="ingredients[]" 
+                            value="{{ ingredient }}" 
+                            placeholder="Digite um novo ingrediente..."/>
+                            <span id ="remove" class="remove_ingredients">X</span>
+                        </div>
+                {% endfor %}
+            {% else %} <!--se não tiver ingrediente cadastrado aparece input vazio-->
+                <div class="ingredient">
+                    <input 
+                        type="text" 
+                        name="ingredients[]" 
+                        value="{{ingredient}}" 
+                        placeholder="Digite um novo ingrediente..."/>
+                        <span id ="remove" class="remove_ingredients">X</span>
+                </div>
+            {% endif %}
+        </div>
+        <button type="button" class="add_new_ingredient">Adicionar Novo Ingrediente</button>
+       
+</div>
+
+<div class="item">
+    <h2>Modo de Preparo</h2>
+        <div id="preparations">
+            {%if recipes.preparation %}
+                {% for preparation in recipes.preparation %}
+                    <div class="preparation">
+                        <input 
+                            type="text" 
+                            name="preparation[]" 
+                            value="{{ preparation }}" 
+                            placeholder="Passos..."/>
+                            <span id ="remove" class="remove_preparation">X</span>
+                    </div>
+                     
+                {% endfor %}
+            {% else %}
+                <div class="preparation">
+                    <input 
+                        type="text" 
+                        name="preparation[]" 
+                        value="{{ preparation }}" 
+                        placeholder="Passos..."/>
+                        <span id ="remove" class="remove_preparation">X</span>
+                </div>
+            {% endif%}
+        </div>
+        <button type="button" class="add_new_pass">Adicionar Novo Passo</button>
+              
+</div>
+
+<div class="item">
+    <h2>Informações Adicionais</h2>
+        <div class="information">
+            <textarea 
+            name="information" 
+            cols="30" 
+            rows="10">{{recipes.information}}
+            </textarea>
+        </div>
+</div>

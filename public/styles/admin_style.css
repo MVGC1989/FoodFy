@@ -1,0 +1,358 @@
+/*=== LAYOUT ADMIN ===*/
+
+.admin{
+    background-color:#111111;
+    width: 1400px;
+    padding: 32px;
+}
+
+.logo_admin{
+    position: absolute;
+    left: 231px;
+    top: 27px;
+}
+
+.admin{
+    font-size: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.linkadmin1{
+    color: #999999;
+    margin-left: 370px;
+    margin-right: 30px;
+    text-decoration: none;
+}
+
+.linkadmin2{
+    color: #999999;
+    text-decoration: none;
+}
+
+.activeadm{
+    color:white;
+}
+
+/*=== LISTAGEM RECEITAS ADMIN ===*/
+
+.index{
+    font-size: 24px;
+    color: #111111 100%;
+    margin-top: 50px;
+    margin-left: 230px;
+    margin-right: 230px;
+}
+
+.index_cards{
+    margin-top: 30px;
+    margin-left: 230px;
+    margin-bottom: 48px;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 20px;
+}
+
+.cardindex{
+    display: grid;
+    grid-template-columns: 172px 1fr;
+    gap: 0;
+}
+
+.cardindex div:nth-child(2),
+.cardindex_chefs div:nth-child(2){
+    margin: 0;
+    margin-left: 20px;
+}
+
+.img_recipe{
+    width: 172px;
+    height: 80px;
+    border-radius: 8px;
+    margin: 0;
+}
+
+.cardindex h1{
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+    color: #111;
+    margin-bottom: 5px;
+}
+
+.cardindex h2{
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.cardindex a,
+.cardindex_chefs a{
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 16px;
+    text-decoration: none;
+    color: #6558C3;
+    margin: 0;
+}
+
+.button_new_recipe,
+.button_new_chef{
+    font-weight: bold;
+    font-size: 16px;
+    width: 139px;
+    height: 37px;
+    text-decoration: none;
+    background-color:#6558C3;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+    left: 610px;
+    bottom: 110px;
+}
+
+/*=== SHOW- DETALHE DA RECEITA ADMIN ====*/
+
+.show{
+    font-size: 24px;
+    color: #111111 100%;
+    margin-left: 230px;
+    margin-top: 30px;
+}
+
+.button_edit_recipe,
+.button_edit_chef{
+    font-weight: bold;
+    font-size: 16px;
+    width: 139px;
+    height: 37px;
+    text-decoration: none;
+    background-color:#6558C3;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+    left: 1030px;
+    top: 64px;
+}
+
+/*=== FIELDS ADMIN RECIPES ===*/
+
+.item h2{
+    font-size: 16px;
+    font-weight: bold;
+    color: #111;
+    margin-bottom: 10px;
+    margin-left: 230px;
+    margin-top: 30px;
+}
+
+.item input[type="text"],
+.item textarea{
+    width: 940px;
+    height: 49px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 4px 10px;
+    font-size: 16px;
+    outline: none;
+    color: #666;
+    margin-top: 10px;
+    margin-left: 230px;
+    margin-right: 230px;
+}
+
+.item select{
+    width: 962px;
+    height: 59px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 4px 10px;
+    font-size: 16px;
+    outline: none;
+    color: #666;
+    margin-top: 10px;
+    margin-left: 230px;
+}
+
+input::placeholder{
+    font-size: 14px;
+}
+
+.item .information textarea {
+    height: 200px;
+    resize: none;
+    margin-bottom: 50px;
+}
+.add_new_ingredient,
+.add_new_pass{
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: none;
+    color: #6558C3;
+    margin-left: 230px;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+.remove_ingredients,
+.remove_preparation{
+    background-color: #DC4747;
+    color:#FFFFFF;
+    padding: 2px 6px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 50%;
+    position: relative;
+    left: 1200px;
+    bottom: 40px;
+}
+
+/*=== CREATE ADMIN RECIPES/CHEFS ===*/
+
+.create{
+    font-size: 24px;
+    margin: 55px 230px 0 230px;
+}
+.button_save{
+    width: 139px;
+    height: 37px;
+    background-color: #6558C3;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 4px;
+    cursor: pointer;
+    float: left;
+    position: relative;
+    bottom: 37px;
+    left: 1050px;
+}
+
+/*=== EDIT ADMIN RECIPES/CHEFS ===*/
+
+.edit{
+    font-size: 24px;
+    margin: 55px 230px 0 230px;
+}
+
+/*=== DELETE ADMIN RECIPES/CHEFS ===*/
+
+.button_delete{
+    width: 92px;
+    height: 37px;
+    background-color:#DC4747;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 530px;   
+}
+
+/*=== INDEX ADMIN CHEFS ===*/
+
+.index_cards_chefs{
+    margin-left: 230px;
+    margin-right: 230px;
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap:20px;
+}
+
+.cardindex_chefs{
+display: grid;
+grid-template-columns: 64px 1fr;
+align-items: center;
+gap: 0;
+}
+
+.avatar_chefs{
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+}
+
+.cardindex_chefs h1{
+    text-transform: capitalize;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+    color: #111;
+    margin-top: 8px;
+    margin-bottom: 5px;
+}
+
+.cardindex_chefs p{
+    font-size: 14px;
+    color:#666666;
+}
+
+/*=== SHOW CHEFS ===*/
+
+.img_chef_show img{
+    border-radius: 50%;
+    box-shadow: 0px 4px 8px 4px  #6558C3;
+    height: 200px;
+    width: 200px;
+    margin-top: 50px;
+    margin-left: 600px;
+}
+
+.name_chef p{
+    font-size: 20px;
+    color: #777777;
+}
+
+.button_create_recipe{
+    background-color: #6558C3;
+    color: #FFFFFF;
+    padding: 8px 16px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 56px 0 64px 600px;
+}
+
+.chef_recipe{
+    font-weight: bold;
+    font-size: 24px;
+    color: #111111;
+    margin-left: 230px;
+    margin-top: 78px;
+}
+
+/*=== PAGINAÇÃO ===*/
+
+.pagination{
+    position: absolute;
+    bottom: 72px;
+    padding: 16px;
+    margin-bottom: 16px;
+    align-self: center;
+    display: flex;
+}
+
+.pagination a,
+.pagination span {
+    color: black;
+    text-decoration: none;
+    margin-right: 16px;
+    font-weight: bold;
+}
+
+.pagination a:hover{
+    color: gray;
+    filter: brightness(0.9); /*deixa mais escuro quando passo mouse*/
+    border-bottom: 2px solid gray;
+}
+
