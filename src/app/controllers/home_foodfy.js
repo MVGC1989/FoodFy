@@ -1,6 +1,7 @@
 const Recipe = require("../models/Recipe")
 const Chef = require("../models/Chef")
 const File = require("../models/Files")
+const {date} = require("../../lib/utils")
 
 module.exports = {
     async index(req , res){
@@ -95,6 +96,8 @@ module.exports = {
                 return res.render("home/notfound")
             }
 
+            recipe.created_at = date(recipe.created_at).format
+            
             result = await Recipe.files(recipe.id)
             const files = result.rows.map( file => ({
                 ...file,
@@ -158,6 +161,8 @@ module.exports = {
             //Pega os dados do chef
             let result = await Chef.find(id)
             const chef = result.rows[0]
+
+            chef.created_at = date(chef.created_at).format
 
             //Mostra as receitas de cada chef
             result = await Chef.findRecipesByChef(id)

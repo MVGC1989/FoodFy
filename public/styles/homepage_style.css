@@ -236,6 +236,13 @@ input::placeholder{
     text-align: center;
     margin-top: 4px;
 }
+
+.register p{
+    text-align: center;
+    margin-top: 8px;
+    color: #777777;
+}
+
 .ingredients h2{
     font-size: 24px;
     margin-left: 230px;

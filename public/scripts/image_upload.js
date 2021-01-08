@@ -87,6 +87,7 @@ const Photos_Upload = {
     get_remove_button(){
         const button = document.createElement('i')
         button.classList.add('material-icons')
+        button.onclick = Photos_Upload.remove_photo
         button.innerHTML = "close"
         return button
     },
@@ -108,7 +109,7 @@ const Photos_Upload = {
         const photoDiv = event.target.parentNode
 
         if(photoDiv.id){
-            const removed_files = document.querySelector(" input[name='removed_files' ")
+            const removed_files = document.querySelector(" input[name='removed_files'] ")
             if(removed_files){
                 removed_files.value += `${photoDiv.id},`
             }

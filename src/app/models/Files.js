@@ -82,7 +82,7 @@ module.exports = {
           UPDATE files SET 
           name = ($1),
           path = ($2)
-          WHERE id = ($3)
+          WHERE id = $3
           RETURNING id`
 
         const values = [

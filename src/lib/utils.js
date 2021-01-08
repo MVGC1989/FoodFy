@@ -5,7 +5,7 @@ age: function (timestamp){
 
     let age = today.getFullYear() - birthDate.getFullYear()
 
-    var month = today.getMonth() - birthDate.getMonth()
+    const month = today.getMonth() - birthDate.getMonth()
 
     if (month < 0 || month == 0 && today.getDate() < birthDate.getDate()){ 
         age = age -1 
@@ -13,15 +13,18 @@ age: function (timestamp){
     return age
 },
 date: function(timestamp){
-    var date = new Date(timestamp)
-    var year = date.getUTCFullYear() 
-    var month = `0${date.getUTCMonth() + 1}`.slice(-2)
-    var day = `0${date.getUTCDate()}`.slice(-2)
+    const date = new Date(timestamp)
+    const year = date.getUTCFullYear() 
+    const month = `0${date.getUTCMonth() + 1}`.slice(-2)
+    const day = `0${date.getUTCDate()}`.slice(-2)
+    const hour = date.getHours()
+    const minutes = date.getMinutes()
+    const seconds = date.getSeconds()
         return {
             day,
             month,
             year,
-            iso: `${year}-${month}-${day}`,
+            iso: `${year}-${month}-${day} ${hour}:${minutes}:${seconds}`,
             birth_day: `${day}/${month}`,
             format: `${day}/${month}/${year}`
         }

@@ -88,21 +88,21 @@ module.exports = {
     async show(req, res) {
         try {
             let results = await Recipe.find(req.params.id)
-            const recipes = results.rows[0]
+            const recipe = results.rows[0]
             
-            if(!recipes) {
+            if(!recipe) {
                 return res.send("Receita não encontrada!")
             } 
             
-            recipes.created_at = date(recipes.created_at).format
+            recipe.created_at = date(recipe.created_at).format
 
-            results = await Recipe.files(recipes.id)
+            results = await Recipe.files(recipe.id)
             const files = results.rows.map( file => ({
                 ...file,
                 src: `${req.protocol}://${req.headers.host}${file.path.replace("public", "")}`
             }))
 
-            return res.render("admin/recipes/show", { recipes, files })
+            return res.render("admin/recipes/show", { recipe, files })
         
         }catch (err) {
             console.error (err)
@@ -177,12 +177,12 @@ module.exports = {
             }
             
         }
-            Recipe.update(req.body, id)
+            await Recipe.update(req.body, id)
             return res.redirect(`/admin/recipes/${req.body.id}`)
         }
         catch (err) {
             console.error(err)
-          }
+        }
     },
 
     async delete(req, res){
@@ -190,13 +190,13 @@ module.exports = {
             const { id } = req.body;
 
             let files = (await Recipe.files(id)).rows;
-      
+    
             let removeFilesPromise = files.map((file) => File.RecipeDelete(file.id));
             await Promise.all(removeFilesPromise);
-      
+    
             removeFilesPromise = files.map((file) => File.delete(file.id));
             await Promise.all(removeFilesPromise);
-      
+    
             await Recipe.delete(id);
     
                 return res.redirect(`/admin/recipes`)

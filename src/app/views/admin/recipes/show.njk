@@ -8,86 +8,88 @@
 
 <button 
     class="button_edit_recipe" 
-    onclick="window.location.href='/admin/recipes/{{recipes.id}}/edit'">Editar Receita
+    onclick="window.location.href='/admin/recipes/{{recipe.id}}/edit'">Editar Receita
 </button>
 
 <div class="show_title">
     <h3 class="show">
-        Receita: {{recipes.title}}
+        Receita: {{recipe.title}}
     </h3>
 </div>
 
 <div class="gallery">
-        <div class="highlight">
-            {% if not files[0] %} {#se não houver imagem #}
-                <img src="http://placehold.it/500x500?text=PRODUTO SEM FOTO">
-            {% else %}
-                <img 
-                    src="{{files[0].src}}" 
-                    alt="{{files[0].name}}"
-                    onclick="Lightbox.open()">
-            {% endif %}
+    <div class="highlight">
+        {% if not files[0] %} {#se não houver imagem #}
+            <img src="http://placehold.it/500x500?text=PRODUTO SEM FOTO">
+        {% else %}
+            <img 
+                src="{{files[0].src}}" 
+                alt="{{files[0].name}}"
+                onclick="Lightbox.open()">
+        {% endif %}
 
-            <div class="lightbox_target">
-                <img 
+        <div class="lightbox_target">
+            <img 
                 src="{{files[0].src}}" 
                 alt="{{files[0].name}}">
-
                 <a 
                     href="#" 
                     class="lightbox_close"
                     onclick = "Lightbox.close()">
-                        <i class="material-icons">close</i>
+                    <i class="material-icons">close</i>
                 </a>
-            </div>
-
-        </div>
-
-        <div class="gallery_preview">
-            {% for image in files %}
-            <img 
-                src="{{image.src}}" 
-                alt="{{image.name}}"
-                {% if loop.index == 0 %}
-                class="active"
-                {% endif %}
-                onclick="Image_Gallery.set_image(event)"
-                >
-            {% endfor %}
         </div>
     </div>
+
+    <div class="gallery_preview">
+        {% for image in files %}
+        <img 
+            src="{{image.src}}" 
+            alt="{{image.name}}"
+            {% if loop.index == 0 %}
+            class="active"
+            {% endif %}
+            onclick="Image_Gallery.set_image(event)"
+            >
+        {% endfor %}
+    </div>
+</div>
+
     <div class="title_recipe">
-        <h2>{{recipes.title}}</h2>
+        <h2>{{recipe.title}}</h2>
     </div>
 
     <div class="author">
-        <p>por {{recipes.chef_name}}</p>
+        <p>por {{recipe.chef_name}}</p>
     </div>
 
-    <div class="ingredients">
-        <h2>Ingredientes</h2>
-            <div class="show_ingredients">
-                {% for ingredient in recipes.ingredients %}
-                    <li>{{ingredient}}</li><!-- esse ingredient pega recipe por recipe do array-->
-                {% endfor %}
-            </div>
+        <div class="register">
+        <p><i>Receita cadastrada em: {{recipe.created_at}}</i></p>
     </div>
 
-    <div class="preparation">
-        <h2>Modo de Preparo</h2>
-            <div class="show_preparation">
-                {% for prepare in recipes.preparation %}
-                    <li>{{prepare}}</li>
-                {% endfor %}
-            </div>
-    </div>
+<div class="ingredients">
+    <h2>Ingredientes</h2>
+        <div class="show_ingredients">
+            {% for ingredient in recipe.ingredients %}
+                <li>{{ingredient}}</li><!-- esse ingredient pega recipe por recipe do array-->
+            {% endfor %}
+        </div>
+</div>
 
-    <div class="infos">
-        <h2>Informações Adicionais</h2>
-            <div class="show_infos">
-                <p>{{recipes.information}}</p>
-            </div>
-    </div>
+<div class="preparation">
+    <h2>Modo de Preparo</h2>
+        <div class="show_preparation">
+            {% for prepare in recipe.preparation %}
+                <li>{{prepare}}</li>
+            {% endfor %}
+        </div>
+</div>
 
+<div class="infos">
+    <h2>Informações Adicionais</h2>
+        <div class="show_infos">
+            <p>{{recipe.information}}</p>
+        </div>
+</div>
 
 {% endblock %}
