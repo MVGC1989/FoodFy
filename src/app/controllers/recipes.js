@@ -146,8 +146,8 @@ module.exports = {
             }
         }
 
-        let results = await Recipe.find(req.body.id)
-        let id = results.rows[0]
+        //let results = await Recipe.find(req.body.id)
+        //let id = results.rows[0]
 
         if (req.body.removed_files) {
             const removedFiles = req.body.removed_files.split(",")
@@ -177,7 +177,7 @@ module.exports = {
             }
             
         }
-            await Recipe.update(req.body, id)
+        await Recipe.update(req.body)
             return res.redirect(`/admin/recipes/${req.body.id}`)
         }
         catch (err) {

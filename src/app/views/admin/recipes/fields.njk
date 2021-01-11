@@ -62,32 +62,36 @@
 
 
 <div class="item">
-        <h2>Ingredientes</h2>
-        <div id="ingredients">
-            {% if recipes.ingredients %}<!-- se tiver ingredientes aparece a lista de ingredientes-->
-                {% for ingredient in recipes.ingredients %}
-                    <div class="ingredient">
-                        <input  
-                            type="text" 
-                            name="ingredients[]" 
-                            value="{{ ingredient }}" 
-                            placeholder="Digite um novo ingrediente..."/>
-                            <span id ="remove" class="remove_ingredients">X</span>
-                        </div>
-                {% endfor %}
-            {% else %} <!--se não tiver ingrediente cadastrado aparece input vazio-->
+    <h2>Ingredientes</h2>
+    <div id="ingredients">
+        {% if recipes.ingredients %}<!-- se tiver ingredientes aparece a lista de ingredientes-->
+            {% for ingredient in recipes.ingredients %}
                 <div class="ingredient">
-                    <input 
+                    <input  
                         type="text" 
                         name="ingredients[]" 
-                        value="{{ingredient}}" 
+                        value="{{ ingredient }}" 
                         placeholder="Digite um novo ingrediente..."/>
                         <span id ="remove" class="remove_ingredients">X</span>
                 </div>
-            {% endif %}
-        </div>
-        <button type="button" class="add_new_ingredient">Adicionar Novo Ingrediente</button>
-       
+            {% endfor %}
+        {% else %} <!--se não tiver ingrediente cadastrado aparece input vazio-->
+            <div class="ingredient">
+                <input 
+                    type="text" 
+                    name="ingredients[]" 
+                    value="{{ingredient}}" 
+                    placeholder="Digite um novo ingrediente..."/>
+                    <span id ="remove" class="remove_ingredients">X</span>
+            </div>
+        {% endif %}
+    </div>
+
+    <button 
+        type="button" 
+        class="add_new_ingredient">Adicionar Novo Ingrediente
+    </button>
+
 </div>
 
 <div class="item">
@@ -103,7 +107,6 @@
                             placeholder="Passos..."/>
                             <span id ="remove" class="remove_preparation">X</span>
                     </div>
-                     
                 {% endfor %}
             {% else %}
                 <div class="preparation">
@@ -116,8 +119,12 @@
                 </div>
             {% endif%}
         </div>
-        <button type="button" class="add_new_pass">Adicionar Novo Passo</button>
-              
+
+        <button 
+            type="button" 
+            class="add_new_pass">Adicionar Novo Passo
+        </button>
+
 </div>
 
 <div class="item">
