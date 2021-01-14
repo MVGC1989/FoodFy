@@ -140,6 +140,7 @@ module.exports = {
 
     async put(req, res){
         try{
+            console.log(req.files)
             const keys = Object.keys(req.body)
                 for( key of keys ){
                     if(req.body[key] == "" && key != "removed_files"){
@@ -152,7 +153,9 @@ module.exports = {
                 const last_index = removedFiles.length -1
                 removedFiles.splice(last_index, 1)
             
-                const removedFilesPromise = removedFiles.map(id => File.delete(id))
+                const removedFilesPromise = removedFiles.map(id => {
+                    File.delete(id)
+                })
                 await Promise.all(removedFilesPromise)
         }
 
