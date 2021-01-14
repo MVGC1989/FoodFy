@@ -59,7 +59,12 @@
     </div>
 
     <div class="register">
+        {% if recipe.created_at != recipe.updated_at%}
         <p><i>Receita cadastrada em: {{recipe.created_at}}</i></p>
+        <p><i>Atualização em: {{recipe.updated_at}}</i></p>
+        {% else %}
+        <p><i>Receita cadastrada em: {{recipe.created_at}}</i></p>
+        {% endif %}
     </div>
 
     <div class="ingredients">

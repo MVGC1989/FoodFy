@@ -7,7 +7,7 @@ module.exports = {
         return db.query(`SELECT recipes.*, chefs.name AS chef_name
         FROM recipes
         LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
-        ORDER BY title ASC`
+        ORDER BY created_at DESC`
         )    
     },
 
@@ -20,6 +20,7 @@ module.exports = {
                 preparation,
                 information,
                 created_at
+                
             ) VALUES ($1, $2, $3, $4, $5, $6)
                 RETURNING id
         `
@@ -29,7 +30,7 @@ module.exports = {
             data.ingredients,
             data.preparation,
             data.information,
-            date(Date.now()).iso,
+            date(Date.now()).iso
         ]
         
         return db.query(query, values)
@@ -50,6 +51,7 @@ module.exports = {
             FROM recipes
             LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
             WHERE recipes.title ILIKE '%${filter}%'
+            ORDER BY updated_at DESC
             `)
     },
 
@@ -78,25 +80,28 @@ module.exports = {
 
     async delete(id) {
         try{
-          const results = await db.query(`
-            SELECT * FROM files
-            INNER JOIN recipes_files ON (files.id = recipes_files.file_id)
-            WHERE recipes_files.recipe_id = $1`, [id]
-          )
-          
-          const removedFiles = results.rows.map( async file => {
-            fs.unlinkSync(file.path)
-      
-            await db.query(`DELETE FROM recipes_files WHERE recipes_files.file_id = $1`, [file.file_id])
-            await db.query(`DELETE FROM files WHERE id = $1`, [file.file_id])
-          })
-      
-          return db.query(`DELETE FROM recipes WHERE id = $1`, [id])
+            const results = await db.query(`
+                SELECT * FROM files
+                INNER JOIN recipes_files ON (files.id = recipes_files.file_id)
+                WHERE recipes_files.recipe_id = $1`, [id]
+            )
+        
+            const removedFiles = results.rows.map( async file => {
+                fs.unlinkSync(file.path)
+    
+            await db.query(`DELETE FROM recipes_files 
+                WHERE recipes_files.file_id =$1`, 
+                [file.file_id])
+            
+                await db.query(`DELETE FROM files WHERE id = $1`, [file.file_id])
+            })
+    
+            return db.query(`DELETE FROM recipes WHERE id = $1`, [id])
+        
+        }catch(err){
+            console.error(err)
         }
-        catch(err){
-          console.error(err)
-        }
-      },
+    },
 
     chef_selection() {
         return db.query(`SELECT name, id FROM chefs`
@@ -130,7 +135,7 @@ module.exports = {
         FROM recipes
         LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
         ${filterQuery}
-        ORDER BY recipes.title ASC LIMIT $1 OFFSET $2`
+        ORDER BY created_at DESC LIMIT $1 OFFSET $2`
         
         return db.query(query , [limit, offset])
     },

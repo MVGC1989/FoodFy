@@ -95,8 +95,9 @@ module.exports = {
             if(!recipe){
                 return res.render("home/notfound")
             }
-
+            
             recipe.created_at = date(recipe.created_at).format
+            recipe.updated_at = date(recipe.updated_at).format
             
             result = await Recipe.files(recipe.id)
             const files = result.rows.map( file => ({

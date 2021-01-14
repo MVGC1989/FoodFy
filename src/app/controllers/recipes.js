@@ -95,6 +95,7 @@ module.exports = {
             } 
             
             recipe.created_at = date(recipe.created_at).format
+            recipe.updated_at = date(recipe.updated_at).format
 
             results = await Recipe.files(recipe.id)
             const files = results.rows.map( file => ({
@@ -145,28 +146,19 @@ module.exports = {
                 return res.send("PREENCHA TODOS OS CAMPOS!")
             }
         }
-
-        //let results = await Recipe.find(req.body.id)
-        //let id = results.rows[0]
-
-        if (req.body.removed_files) {
-            const removedFiles = req.body.removed_files.split(",")
-            const lastIndex = removedFiles.length - 1
-            removedFiles.splice(lastIndex, 1)
+        
+            if(req.body.removed_files){//removendo foto
+                const removedFiles = req.body.removed_files.split(",")
+                const last_index = removedFiles.length -1
+                removedFiles.splice(last_index, 1)
             
-            const removedRecipeFiles = removedFiles.map(id => File.RecipeDelete(id))
-            await Promise.all(removedRecipeFiles)
-
-            const removedFilesPromise = removedFiles.map( id => {
-                File.delete(id)
-            })
-
-            await Promise.all(removedFilesPromise)
+                const removedFilesPromise = removedFiles.map(id => File.delete(id))
+                await Promise.all(removedFilesPromise)
         }
 
-        if (req.files.length != 0) {
-            const oldFiles = await Recipe.files(req.body.id)
-            const totalFiles = oldFiles.rows.lenght + req.files.lenght
+            if (req.files.length != 0) {
+                const oldFiles = await Recipe.files(req.body.id)
+                const totalFiles = oldFiles.rows.length + req.files.length
 
             if(totalFiles <= 5){
                 const newFilesPromise = req.files.map( file => File.createRecipeFile({
@@ -177,10 +169,10 @@ module.exports = {
             }
             
         }
-        await Recipe.update(req.body)
-            return res.redirect(`/admin/recipes/${req.body.id}`)
-        }
-        catch (err) {
+            await Recipe.update(req.body)
+            return res.redirect(`/admin/recipes/${req.body.id}`) 
+            
+        }catch (err) {
             console.error(err)
         }
     },
