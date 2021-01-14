@@ -167,8 +167,8 @@ module.exports = {
                 }))
                 await Promise.all(newFilesPromise)
             }
+            }
             
-        }
             await Recipe.update(req.body)
             return res.redirect(`/admin/recipes/${req.body.id}`) 
             
