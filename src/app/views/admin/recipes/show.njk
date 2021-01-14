@@ -1,4 +1,4 @@
-{% extends "layoutAdmin.njk" %}
+{% extends "parts/layoutAdmin.njk" %}
 
 {% block head %}
     <title>FoodFy - Admin - Receita: {{recipes.title}}</title>
@@ -20,7 +20,7 @@
 <div class="gallery">
     <div class="highlight">
         {% if not files[0] %} {#se não houver imagem #}
-            <img src="http://placehold.it/500x500?text=PRODUTO SEM FOTO">
+            <img src="http://placehold.it/500x500?text=RECEITA SEM FOTO">
         {% else %}
             <img 
                 src="{{files[0].src}}" 
@@ -63,8 +63,13 @@
         <p>por {{recipe.chef_name}}</p>
     </div>
 
-        <div class="register">
-        <p><i>Receita cadastrada em: {{recipe.created_at}}</i></p>
+    <div class="register">
+        {% if recipe.created_at != recipe.updated_at%}
+            <p><i>Receita cadastrada em: {{recipe.created_at}}</i></p>
+            <p><i>Atualização em: {{recipe.updated_at}}</i></p>
+        {% else %}
+            <p><i>Receita cadastrada em: {{recipe.created_at}}</i></p>
+        {% endif %}
     </div>
 
 <div class="ingredients">

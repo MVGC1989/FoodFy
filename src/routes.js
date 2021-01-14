@@ -2,9 +2,9 @@ const express = require("express")
 const routes = express.Router()
 const multer = require("./app/middlewares/multer")
 
-const homepage = require("./app/controllers/home_foodfy")
-const recipes = require("./app/controllers/recipes")
-const chefs = require("./app/controllers/chefs")
+const homepage = require("./app/controllers/HomeController")
+const recipes = require("./app/controllers/RecipesController")
+const chefs = require("./app/controllers/ChefsController")
 
 // ROTAS WEBSITE
 

@@ -32,7 +32,7 @@ module.exports = {
             
                 const allRecipes = await Promise.all(recipesPromise);
 
-                return res.render("home/homepage", {recipes: allRecipes})
+                return res.render("home/index", {recipes: allRecipes})
             }
         } catch (err){
             console.error(err)

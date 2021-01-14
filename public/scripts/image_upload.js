@@ -17,12 +17,13 @@ const Photos_Upload = {
         
         
     Array.from(file_list).forEach(file =>{
-        const reader = new FileReader()
-        
+
+
         Photos_Upload.files.push(file)
 
+        const reader = new FileReader()
         reader.onload = () =>{
-            const image = new Image() //como se colocasse uma tag img no html
+            const image = new Image() 
             image.src = String(reader.result)
 
             const div = Photos_Upload.get_container(image)
@@ -32,11 +33,11 @@ const Photos_Upload = {
         reader.readAsDataURL(file)
     })
 
-    Photos_Upload.input.files = Photos_Upload.get_all_files()
+    Photos_Upload.update_input_files()
 
     },
 
-    limit(event){ //limitando numero de fotos
+    limit(event){ 
         const {upload_limit , input , preview} = Photos_Upload
         const {files: file_list} = input
 
