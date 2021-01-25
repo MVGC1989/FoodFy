@@ -1,8 +1,13 @@
+--VERIFICAR SE O DB EXISTE E CRIÁ-LO
+DROP DATABASE IF EXISTS foodfy;
+CREATE DATABASE foodfy;
+
 --CREATE TABLES
 
 CREATE TABLE "recipes" (
   "id" SERIAL PRIMARY KEY,
-  "chef_id" int DEFAULT 0,
+  "chef_id" int NOT NULL,
+  "user_id" int NOT NULL
   "title" text NOT NULL,
   "ingredients" text[],
   "preparation" text[],
@@ -31,6 +36,28 @@ CREATE TABLE "recipes_files"(
     "file_id" integer
 );
 
+CREATE TABLE "users"(
+  "id" SERIAL PRIMARY KEY,
+  "name" TEXT NOT NULL,
+  "email" TEXT UNIQUE NOT NULL,
+  "password" TEXT NOT NULL,
+  "reset_token" TEXT,
+  "reset_token_expires" TEXT,
+  "is_admin" BOOLEAN DEFAULT false,
+  "created_at" TIMESTAMP DEFAULT(now()),
+  "updated_at" TIMESTAMP DEFAULT(now())
+)
+
+CREATE TABLE "session" (
+  "sid" varchar NOT NULL COLLATE "default",
+  "sess" json NOT NULL,
+  "expire" timestamp(6) NOT NULL
+)
+WITH (OIDS=FALSE);
+ALTER TABLE "session" 
+ADD CONSTRAINT "session_pkey" 
+PRIMARY KEY ("sid") NOT DEFERRABLE INITIALLY IMMEDIATE;
+
 --CREATE PROCEDURE
 
 CREATE FUNCTION trigger_set_timestamp()
@@ -55,9 +82,17 @@ BEFORE UPDATE ON recipes
 FOR EACH ROW
 EXECUTE PROCEDURE trigger_set_timestamp();
 
+--CREATE FUNCTION AUTO updated_at for users
+
+CREATE TRIGGER set_timestamp
+BEFORE UPDATE ON users
+FOR EACH ROW
+EXECUTE PROCEDURE trigger_set_timestamp();
+
 -- TABLE RELATIONS
 
 ALTER TABLE "chefs" ADD FOREIGN KEY ("file_id") REFERENCES "files" ("id");    
 ALTER TABLE "recipes" ADD FOREIGN KEY ("chef_id") REFERENCES "chefs" ("id");
 ALTER TABLE "recipes_files" ADD FOREIGN KEY ("recipe_id") REFERENCES "recipes" ("id");
 ALTER TABLE "recipes_files" ADD FOREIGN KEY ("file_id") REFERENCES "files" ("id");
+ALTER TABLE "recipes" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");

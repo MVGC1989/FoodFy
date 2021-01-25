@@ -28,6 +28,13 @@
 .linkadmin2{
     color: #999999;
     text-decoration: none;
+    margin-right: 30px;
+}
+
+.linkadmin3{
+    color: #999999;
+    text-decoration: none;
+    margin-right: 30px;
 }
 
 .activeadm{
@@ -158,7 +165,7 @@
     margin-top: 30px;
 }
 
-.item input[type="text"],
+.item .input,
 .item textarea{
     width: 940px;
     height: 49px;

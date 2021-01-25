@@ -1,0 +1,44 @@
+{% extends "parts/login-layout.njk"%}
+
+{% block content %}
+
+<section class="login-form">
+    <form action="/admin/session/profile" method="post">
+        <h2 class="session-init">Iniciar Sessão</h2>
+
+        <div>
+            <h4>E-mail:</h4>
+            <div class="input-login">
+            <input 
+                type="email"
+                name="email"
+                value="{{user.email}}"
+                placeholder="Digite seu e-mail para entrar..."
+                onblur="Validate.apply(this , 'isEmail')">
+            </div>
+        </div>
+
+        <div>
+            <h4>Senha:</h4>
+            <div class="input-login">
+            <input 
+                type="password"
+                name="password"
+                placeholder="Digite sua senha...">
+            </div>
+        </div>
+
+    <footer class="footer">
+        <a href="/admin/session/forgot-password">
+            Esqueceu ou perdeu sua senha?
+        </a>
+
+        <button 
+            class="button_login" 
+            type="submit">Acessar
+        </button>
+    </footer>
+
+    </form>
+</section>
+{% endblock content%}

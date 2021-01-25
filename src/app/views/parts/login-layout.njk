@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head%}
+        <title>FoodFy - Login</title>
+    {% endblock %}
+
+    {% include "parts/styles.njk"%}
+</head>
+
+<body>
+    <header>
+        <div class="img-login">
+            <img src="/images/logo.png" alt="logoadmin">
+        </div>
+    </header>
+
+{% include "parts/messages.njk"%}
+
+{% block content%} 
+    {% include "parts/scripts.njk"%}
+{% endblock %}
+
+</body>
+</html>

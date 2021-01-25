@@ -4,7 +4,7 @@
 <div class="item">
     <h2>Nome:</h2>
     <div>
-        <input 
+        <input class="input"
             type="text" 
             name="name" 
             placeholder="Nome do chef..." 
@@ -16,7 +16,7 @@
 <div class="item">
     <h2>Avatar:</h2>
     {% if files %}
-        <input 
+        <input class="input"
             type="text" 
             name="path" 
             value="{{files[0].path}}">
@@ -25,7 +25,7 @@
     
 <div class="item">
     <div class="avatar_upload">
-            <input 
+            <input class="input"
                 id="avatar_input"
                 type="file"
                 name="avatar"

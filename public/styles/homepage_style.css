@@ -1,7 +1,5 @@
 /* === PÁGINA INICIAL ===*/
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-
 * {
     margin: 0;
     padding: 0;
@@ -50,9 +48,16 @@ body{
 }
 .recipes,
 .chefs,
-.admin1{
+.account{
     margin-left: 30px;
 }
+
+.links i{
+    position: absolute;
+    margin-left: 50px;
+    margin-top: 8px;
+}
+
 
 .active{
     font-weight: bold;

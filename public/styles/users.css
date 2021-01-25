@@ -1,0 +1,141 @@
+/*===LOGIN-FORM===*/
+
+.login-form{
+    max-width: 500px;
+    margin-left: 450px ;
+}
+
+.img-login{
+    text-align: center;
+    margin-top: 35px;
+}
+
+.session-init{
+    font-size: 24px;
+    margin-top: 130px;
+    text-align: center;
+}
+
+h4{
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 35px;
+    margin-bottom: 10px;
+    
+}
+
+.input-login input{
+    border: 1px solid #DDDDDD ;
+    height: 50px;
+    width: 100%;
+    border-radius: 4px;
+}
+
+.footer a{
+    font-size: 16px;
+    color: #969696;
+    font-weight: bold;
+    text-decoration: none;
+    position: absolute;
+    margin-top: 50px;
+}
+
+.footer a:hover{
+    color: red;
+    transition: 500ms;
+}
+
+.button_login{
+    background: #6558C3;
+    border-radius: 4px;
+    color:#FFFFFF ;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    padding: 8px 16px;
+    width: 134px;
+    height: 37px;
+    margin-top: 40px;
+    margin-left: 368px;
+    cursor: pointer;
+}
+
+
+/*=== CADASTRO NOVO USUÁRIO ===*/
+
+.user-register{
+    max-width: 940px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.user-input1{
+    width: 450px;
+    height: 50px;
+    border: 1px solid #DDDDDD;
+    margin-left: 230px;
+}
+
+.user-input2{
+    width: 450px;
+    height: 50px;
+    border: 1px solid #DDDDDD;
+    margin-left: 50px;
+}
+
+#name-user,
+#email-user{
+    
+    font-size: 16px;
+    font-weight: bold;
+    color: #111;
+    margin-top: 70px;
+    margin-bottom: 10px;
+}
+#name-user{
+    margin-left: 230px;
+
+}
+
+#email-user{
+    margin-left: 50px;
+}
+
+.item input[type="checkbox"]{
+    margin-left: 230px;
+    margin-top: 35px;
+}
+
+label{
+    font-size: 16px;
+    font-weight: bold;
+    color: #111;
+    margin-left: 8px;
+}
+
+.user-save,
+.user-cancel{
+    font-weight: bold;
+    font-size: 16px;
+    width: 139px;
+    height: 37px;
+    text-decoration: none;
+    border-radius: 4px;
+    color:white;
+    cursor: pointer;
+    
+}
+
+.user-save{
+    background-color: #6558C3;
+    position: absolute;
+    left: 900px;
+    top: 140px;
+}
+
+.user-cancel{
+    background-color:#8A8A8A ;
+    position: absolute;
+    left: 1045px;
+    top: 140px;
+}
+

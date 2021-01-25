@@ -5,10 +5,7 @@
         <title>FoodFy</title>
     {% endblock %}
 
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link rel="stylesheet" href="/styles/homepage_style.css">
-<link rel="stylesheet" href="/styles/admin_style.css">
-<link rel="stylesheet" href="/styles/photos_style.css">
+    {% include "parts/styles.njk"%}
 </head>
 
 <body>
@@ -18,7 +15,10 @@
             <a id="active" class="about" href="/about">Sobre</a>
             <a id="active" class="recipes" href="/recipes">Receitas</a>
             <a id="active" class="chefs" href="/chefs">Chefs</a>
-            <a id="active" class="admin1" href="/admin/recipes">Admin</a>
+            <a class = "account" href="/accounts">
+                <i class="material-icons">account_circle</i>
+                    Entrar
+            </a>
         </div>
         
 <div class="search">
@@ -35,9 +35,6 @@
         <p>Todos os direitos reservados, receitas Foodfy &copy;</p>
     </footer>
 
-    <script src="/scripts/header_and_cards_home.js"></script>
-    <script src="/scripts/show_hide_buttons.js"></script>
-    <script src="/scripts/pagination.js"></script>
-    <script src="/scripts/image_upload.js"></script>
+    {% include "parts/scripts.njk"%}
 </body>
 </html>

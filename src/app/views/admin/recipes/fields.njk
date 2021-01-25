@@ -7,6 +7,7 @@
     <div class="photos_loading">
             <div class="photos_upload">
                 <input 
+                    class="input"
                     id="photos_input"
                     type="file"
                     name="photos"
@@ -37,6 +38,7 @@
     <h2>Nome da Receita</h2>
     <div>
         <input 
+            class="input"
             type="text" 
             name="title" 
             placeholder="Nome da receita..." 
@@ -67,7 +69,8 @@
         {% if recipes.ingredients %}<!-- se tiver ingredientes aparece a lista de ingredientes-->
             {% for ingredient in recipes.ingredients %}
                 <div class="ingredient">
-                    <input  
+                    <input
+                        class="input"
                         type="text" 
                         name="ingredients[]" 
                         value="{{ ingredient }}" 
@@ -78,6 +81,7 @@
         {% else %} <!--se não tiver ingrediente cadastrado aparece input vazio-->
             <div class="ingredient">
                 <input 
+                    class="input"
                     type="text" 
                     name="ingredients[]" 
                     value="{{ingredient}}" 
@@ -101,6 +105,7 @@
                 {% for preparation in recipes.preparation %}
                     <div class="preparation">
                         <input 
+                            class="input"
                             type="text" 
                             name="preparation[]" 
                             value="{{ preparation }}" 
@@ -111,6 +116,7 @@
             {% else %}
                 <div class="preparation">
                     <input 
+                        class="input"
                         type="text" 
                         name="preparation[]" 
                         value="{{ preparation }}" 

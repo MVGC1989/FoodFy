@@ -1,0 +1,40 @@
+<button class="user-save" type="submit">Salvar</button>
+<button class="user-cancel" type="submit">Cancelar</button>
+<div class="user-register">
+
+<div class="item">
+    <div id="name-user">Nome:</div>
+    <div>
+        <input class="user-input1"
+            type="text" 
+            name="name" 
+            placeholder="Nome do usuário..." 
+            value="{{user.name}}"
+            required>
+    </div>        
+</div>
+
+<div class="item">
+    <div id="email-user">E-mail:</div>
+        <div> 
+            <input class="user-input2"
+                type="email" 
+                name="email"
+                placeholder="Digite seu e-mail..."
+                value="{{user.email}}"
+                onblur="Validate.apply(this, 'isEmail')"> 
+        </div>
+</div>
+
+<div class="item">
+    <input 
+        type="checkbox"
+        name="is_admin"
+        value="true"
+        {% if user.is_admin == true %}
+        checked
+        {% endif %}
+        >
+    <label>Administrador</label>
+</div>
+</div>
