@@ -1,22 +1,21 @@
 const express = require("express")
 const routes = express.Router()
-const {onlyUsers, userIsLogged, userIsAdmin} = require("../app/middlewares/session")
+const {onlyUsers, UserIsAdmin} = require("../app/middlewares/session")
 
+const FieldsValidator= require("../app/validators/chekfields")
 const UserValidator = require("../app/validators/user")
-const SessionValidator = require("../app/validators/session")
 
 const UserController = require("../app/controllers/UserController")
-const SessionController = require("../app/controllers/SessionController")
-const ProfileController = require("../app/controllers/ProfileController")
+
 
 //CADASTRO DE USUÁRIOS
 
 // Admin
 routes.get("/", /*onlyUsers*/ UserController.index)
-routes.get("/register", /*userIsAdmin*/ UserController.registerForm)
-//routes.get("/:id/edit", userIsAdmin, UserValidator.edit, UserController.edit)
-routes.post("/" , /*userIsAdmin,*/ UserValidator.post, UserController.post)
-//routes.put("/", userIsAdmin, UserValidator.update, UserController.update)
+routes.get("/create", /*userIsAdmin*/ UserController.create)
+//routes.get("/:id/edit", onlyUsers, userIsAdmin, UserController.edit)
+routes.post("/" , /* onlyUsers, userIsAdmin,*/ FieldsValidator.checkAllFields, UserValidator.emailCheck, UserController.createNewUser)
+//routes.put("/", userIsAdmin, UserValidator.update, FieldsValidator.checkAllFields, UserController.update)
 //routes.delete("/", userIsAdmin, UserValidator.adminDeletesOwnAccount, UserController.delete)
 
 

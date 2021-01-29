@@ -1,6 +1,7 @@
 const crypto = require('crypto')
 const mailer = require('../../lib/mailer')
 const {hash} = require('bcryptjs')
+const User = require('../models/User')
 
 
 module.exports ={
@@ -10,7 +11,7 @@ module.exports ={
 
     login(req , res){
         req.session.userId = req.user.id 
-        req.session.Isdamin = req.user.is_admin
+        req.session.isAdmin = req.user.is_admin
 
         req.session.sucess = "Login efetuado !"
         return res.redirect("/admin/profile")
@@ -34,7 +35,7 @@ module.exports ={
 
             //Criar uma expiração do token
             let now = new Date()
-            now = now.setHours(now.getHours() + 1)//uma hora para expirar
+            now = now.setHours(now.getHours() + 1)
 
             await User.update(user.id, {
                 reset_token: token,
@@ -50,7 +51,7 @@ module.exports ={
                     <h2>Perdeu ou esqueceu sua senha ?</h2>
                     <p>Não se preocupe, clique no link abaixo para recuperar sua senha.</p>
                 <p>
-                    <a href="htpp://localhost:3000/admin/password-reset?token=${token}" target="_blank">
+                    <a href="htpp://localhost:3000/admin/session/password-reset?token=${token}" target="_blank">
                     RECUPERAR SENHA
                     </a>
                 </p>
@@ -71,7 +72,7 @@ module.exports ={
     },
 
     resetForm(req, res){
-        return res,render("adminsession/password-reset", {token: req.query.token})
+        return res.render("admin/session/password-reset", {token: req.query.token})
     },
 
     async reset(req, res){

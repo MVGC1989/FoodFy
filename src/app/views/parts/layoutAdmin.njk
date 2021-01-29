@@ -11,18 +11,15 @@
 <body>
     <header class = "admin">
         <div>
-            <a class="logo_admin" href="/"><img src="/images/logoadmin.png" alt="logoadmin"></a>
-            <a id= "active_adm" class="linkadmin1" href="/admin/recipes">Receitas</a>
-            <a id= "active_adm" class="linkadmin2" href="/admin/chefs">Chefs</a>
-            <a id= "active_adm" class="linkadmin3" href="/admin/users">Usuários</a>
+            {% include "parts/links-admin.njk" %}
         </div>
     </header>
 
     {% include "parts/messages.njk"%}
 
-    {% block content%} {% endblock %}
-
-    {% include "parts/scripts.njk"%}
+    {% block content%} 
+        {% include "parts/scripts.njk"%}
+    {% endblock %}
 
     <footer class="rodape">
         <p>Todos os direitos reservados, receitas Foodfy &copy;</p>

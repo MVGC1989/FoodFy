@@ -1,0 +1,146 @@
+/*=== LAYOUT HOMEPAGE ===*/
+
+.layout{
+    background-color: white;
+    width: 1400px;
+    padding-top: 32px;
+
+}
+.links img{
+    width: 90;
+    height: 26px;
+    margin-left: 231px;
+    position: relative;
+    top: 10px;
+
+}
+.links a {
+    font-size: 16px;
+    text-decoration: none;
+    color: black;
+}
+
+.links a:hover{
+    font-weight: bold;
+}
+
+
+.about{
+    margin-left: 120px;
+}
+.recipes,
+.chefs,
+.account{
+    margin-left: 30px;
+}
+
+.links i{
+    position: absolute;
+    margin-left: 50px;
+    margin-top: 8px;
+}
+
+
+.active{
+    font-weight: bold;
+    border-bottom: 2px solid black;
+}
+
+.rodape{
+    width: 1400px;
+    padding: 32px;
+    margin-top: auto;
+    text-align: center;
+    color: #999999;
+    background-color:#EEEEEE;
+} 
+
+/*=== FILTER ===*/
+
+.search form input{
+    width: 246px;
+    height: 37px;
+    margin-left: 825px;
+    border: 1px solid #DDDDDD;
+    position: relative;
+    bottom: 28px;
+}
+
+.search form button{
+    width: 91px;
+    height: 37px;
+    background-color: #6558C3;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+    bottom: 28px;
+}
+
+input::placeholder{
+    margin-left: 15px;
+    font-size: 14px;
+}
+
+/*=== LAYOUT ADMIN ===*/
+
+.admin{
+    background-color:#111111;
+    width: 1400px;
+    padding: 32px;
+}
+
+.logo_admin{
+    position: absolute;
+    left: 231px;
+    top: 27px;
+}
+
+.admin{
+    font-size: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.linkadmin1{
+    color: #999999;
+    margin-left: 370px;
+    margin-right: 30px;
+    text-decoration: none;
+}
+
+.linkadmin2{
+    color: #999999;
+    text-decoration: none;
+    margin-right: 30px;
+}
+
+.linkadmin3{
+    color: #999999;
+    text-decoration: none;
+    margin-right: 30px;
+}
+
+.linkadmin1:hover,
+.linkadmin2:hover,
+.linkadmin3:hover{
+    color: white;
+}
+
+.activeadm{
+    color:white;
+}
+
+.button-logout a{
+    position: absolute;
+    margin-left: 760px;
+    margin-top: -17px;
+}
+.button-logout i{
+    position: absolute;
+    margin-top: -5px;
+    margin-left: 2px;
+}

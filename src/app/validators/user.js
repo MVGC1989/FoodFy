@@ -1,25 +1,26 @@
-const User = require("../models/User")
+const User = require('../models/User')
 const {compare} = require('bcryptjs')
 
-function checkAllFields(body){
-    const keys = Object.keys(body) 
-        for( key of keys){
-            if(body[key]== ""){
-                return {
-                    user: body,
-                    error: "Por favor, preencha todos os campos !"
-                }
-            }
-        }
+async function emailCheck(req, res, next) {
+
+    let { email } = req.body
+
+    const user = await User.findOne({where: { email }})
+
+    if (user) return res.render('admin/users/create', {
+        user: req.body,
+        error: 'Usuário já cadastrado. Tente outro email.'
+    })    
+
+    next()
 }
 
-async function show (req, res, next){
-    const {userId : id} = req.session
+async function edit(req, res, next) {
+    const { userId: id } = req.session
+    const user = await User.findOne({where: {id} })
 
-    const user = await User.findOne({where: {id}})
-
-    if(!user) return res.render("user/register", {
-        error: "Usuário não encontrado !"
+    if(!user) return res.render('admin/users/create', {
+        error: 'Usuário não encontrado'
     })
 
     req.user = user
@@ -27,80 +28,59 @@ async function show (req, res, next){
     next()
 }
 
-async function post (req , res , next){
-     //checar se todos os campos estão preenchidos
+async function update(req, res, next) {
+    let {id, is_admin} = req.body
 
-    const fillAllFields = checkAllFields(req.body)
-
-    if(fillAllFields){
-        return res,render("admin/user/register", fillAllFields)
+    if (is_admin == 'on') {
+        is_admin = true
+    } else {
+        is_admin = false
     }
+
+    const user = await User.findOne({where: { id } })
+
+    if (!user) return res.render('admin/users/edit', {
+        user: req.body,
+        error: 'Usuário já cadastrado.'
+    })
+
+    req.user = user
+
+    next()
+}
+
+async function profile(req, res, next) {
+
+    const { userId: id } = req.session
+
+    const user = await User.findOne({where: {id} })
+
+    if(!user) {  
+        user = req.body
+        req.session.error = 'Usuário não encontrado'
+        res.redirect(`${req.headers.referer}`)
+    }
+
+    req.user = user    
+
+    next()
+}
+
+async function passwordMatch(req, res, next) {    
+    const { email, password } = req.body
+
+    const user = await User.findOne({where: {email} })
+
+    const passed = await compare(password, user.password)
+
+    if(!passed) {        
+        req.session.error = 'Senha incorreta'        
+        return res.redirect('/admin/profile')
+    }
+
+    req.user = user    
     
-    //Ver se usuário já existe
-    let { email} = req.body
-
-        const user = await User.findOne({where: {email}})
-
-        if(user){ return res.render("admin/user/register", {
-            user: req.body,
-            error: "Usuário já cadastrado !"
-        })}
-
-        next()
-}
-
-async function updateProfile(req, res, next){
-    //checando campos
-    const fillAllFields = checkAllFields(req.body)
-
-    if(fillAllFields){
-        return res,render("admin/user/profile", fillAllFields)
-    }
-
-    //checando se a senha foi preenchida
-
-    const {id , password} = req.body
-
-    if(!password) return res.render("admin/user/profile", {
-        user: req.body,
-        erro: "É necessário digitar sua senha para atualizar o cadastro !"
-    })
-
-    //ver se a senha esta certa
-
-    const user = await User.findOne({ where: {id}})
-
-    const passed = await compare(password , user.password)
-
-    if(!passed) return res.render("admin/user/profile", {
-        user: req.body,
-        erro: "Senha incorreta !"
-    })
-
-    req.user = user
-
     next()
 }
 
-async function adminDeletesOwnAccount(req, res, next) {
-    const { userId } = req.session
-    const { id } = req.body
-
-    const user = await User.findOne({ where: { id } })
-
-    if(userId == id) {
-        return res.render("admin/users/profile", {
-        user,
-        error: "Desculpe, você não pode deletar a própria conta !"
-        })
-    }
-
-    next()
-}
-
-module.exports = {
-    post,
-    show,
-    updateProfile,
-    adminDeletesOwnAccount
-}
+module.exports = { emailCheck, edit, update, profile, passwordMatch }

@@ -1,0 +1,45 @@
+/*===PROFILE===*/
+
+.welcome{
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 230px;
+    margin-top: 55px;
+}
+
+#password-user{
+    margin-left: 230px;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 35px;
+}
+
+.user-input3{
+    width: 450px;
+    height: 50px;
+    margin-left: 230px;
+    margin-top: 10px;
+    border: 1px solid #dddddd ;
+}
+
+.user-input1::placeholder,
+.user-input2::placeholder,
+.user-input3::placeholder{
+    font-size: 16px;
+    color: #999999;
+}
+
+.user_update{
+    position: absolute;
+    left: 1045px;
+    top: 140px;
+    background-color: #6558C3;
+    font-weight: bold;
+    font-size: 16px;
+    width: 139px;
+    height: 37px;
+    text-decoration: none;
+    border-radius: 4px;
+    color:white;
+    cursor: pointer;
+}

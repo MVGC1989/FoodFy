@@ -1,28 +1,30 @@
 const User = require("../models/User")
 
 module.exports = {
-    index(req, res) {
-        //const { user, session: { success, error } } = req
+    async index(req, res) {
+        try {          
+            const { userId : id } = req.session
 
-        //req.session.success = "", req.session.error = ""
+            const user = await User.findOne({where: {id}})
 
-        return res.render("admin/session/profile"
-         /*{ user, success, error }*/)
+            return res.render("admin/profile/index", {user})            
+        } catch (error) {
+            console.error(error)
+        }
     },
 
     async update(req, res) {
+        const { user } = req
+        const { name , email} = req.body
+        
         try {
-            let { name, email } = req.body
-            const { user } = req
-
-        await User.update(user.id, {
-        name,
-        email
+            await User.update(user.id, {
+            name,
+            email
         })
+        req.session.success = "Perfil atualizado com sucesso!"
 
-        req.session.success = "Usuário atualizado com sucesso!"
-
-        return res.redirect(`/admin/profile`)
+        return res.redirect(`/admin/users/index`)
     } 
     catch (err) {
         console.error(err)

@@ -1,1 +1,52 @@
-ola
+{% extends "parts/layoutAdmin.njk"%}
+
+{% block content%} 
+<h2 class="welcome">Bem vindo(a) {{user.name}}</h2>
+
+<button form= "update" class="user_update" type="submit">Salvar</button>
+
+<section>
+    <form action="/admin/profile?_method=PUT" method="post" id="update">
+    <div class="user-register">
+        <div class="item">
+            <div id="name-user">Nome:</div>
+            <div>
+                <input class="user-input1"
+                    type="text" 
+                    name="name" 
+                    placeholder=" Nome do usuário..." 
+                    value="{{user.name}}"
+                    required>
+            </div>        
+        </div>
+
+    <div class="item">
+        <div id="email-user">E-mail:</div>
+            <div> 
+                <input class="user-input2"
+                    type="email" 
+                    name="email"
+                    placeholder=" Digite seu e-mail..."
+                    value="{{user.email}}"
+                    onblur="Validate.apply(this, 'isEmail')"> 
+            </div>
+    </div>
+
+    <div>
+        <div id="password-user">Senha:</div>
+        <div >
+        <input class="user-input3"
+            type="password"
+            name="password"
+            placeholder= " Digite sua senha...">
+        </div>
+    </div>
+
+    <input 
+        type="hidden"
+        name="id"
+        value="{{user.id}}">
+    </form>
+</section>
+
+{% endblock content %}

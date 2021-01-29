@@ -16,93 +16,6 @@ body{
     flex-direction: column;
 }
 
-/*=== LAYOUT HOMEPAGE ===*/
-
-.layout{
-    background-color: white;
-    width: 1400px;
-    padding-top: 32px;
-
-}
-.links img{
-    width: 90;
-    height: 26px;
-    margin-left: 231px;
-    position: relative;
-    top: 10px;
-
-}
-.links a {
-    font-size: 16px;
-    text-decoration: none;
-    color: black;
-}
-
-.links a:hover{
-    font-weight: bold;
-}
-
-
-.about{
-    margin-left: 120px;
-}
-.recipes,
-.chefs,
-.account{
-    margin-left: 30px;
-}
-
-.links i{
-    position: absolute;
-    margin-left: 50px;
-    margin-top: 8px;
-}
-
-
-.active{
-    font-weight: bold;
-    border-bottom: 2px solid black;
-}
-
-.rodape{
-    width: 1400px;
-    padding: 32px;
-    margin-top: auto;
-    text-align: center;
-    color: #999999;
-    background-color:#EEEEEE;
-} 
-
-/*=== FILTER ===*/
-
-.search form input{
-    width: 246px;
-    height: 37px;
-    margin-left: 825px;
-    border: 1px solid #DDDDDD;
-    position: relative;
-    bottom: 28px;
-}
-
-.search form button{
-    width: 91px;
-    height: 37px;
-    background-color: #6558C3;
-    color: #FFFFFF;
-    font-size: 16px;
-    font-weight: bold;
-    text-align: center;
-    border-radius: 4px;
-    cursor: pointer;
-    position: relative;
-    bottom: 28px;
-}
-
-input::placeholder{
-    margin-left: 15px;
-    font-size: 14px;
-}
-
 /*=== HOMEPAGE ===*/
 .megacard{
     width: 940px;
@@ -138,7 +51,7 @@ input::placeholder{
     top: 66px;
 }
 .titlemore h3{
-    font-family: "Roboto", bold;
+    font-weight: bold;
     font-size: 24px;
     margin-left: 230px;
     margin-top: 50px;

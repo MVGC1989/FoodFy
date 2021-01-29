@@ -5,11 +5,13 @@ const chefs = require("./chefs")
 const recipes = require("./recipes")
 const users = require("./users")
 const session = require("./session")
+const profile = require("./profile")
 
 routes.use("/admin/chefs", chefs)
 routes.use("/admin/recipes", recipes)
 routes.use("/admin/users", users)
 routes.use("/admin/session", session)
+routes.use("/admin/profile", profile)
 
 
 //ATALHOS

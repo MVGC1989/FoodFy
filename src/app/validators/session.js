@@ -52,7 +52,7 @@ async function reset(req, res, next){
     //Procurar o usuário
     const user = await User.findOne({where: {email}})
 
-    if(!user) return res.render("admin/session/reset-password", {
+    if(!user) return res.render("admin/session/password-reset", {
         user: req.body,
         token,
         error: "Usuário não cadastrado !"
@@ -60,15 +60,15 @@ async function reset(req, res, next){
 
     //Checar se a senha corresponde
     if(password != passwordRepeat){
-        return res.render("admin/session/reset-password", {
+        return res.render("admin/session/password-reset", {
             user: req.body,
             token,
-            error: "As senhas são diferentes !"
+            error: "As senhas digitadas são diferentes !"
         })}
 
     //Verificar se token corresponde
     if(token != user.reset_token){
-        return res.render("admin/session/reset-password", {
+        return res.render("admin/session/password-reset", {
             user: req.body,
             token,
             error: "Token inválido ! Solicite uma nova recuperação de senha."
@@ -79,7 +79,7 @@ async function reset(req, res, next){
     now.setHours(now.getHours())
 
     if(now > user.reset_token_expires){
-        return res.render("admin/session/reset-password", {
+        return res.render("admin/session/password-reset", {
             user: req.body,
             token,
             error: "Token expirado! Por favor solicite uma nova recuperação de senha."
