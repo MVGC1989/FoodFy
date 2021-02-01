@@ -1,29 +1,32 @@
 const User = require("../models/User")
 const {compare} = require('bcryptjs')
 
-async function login (req, res, next){
-    try{
-        const {email , password} = req.body
+async function login (req, res, next){    
+    
+        const { email, password } = req.body;
 
-        const user = await User.findOne({where: {email}})
-
-        if(!user) return res.render("admin/session/login", {
+        if (!email || !password) return res.render('admin/session/login', {
             user: req.body,
-            error: "Usuário não cadastrado !"
+            error: 'Por favor, entre com seu email e senha.'
         })
 
-        const passed = await compare(password , user.password)
+        const user = await User.findOne({ where: { email } });
 
-        if(!passed) return res.render("admin/session/login", {
+        if (!user) return res.render('admin/session/login', {
             user: req.body,
-            erro: "Senha incorreta !"
+            error: 'Usuário não cadastrado!' 
         })
+
+        const passed = await compare(password, user.password);
+
+        if (!passed) return res.render('admin/session/login', {
+            user: req.body,
+            error: 'Senha incorreta! Tente novamente.'
+        });
 
         req.user = user
+
         next()
-    }catch(error){
-        console.error(error)
-    }
 }
 
 async function forgot (req, res, next){
@@ -47,9 +50,9 @@ async function forgot (req, res, next){
 }
 
 async function reset(req, res, next){
-    const {email , password, token, passwordRepeat} = req.body
-
-    //Procurar o usuário
+    const {email , password, passwordRepeat, token} = req.body
+    try{
+        //Procurar o usuário
     const user = await User.findOne({where: {email}})
 
     if(!user) return res.render("admin/session/password-reset", {
@@ -64,7 +67,7 @@ async function reset(req, res, next){
             user: req.body,
             token,
             error: "As senhas digitadas são diferentes !"
-        })}
+    })}
 
     //Verificar se token corresponde
     if(token != user.reset_token){
@@ -88,9 +91,17 @@ async function reset(req, res, next){
 
     req.user = user
     next()
+
+    }catch (error) {
+        console.error(error)
+        return res.render('admin/session/reset-password', {
+            token,
+            error: "Erro inesperado. Por favor, tente novamente."
+        })
+    }
 }
 
-module.exports = {
+module.exports={
     login,
     forgot,
     reset

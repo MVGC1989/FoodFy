@@ -1,86 +1,96 @@
 const User = require('../models/User')
 const {compare} = require('bcryptjs')
+const Recipe = require("../models/Recipe")
 
-async function emailCheck(req, res, next) {
+function checkAllFields(body) {
+    const keys = Object.keys(body);
 
-    let { email } = req.body
+    for (let key of keys) {
+        if (body[key] == '') {
+            return {
+                user: body,
+                error: 'Por favor, preencha todos os campos!'
+            };
+        }
+    }
+}
 
-    const user = await User.findOne({where: { email }})
-
-    if (user) return res.render('admin/users/create', {
-        user: req.body,
-        error: 'Usuário já cadastrado. Tente outro email.'
-    })    
-
-    next()
+async function post(req, res, next) {
+    try{
+        const fillAllFields = checkAllFields(req.body)
+        if(fillAllFields) return res.render('admin/users/create', fillAllFields)
+        
+        const { email } = req.body
+        const user = await User.findOne({where: { email }})
+        if (user) return res.render('admin/users/create', {
+            user: req.body,
+            error: 'Usuário já cadastrado. Tente outro email.'
+        })
+        
+        next()
+    }catch (error) {
+        console.error(error)
+    }
 }
 
 async function edit(req, res, next) {
-    const { userId: id } = req.session
-    const user = await User.findOne({where: {id} })
+    try{
+        const { id } = req.params
+        const user = await User.findOne({ where: { id } })
 
-    if(!user) return res.render('admin/users/create', {
-        error: 'Usuário não encontrado'
-    })
-
-    req.user = user
-
-    next()
+        if (!user) return res.render('admin/users/create', {
+            error: 'Usuário não encontrado!'
+        });
+        req.user = user
+        
+        next();
+    }catch (error) {
+        console.error(error)
+    }
 }
 
 async function update(req, res, next) {
-    let {id, is_admin} = req.body
-
-    if (is_admin == 'on') {
-        is_admin = true
-    } else {
-        is_admin = false
-    }
-
+    const {id , password} = req.body
     const user = await User.findOne({where: { id } })
 
-    if (!user) return res.render('admin/users/edit', {
-        user: req.body,
-        error: 'Usuário já cadastrado.'
-    })
+    if (req.session.userId == id) {
+        if(!password){
+            return res.render('admin/users/index', {
+                user: req.body,
+                error: 'Digite sua senha para atualizar seu cadastro!.'
+        })
+        }
+    }
+
+    const passed = await compare(password, user.password)
+        if(!passed) return res.render('admin/user/index', {
+            user: req.body,
+            error: 'Senha incorreta.'
+        })
 
     req.user = user
 
     next()
 }
 
-async function profile(req, res, next) {
 
+async function remove(req, res, next) {
     const { userId: id } = req.session
+    const deletedUserId = req.body.id
 
-    const user = await User.findOne({where: {id} })
+    const user = await User.find(req.body.id)
+    const users = await User.findAll() 
 
-    if(!user) {  
-        user = req.body
-        req.session.error = 'Usuário não encontrado'
-        res.redirect(`${req.headers.referer}`)
+    if(id == deletedUserId) {
+        return res.render('admin/user/index', {
+            user,
+            users,
+            error: 'Não é possível deletar a própria conta.'
+        })
+    } else {
+        next()
     }
-
-    req.user = user    
-
-    next()
 }
 
-async function passwordMatch(req, res, next) {    
-    const { email, password } = req.body
 
-    const user = await User.findOne({where: {email} })
-
-    const passed = await compare(password, user.password)
-
-    if(!passed) {        
-        req.session.error = 'Senha incorreta'        
-        return res.redirect('/admin/profile')
-    }
-
-    req.user = user    
-    
-    next()
-}
-
-module.exports = { emailCheck, edit, update, profile, passwordMatch }
+module.exports = { post, edit, update, remove }

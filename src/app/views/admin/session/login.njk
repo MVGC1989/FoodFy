@@ -3,14 +3,14 @@
 {% block content %}
 
 <section class="login-form">
-    <form action="/admin/session/login" method="post" id="login">
+    <form action="/admin/users/login" method="post" id="login">
         <h2 class="session-init">Iniciar Sessão</h2>
 
         {% include "admin/session/fields.njk"%}
     </form>
 
     <footer class="footer">
-        <a href="/admin/session/forgot-password">Esqueceu ou perdeu sua senha?</a>
+        <a href="/admin/users/forgot-password">Esqueceu ou perdeu sua senha?</a>
 
         <button class="button_login" type="submit" form="login">Acessar</button>
     </footer>

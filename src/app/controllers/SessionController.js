@@ -10,11 +10,11 @@ module.exports ={
     },
 
     login(req , res){
-        req.session.userId = req.user.id 
+        req.session.userId = req.user.id
         req.session.isAdmin = req.user.is_admin
 
-        req.session.sucess = "Login efetuado !"
-        return res.redirect("/admin/profile")
+        req.session.success = "Login efetuado !"
+        return res.redirect("/admin/users/profile")
     },
 
     logout(req , res){

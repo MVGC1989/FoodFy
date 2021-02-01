@@ -2,126 +2,102 @@ const User = require('../models/User')
 const crypto = require('crypto')
 const mailer = require('../../lib/mailer')
 const { hash } = require('bcryptjs')
+const { emailTemplate} = require('../../lib/utils');
 
 module.exports = {
     async index(req, res) {
         try {
         
-        const results = await User.findAll()
+            const users = await User.findAll()
 
-        const usersList = results.rows
-            
-            if(req.session.isAdmin) {
-                return res.render("admin/users/index", { users: usersList })
-            }
-            
-            function filterUser(user) {
-                return user.id == req.session.userId
-            }
-        
-            usersList = usersList.filter(filterUser)
-            
-            return res.render("admin/users/index", { users: usersList, error })
-
+            return res.render("admin/users/index", {users})
         } catch (error) {
             console.error(error)
         }
     },
 
-    async create(req, res) {
-        try {
-            const error = req.session.error
-            req.session.error = ''
-
-            user = req.session.user
-            req.session.user = ''
-
-            return res.render("admin/users/create", { error, user })
-        } catch (error) {
-
-        }
+    create(req, res) {
+        return res.render("admin/users/create")
     },
 
-    async edit(req, res) {
+    async post(req, res) {
         try {
-            const { id } = req.params
+            let { name, email, is_admin } = req.body
 
-            const error = req.session.error
-            req.session.error = ''
+            is_admin = is_admin || false
 
-            const success = req.session.success
-            req.session.success = ''
-
-            const user = await User.findOne({ where: { id } })
-
-            return res.render("admin/users/edit", { user, error, success })
-        } catch (error) {
-            console.error(error)
-        }
-    },
-
-    async createNewUser(req, res) {
-        try {
-            const token = crypto.randomBytes(6).toString("hex")
-
-            const passwordHash = await hash(token, 8)
+            const userPassword = crypto.randomBytes(3).toString('hex')
+            const welcomeEmail = `
+                <h2 style="font-size: 24px; font-weight: normal;">Olá <strong>${name}</strong>,</h2>
+                <p>Seja muito bem-vindo(a) ao <strong>Foodfy</strong> :)</p>
+                <p>Seu cadastro foi realizado com sucesso! Confira seus dados:</p>
+                <p>Login: ${email}</p>
+                <p>Senha: ${userPassword}</p>
+                <br>
+                <h3>Como eu acesso minha Conta?</h3>
+                <p>
+                    Bem simples, você só precisa clicar no botão abaixo e entrar com seu email e senha informados acima.
+				</p>
+				<p style="text-align: center;">
+                    <a
+                        style="display: block; margin: 32px auto; padding: 16px; width:150px; color: #fff;
+                        background-color: #6558C3; text-decoration: none; border-radius: 4px;"
+                        href="http:localhost:3000/admin/users/login" target="_blank"
+                    >Acessar</a> 
+				</p>
+                <p style="padding-top:16px; border-top: 2px solid #ccc">Te esperamos lá!</p>
+                <p>Equipe Foodfy.</p>
+            `
 
             await mailer.sendMail({
                 to: req.body.email,
-                from: 'no-reply@foodfy.com',
-                subject: 'Cadastro Efetuado',
-                html: `<h2>Olá ${req.body.name}</h2>
-                        <p>Seu cadastro foi realizado com sucesso !</p>
-                        <p>Seu acesso provisório é:</p>
-                        <p>login: ${req.body.email}</p>
-                        <p>senha: ${token}</p>
-                        <p>Faça o seu primeiro acesso clicando 
-                            <a href="http://localhost:3000/admin/users/login"target="_blank"> aqui.</a>
-                        </p>
-                        <p>Sugerimos trocar a senha após o primeiro acesso!</p>`
+                from: 'no-reply@foodfy.com.br',
+                subject: 'Bem-vindo ao Foodfy',
+                html: emailTemplate(welcomeEmail)
             })
 
-            let { is_admin } = req.body
+            const password = await hash(userPassword, 8)
 
-            if (is_admin == 'on') {
-                is_admin = true
-            } else {
-                is_admin = false
-            }
-
-            const values = {
-                name: req.body.name,
-                email: req.body.email,
-                password: passwordHash,
+            const userId = await User.create({
+                name,
+                email,
+                password,
                 is_admin
-            }
+            })
 
-            const userId = await User.create(values)
-
-            req.session.userId = userId
-
-            req.session.success = `O seu acesso foi enviado para o email ${req.body.email}.`
+            //req.session.success = 'Usuário cadastrado com sucesso!'
 
             return res.redirect(`/admin/users/${userId}/edit`)
+        } catch (err) {
+            console.error(err)
+        }
+},
 
-        } catch (error) {
-            console.error(error)
+    async edit(req, res) {
+        try {
+            const { user } = req
+            user.is_admin = user.is_admin.toString()
+
+            const { success } = req.session
+            
+            if (success) {
+                res.render('admin/users/edit', { user, success })
+                req.session.success = ''
+                return
+            }
+
+            return res.render('admin/users/edit', { user })
+        } catch (err) {
+            console.error(err)
         }
     },
 
     async update(req, res) {
         try {
-            const { user } = req
+            let { id, name, email, is_admin } = req.body
+            is_admin = is_admin || false
 
-            let { name, email, is_admin } = req.body
-
-            if (is_admin == 'on') {
-                is_admin = true
-            } else {
-                is_admin = false
-            }
-
-            await User.update(user.id, {
+            await User.update(id, {
                 name,
                 email,
                 is_admin
@@ -129,35 +105,34 @@ module.exports = {
 
             return res.render('admin/users/edit', {
                 user: req.body,
-                success: 'Conta atualizada com sucesso.'
+                success: 'Usuário atualizado com sucesso!'
             })
-
-
-        } catch (error) {
-            console.error(error)
+        } catch (err) {
+            console.error(err)
             return res.render('admin/users/edit', {
-                error: 'Algum erro aconteceu.'
+                user: req.body,
+                error: 'Ops, algum erro aconteceu!'
             })
         }
-
-
     },
 
-    async destroy(req, res) {
+    async delete(req, res) {
+        const {id} = req.body
         try {
+            await User.delete(id)
+            req.session.destroy()
 
-            if(req.body.id==req.session.userId){
-                req.session.error = `Você não pode deletar sua própria conta.`
-
-                return res.redirect(`/admin/users/${req.body.id}/edit`)
-            }
-
-            await User.delete(req.body.id)            
-
-            return res.redirect(`/admin/users`)
+            return res.render("admin/session/login", {
+                success: "Conta deletada com sucesso !"
+            })
 
         } catch (error) {
             console.error(error)
+            return res.render("admin/users/index", {
+                user:req.body,
+                error: "Erro ao deletar conta !"
+            })
         }
     }
 }
+

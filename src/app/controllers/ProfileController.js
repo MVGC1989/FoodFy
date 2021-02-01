@@ -13,6 +13,12 @@ module.exports = {
         }
     },
 
+    async show(req, res){
+        const {user} = req
+
+        return res.render("/admin/profile/index", {user})
+    },
+
     async update(req, res) {
         const { user } = req
         const { name , email} = req.body
@@ -29,7 +35,7 @@ module.exports = {
     catch (err) {
         console.error(err)
         req.session.error = "Ocorreu um erro inesperado!"
-        return res.redirect(`/admin/profile`) 
+        return res.redirect("admin/users/index") 
     }
     }
 }
