@@ -24,6 +24,8 @@ module.exports = {
         try {
             let { name, email, is_admin } = req.body
 
+            
+
             is_admin = is_admin || false
 
             const userPassword = crypto.randomBytes(3).toString('hex')
@@ -75,18 +77,14 @@ module.exports = {
 
     async edit(req, res) {
         try {
-            const { user } = req
+            const { user , session: {success, error} } = req
             user.is_admin = user.is_admin.toString()
 
-            const {success}  = req.session
+            req.session.success = "",
+            req.session.error = ""
             
-            if (success) {
-                res.render('admin/users/edit', { user, success })
-                req.session.success = ''
-                return
-            }
+            return res.render('admin/users/edit', { user , success, error})
 
-            return res.render('admin/users/edit', { user })
         } catch (err) {
             console.error(err)
         }

@@ -10,12 +10,10 @@ module.exports ={
     },
 
     async login(req , res){
+        req.body.user_id =req.session.userId
         try {
             req.session.userId = req.user.id
-            const currentUser = await User.findOne({ where: {id: req.session.userId} })
-    
-            if(currentUser.is_admin == true)
-                req.session.isAdmin = true
+            req.session.isAdmin = req.user.is_admin
             
             return res.redirect("/admin/users/profile")
         } catch (err) {
