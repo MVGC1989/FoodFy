@@ -9,12 +9,18 @@ module.exports ={
         return res.render("admin/session/login")
     },
 
-    login(req , res){
-        req.session.userId = req.user.id
-        req.session.isAdmin = req.user.is_admin
-
-        req.session.success = "Login efetuado !"
-        return res.redirect("/admin/users/profile")
+    async login(req , res){
+        try {
+            req.session.userId = req.user.id
+            const currentUser = await User.findOne({ where: {id: req.session.userId} })
+    
+            if(currentUser.is_admin == true)
+                req.session.isAdmin = true
+            
+            return res.redirect("/admin/users/profile")
+        } catch (err) {
+            console.error(err)
+        }
     },
 
     logout(req , res){

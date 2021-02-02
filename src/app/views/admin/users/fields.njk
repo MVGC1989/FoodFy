@@ -1,5 +1,5 @@
 <button class="user-save" type="submit">Salvar</button>
-<button class="user-cancel" type="submit">Cancelar</button>
+<a class="user-cancel" href="/admin/users">Cancelar</a>
 <div class="user-register">
 
 <div class="item">
@@ -8,7 +8,7 @@
         <input class="user-input1"
             type="text" 
             name="name" 
-            placeholder="Nome do usuário..." 
+            placeholder=" Nome do usuário..." 
             value="{{user.name}}"
             required>
     </div>        
@@ -20,7 +20,7 @@
             <input class="user-input2"
                 type="email" 
                 name="email"
-                placeholder="Digite seu e-mail..."
+                placeholder=" Digite seu e-mail..."
                 value="{{user.email}}"
                 onblur="Validate.apply(this, 'isEmail')"> 
         </div>

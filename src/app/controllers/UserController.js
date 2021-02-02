@@ -65,7 +65,7 @@ module.exports = {
                 is_admin
             })
 
-            //req.session.success = 'Usuário cadastrado com sucesso!'
+            req.session.success = 'Usuário cadastrado com sucesso!'
 
             return res.redirect(`/admin/users/${userId}/edit`)
         } catch (err) {
@@ -78,7 +78,7 @@ module.exports = {
             const { user } = req
             user.is_admin = user.is_admin.toString()
 
-            const { success } = req.session
+            const {success}  = req.session
             
             if (success) {
                 res.render('admin/users/edit', { user, success })

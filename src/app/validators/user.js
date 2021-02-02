@@ -35,6 +35,7 @@ async function post(req, res, next) {
         
         const { email } = req.body
         const user = await User.findOne({where: { email }})
+            
         if (user) return res.render('admin/users/create', {
             user: req.body,
             error: 'Usuário já cadastrado. Tente outro email.'
@@ -64,22 +65,25 @@ async function edit(req, res, next) {
 
 async function update(req, res, next) {
     const fillAllFields = checkAllFields(req.body)
-        if(fillAllFields) return res.render('admin/users/edit', fillAllFields)
+    
+    if(fillAllFields) 
+        return res.render('admin/users/edit', fillAllFields)
     
     const {id , password} = req.body
-    const user = await User.findOne({where: { id } })
 
-    if (req.session.userId == id) {
-        if(!password){
-            return res.render('admin/users/index', {
-                user: req.body,
-                error: 'Digite sua senha para atualizar seu cadastro!.'
+    if(!password){
+        return res.render('admin/users/index', {
+            user: req.body,
+            error: 'Digite sua senha para atualizar seu cadastro!.'
         })
-        }
     }
-
+    
+    const user = await User.findOne({where: { id } })
+    
     const passed = await compare(password, user.password)
-        if(!passed) return res.render('admin/user/index', {
+    
+    if(!passed) 
+        return res.render('admin/user/index', {
             user: req.body,
             error: 'Senha incorreta.'
         })

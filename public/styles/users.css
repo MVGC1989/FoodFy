@@ -99,6 +99,8 @@ h4{
     margin-left: 50px;
 }
 
+
+
 #name-user,
 #email-user{
     
@@ -153,5 +155,10 @@ label{
     position: absolute;
     left: 1045px;
     top: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
+
 
