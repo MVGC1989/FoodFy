@@ -10,8 +10,9 @@ module.exports ={
     },
 
     async login(req , res){
-        req.body.user_id =req.session.userId
         try {
+            
+            
             req.session.userId = req.user.id
             req.session.isAdmin = req.user.is_admin
             
