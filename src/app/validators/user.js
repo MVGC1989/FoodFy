@@ -15,6 +15,19 @@ function checkAllFields(body) {
     }
 }
 
+async function show(req, res, next) {
+    const { userId: id } = req.session
+    const user = await User.findOne({ where: { id } })
+
+    if (!user) return res.render('admin/users/create', {
+        error: 'Usuário não encontrado!'
+    });
+
+    req.user = user
+
+    next()
+}
+
 async function post(req, res, next) {
     try{
         const fillAllFields = checkAllFields(req.body)
@@ -50,6 +63,9 @@ async function edit(req, res, next) {
 }
 
 async function update(req, res, next) {
+    const fillAllFields = checkAllFields(req.body)
+        if(fillAllFields) return res.render('admin/users/edit', fillAllFields)
+    
     const {id , password} = req.body
     const user = await User.findOne({where: { id } })
 
@@ -93,4 +109,4 @@ async function remove(req, res, next) {
 }
 
 
-module.exports = { post, edit, update, remove }
+module.exports = { show, post, edit, update, remove }

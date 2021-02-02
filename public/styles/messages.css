@@ -6,23 +6,29 @@
 }
 
 .messages {
+    position: fixed;
+    top: 16px;
+    right: 16px;
     display: flex;
-    padding: 16px;
+    align-items: center;
     justify-content: center;
-    position: absolute;
-    width: 100%;
-    color: white;
-    top: 0;
+    padding: 0 16px;
+    width: 344px;
+    height: 135px;
+    color: #fff;
+    border-radius: 4px;
     opacity: 1;
-    font-weight: bold;
-    animation: hidemessage 400ms 5s ease-out forwards;
+    animation: hidemessage .4s 5s ease-out forwards;
 }
 
 .messages.error{
-    background-color:#DC4747 100%;
+    background-color:#DC4747;
+    color: #FFFFFF ;
+    text-align: center;
 }
 
 .messages.success{
     background-color:green;
-
+    color: #FFFFFF ;
+    text-align: center;
 }

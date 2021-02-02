@@ -1,2 +1,2 @@
 # FoodFy
- Site de receitas feito durante o Bootcamp LaunchBase da RocketSeat
+ Site de gerencimaneto de receitas feito durante o Bootcamp LaunchBase da RocketSeat!
