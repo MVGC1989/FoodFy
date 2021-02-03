@@ -32,7 +32,7 @@ module.exports = {
             const welcomeEmail = `
                 <h2 style="font-size: 24px; font-weight: normal;">Olá <strong>${name}</strong>,</h2>
                 <p>Seja muito bem-vindo(a) ao <strong>Foodfy</strong> :)</p>
-                <p>Seu cadastro foi realizado com sucesso! Confira seus dados:</p>
+                <p>Seu cadastro foi realizado com sucesso! Confira seus dados de acesso:</p>
                 <p>Login: ${email}</p>
                 <p>Senha: ${userPassword}</p>
                 <br>
@@ -66,7 +66,7 @@ module.exports = {
                 password,
                 is_admin
             })
-
+            
             req.session.success = 'Usuário cadastrado com sucesso!'
 
             return res.redirect(`/admin/users/${userId}/edit`)
@@ -77,13 +77,9 @@ module.exports = {
 
     async edit(req, res) {
         try {
-            const { user , session: {success, error} } = req
-            user.is_admin = user.is_admin.toString()
-
-            req.session.success = "",
-            req.session.error = ""
+            const { user }= req
             
-            return res.render('admin/users/edit', { user , success, error})
+            return res.render('admin/users/edit', {user})
 
         } catch (err) {
             console.error(err)

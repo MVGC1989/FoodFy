@@ -103,7 +103,7 @@ h4{
     width: 450px;
     height: 50px;
     border: 1px solid #DDDDDD;
-    margin-left: 50px;
+    margin-left: 40px;
 }
 
 #name-user,
@@ -120,7 +120,7 @@ h4{
 }
 
 #email-user{
-    margin-left: 50px;
+    margin-left: 40px;
 }
 
 .item input[type="checkbox"]{
@@ -148,22 +148,48 @@ label{
     
 }
 
+
 .user-save{
     background-color: #6558C3;
     position: absolute;
-    left: 900px;
+    left: 885px;
     top: 140px;
 }
 
 .user-cancel{
     background-color:#8A8A8A ;
     position: absolute;
-    left: 1045px;
+    left: 1035px;
     top: 140px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
+
+/*=== EDIT USER ===*/
+
+.button-save-user,
+.button-del-user{
+    width: 139px;
+    height: 37px;
+    color:white;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.button-save-user{
+    background-color: #7159C1;
+    position: absolute;
+    left:1030px;
+}
+
+.button-del-user{
+    background-color: #DC4747;
+    margin-left: 475px;
+}
+
 
 
 

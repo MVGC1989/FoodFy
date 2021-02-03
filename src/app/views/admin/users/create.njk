@@ -4,6 +4,8 @@
 
 <form method="POST" action="/admin/users/create">
     <h3 class="create">Criar Usuário</h3>
+        <button class="user-save" type="submit">Salvar</button>
+        <a class="user-cancel" href="/admin/users">Cancelar</a>
         
         {% include "admin/users/fields.njk" %}
 </form>

@@ -8,19 +8,23 @@ module.exports ={
     loginForm(req , res){
         return res.render("admin/session/login")
     },
-
-    async login(req , res){
+    
+    login(req , res){
+        req.session.userId = req.user.id 
+        return res.redirect("/admin/users")
+    },
+    /*async login(req , res){
         try {
             const {user} = req
             
             req.session.userId = user.id
             req.session.isAdmin = user.is_admin
             
-            return res.redirect("/admin/users/profile")
+            return res.redirect("/admin/users")
         } catch (err) {
             console.error(err)
         }
-    },
+    },*/
 
     logout(req , res){
         req.session.destroy()

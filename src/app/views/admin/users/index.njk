@@ -2,25 +2,29 @@
 
 {% block content %}
 
-<h2 class="index">Gerenciar Usuários
-    <!--{% if session.isAdmin %}-->
+<section class="users-list">
+    <h2 class="index">Usuários Cadastrados
+
     <button 
         class="button_new_user" 
         onclick="location.href='/admin/users/create'">Novo Usuário
     </button>
-    <!--{% endif %}-->
-</h2>
 
-<div class="index_cards_chefs">
-    {% for user in users %}
-        <div class="cardindex_chefs">
+    </h2>
+
+    <div class="index_cards_users">
+        {% for user in users %}
+            <div class="card_users">
                 <div>
                     <h1>{{user.name}}</h1>
-                    <a href="/admin/users/{{user.id}}/edit">Visualizar</a>
+                    <p>{{user.email}}</p>
+                    <a id="edit-user" href="/admin/users/{{user.id}}/edit">Editar</a>
+                    <a id="remove-user" href="/admin/users/{{user.id}}/edit">Remover</a>
                 </div>
-        </div>
-    {% endfor %}
-</div> 
+            </div>
+        {% endfor %}
+    </div> 
+</section>
 
 <div 
     class="pagination"

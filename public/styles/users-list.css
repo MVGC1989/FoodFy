@@ -1,3 +1,9 @@
+/*=== LISTAGEM DE USUÁRIOS ===*/
+
+.user-list{
+    max-width: 940px;
+}
+
 .button_new_user{
     font-weight: bold;
     font-size: 16px;
@@ -8,7 +14,49 @@
     color:white;
     cursor: pointer;
     background-color: #6558C3;
-    position: absolute;
-    left: 900px;
-    top: 128px;
+    margin-left: 500px;
 }
+
+.index_cards_users{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-left: 230px;
+    margin-top: 72px;
+}
+
+
+.card_users h1{
+    font-size: 18px;
+    color: #111111;
+}
+
+.card_users p{
+    font-size: 14px;
+    color: #777777;
+    margin-top: 4px;
+    margin-bottom: 16px;
+}
+
+.card_users a{
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 4px;
+}
+
+#edit-user{
+    color: #6558C3;
+}
+
+#remove-user{
+    color: #F55A5A;
+}
+
+#edit-user:hover{
+    border: 1px solid #6558C3;
+}
+
+#remove-user:hover{
+    border: 1px solid #F55A5A;
+}
+
