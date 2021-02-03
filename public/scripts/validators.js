@@ -43,3 +43,5 @@ const Validate ={
         }
     },
 }
+
+const inputInvalid = document.querySelectorAll(".error-input")

@@ -11,10 +11,10 @@ module.exports ={
 
     async login(req , res){
         try {
+            const {user} = req
             
-            
-            req.session.userId = req.user.id
-            req.session.isAdmin = req.user.is_admin
+            req.session.userId = user.id
+            req.session.isAdmin = user.is_admin
             
             return res.redirect("/admin/users/profile")
         } catch (err) {

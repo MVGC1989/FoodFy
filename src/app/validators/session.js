@@ -7,7 +7,7 @@ async function login (req, res, next){
 
         if (!email || !password) return res.render('admin/session/login', {
             user: req.body,
-            error: 'Por favor, entre com seu email e senha.'
+            error: 'Por favor, entre com seu email e senha.',
         })
 
         const user = await User.findOne({ where: { email } });

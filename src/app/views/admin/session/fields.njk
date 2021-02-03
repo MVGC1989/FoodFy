@@ -1,4 +1,29 @@
 
+
+
+{% if error %}
+<div>
+    <h4>E-mail:</h4>
+    <div class="input-error">
+    <input 
+        type="email"
+        name="email"
+        value="{{user.email}}"
+        placeholder=" Digite seu e-mail para entrar..."
+        onblur="Validate.apply(this , 'isEmail')">
+    </div>
+</div>
+
+<div>
+    <h4>Senha:</h4>
+    <div class="input-error">
+    <input 
+        type="password"
+        name="password"
+        placeholder=" Digite sua senha...">
+    </div>
+</div>
+{% else %}
 <div>
     <h4>E-mail:</h4>
     <div class="input-login">
@@ -20,3 +45,4 @@
         placeholder=" Digite sua senha...">
     </div>
 </div>
+{% endif %}

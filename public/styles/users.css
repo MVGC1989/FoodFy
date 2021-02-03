@@ -48,6 +48,13 @@ h4{
     color: #999999;
 }
 
+.input-error input{
+    border: 1px solid #FF3131  ;
+    height: 50px;
+    width: 100%;
+    border-radius: 4px;
+}
+
 .footer a{
     font-size: 16px;
     color: #969696;
@@ -98,8 +105,6 @@ h4{
     border: 1px solid #DDDDDD;
     margin-left: 50px;
 }
-
-
 
 #name-user,
 #email-user{
