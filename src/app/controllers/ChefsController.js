@@ -149,7 +149,7 @@ module.exports = {
     }
   },
 
-  async put(req, res) { 
+  async update(req, res) { 
     try{
       const keys = Object.keys(req.body)
         for (key of keys) {

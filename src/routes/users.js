@@ -2,11 +2,11 @@ const express = require("express")
 const routes = express.Router()
 
 const UserController = require("../app/controllers/UserController")
-const ProfileController = require("../app/controllers/ProfileController")
+
 const SessionController = require("../app/controllers/SessionController")
 
 const UserValidator = require("../app/validators/user")
-const ProfileValidator = require("../app/validators/profile")
+
 const SessionValidator = require("../app/validators/session")
 
 
@@ -26,9 +26,7 @@ routes.post('/password-reset', SessionValidator.reset, SessionController.reset)
 
 //CADASTRO DE USUÁRIOS
 
-//ROTAS QUE TODOS OS USUÁRIOS PODEM ACESSAR - SEU PERFIL
-routes.get('/profile', ProfileController.index)
-routes.put('/profile', ProfileValidator.update, ProfileController.update)
+
 
 //ROTA PARA ADMIN VER A LISTA DE USUÁRIOS
 routes.get('/', UserController.index)

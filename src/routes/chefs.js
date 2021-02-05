@@ -13,7 +13,7 @@ routes.get("/create", chefs.create)
 routes.get("/:id", chefs.show)
 routes.get("/:id/edit", chefs.edit)
 routes.post("/", multer.array("avatar",1), chefs.post)
-routes.put("/", multer.single("avatar"), chefs.put)
+routes.put("/", multer.single("avatar"), chefs.update)
 routes.delete("/", chefs.delete)
 
 module.exports = routes

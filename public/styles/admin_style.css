@@ -75,7 +75,6 @@
     cursor: pointer;
     position: relative;
     left: 610px;
-    bottom: 110px;
 }
 
 /*=== SHOW- DETALHE DA RECEITA ADMIN ====*/
@@ -216,7 +215,7 @@ input::placeholder{
 /*=== DELETE ADMIN RECIPES/CHEFS ===*/
 
 .button_delete{
-    width: 92px;
+    width: 139px;
     height: 37px;
     background-color:#DC4747;
     color: #FFFFFF;
@@ -225,7 +224,20 @@ input::placeholder{
     text-align: center;
     border-radius: 4px;
     cursor: pointer;
-    margin-left: 530px;   
+    margin-left: 500px;   
+}
+
+.button_delete_recipe{
+    width: 139px;
+    height: 37px;
+    background-color:#DC4747;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 470px;
 }
 
 /*=== INDEX ADMIN CHEFS ===*/

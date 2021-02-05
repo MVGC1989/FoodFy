@@ -72,7 +72,7 @@ async function update(req, res, next) {
     const {id , password} = req.body
 
     if(!password){
-        return res.render('admin/users/index', {
+        return res.render('admin/users/edit', {
             user: req.body,
             error: 'Digite sua senha para atualizar seu cadastro!.'
         })
@@ -83,7 +83,7 @@ async function update(req, res, next) {
     const passed = await compare(password, user.password)
     
     if(!passed) 
-        return res.render('admin/user/index', {
+        return res.render('admin/users/edit', {
             user: req.body,
             error: 'Senha incorreta.'
         })

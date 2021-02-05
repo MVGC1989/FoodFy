@@ -90,7 +90,7 @@ h4{
 .user-register{
     max-width: 940px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr ;
 }
 .user-input1{
     width: 450px;
@@ -108,7 +108,6 @@ h4{
 
 #name-user,
 #email-user{
-    
     font-size: 16px;
     font-weight: bold;
     color: #111;
@@ -128,11 +127,9 @@ h4{
     margin-top: 35px;
 }
 
-label{
+.item label{
     font-size: 16px;
     font-weight: bold;
-    color: #111;
-    margin-left: 8px;
 }
 
 .user-save,

@@ -16,7 +16,7 @@ module.exports = {
     async show(req, res){
         const {user} = req
 
-        return res.render("/admin/profile/index", {user})
+        return res.render("admin/profile/index", {user})
     },
 
     async update(req, res) {

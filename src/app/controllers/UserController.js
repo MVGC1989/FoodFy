@@ -66,7 +66,7 @@ module.exports = {
                 password,
                 is_admin
             })
-            
+                
             req.session.success = 'Usuário cadastrado com sucesso!'
 
             return res.redirect(`/admin/users/${userId}/edit`)
