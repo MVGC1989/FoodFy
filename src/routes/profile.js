@@ -6,7 +6,7 @@ const routes = express.Router()
 const ProfileController = require("../app/controllers/ProfileController")
 const ProfileValidator = require("../app/validators/profile")
 
-routes.get('/', ProfileController.show)
+routes.get('/', ProfileValidator.show, ProfileController.show)
 routes.put('/', ProfileValidator.update, ProfileController.update)
 
 module.exports = routes

@@ -10,7 +10,7 @@ body{
     background-color: white;
     font-family: "Roboto", sans-serif;
     color: #111111;
-    width: 1400px;
+    width: 100%;
     position: relative;
     display: flex;
     flex-direction: column;

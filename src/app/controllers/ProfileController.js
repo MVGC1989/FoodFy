@@ -1,7 +1,19 @@
 const User = require("../models/User")
 
 module.exports = {
-    async index(req, res) {
+    index(req, res) {
+        const { user } = req;
+        const { error } = req.session;
+
+        if (error) {
+            res.render('admin/users/index', { user, error });
+            req.session.error = '';
+            return;
+        }
+        
+        return res.render('admin/users/index', { user });
+    },
+    /*async index(req, res) {
         try {          
             const { userId : id } = req.session
 
@@ -11,7 +23,7 @@ module.exports = {
         } catch (error) {
             console.error(error)
         }
-    },
+    },*/
 
     async show(req, res){
         const {user} = req
