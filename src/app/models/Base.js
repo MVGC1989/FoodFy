@@ -2,7 +2,7 @@ const db = require('../../config/db')
 
 function find(filters, table) {
     try {
-        let query = `SELECT * FROM ${table}`
+        let query = `SELECT * FROM ${table} `
 
         if(filters) {
             Object.keys(filters).map(key => {

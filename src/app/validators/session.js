@@ -10,19 +10,19 @@ async function login (req, res, next){
             error: 'Por favor, entre com seu email e senha.',
         })
 
-        const user = await User.findOne({ where: { email } });
+        const user = await User.findOne({ where: { email } })
 
         if (!user) return res.render('admin/session/login', {
             user: req.body,
             error: 'Usuário não cadastrado!' 
         })
 
-        const passed = await compare(password, user.password);
+        const passed = await compare(password, user.password)
 
         if (!passed) return res.render('admin/session/login', {
             user: req.body,
             error: 'Senha incorreta! Tente novamente.'
-        });
+        })
 
         req.user = user
 

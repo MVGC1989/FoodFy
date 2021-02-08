@@ -2,6 +2,7 @@ const crypto = require('crypto')
 const mailer = require('../../lib/mailer')
 const {hash} = require('bcryptjs')
 const User = require('../models/User')
+const {emailTemplate} = require('../../lib/utils')
 
 
 module.exports ={
@@ -10,7 +11,6 @@ module.exports ={
     },
     
     login(req , res){
-        req.session ={}
         req.session.userId = req.user.id 
         req.session.isAdmin = req.user.is_admin
         return res.redirect("/admin/profile")
@@ -38,9 +38,9 @@ module.exports ={
     },
 
     async forgot(req , res){
-        const user = req.user
-
         try{
+            const {user} = req
+
              //Criar Token
             const token = crypto.randomBytes(20).toString("hex")
 
@@ -54,19 +54,30 @@ module.exports ={
             })
 
             //Enviar email com link de recuperação de senha
+            
+            const email = `
+            <h2 style="font-size: 24px; font-weight: normal;">Esqueceu sua senha ? </h2>
+            <br>
+            <p>
+                Esqueceu ou quer trocar sua senha? Não se preocupe ${user.name} !
+                <br><br>
+                Clique e botão abaixo para recupera-lá ou atualiza-lá:
+            </p>
+            <p style="text-align: center;">
+                <a
+                    style="display: block; margin: 32px auto; padding: 16px; width:150px; color: #fff;
+                    background-color: #6558C3; text-decoration: none; border-radius: 4px;"
+                    href="http:localhost:3000/admin/users/password-reset?token=${token}" target="_blank"
+                >Recuperar</a> 
+            </p>
+            <p style="padding-top:16px; border-top: 2px solid #ccc">Te esperamos lá!</p>
+            <p>Equipe Foodfy.</p>
+            `;
             await mailer.sendMail({
                 to: user.email,
                 from: "no-reply@foodfy.com.br",
                 subject: "Recuperação de Senha",
-                html: `
-                    <h2>Perdeu ou esqueceu sua senha ?</h2>
-                    <p>Não se preocupe, clique no link abaixo para recuperar sua senha.</p>
-                <p>
-                    <a href="htpp://localhost:3000/admin/session/password-reset?token=${token}" target="_blank">
-                    RECUPERAR SENHA
-                    </a>
-                </p>
-                `
+                html: emailTemplate(email) 
             })
 
             //Avisar usuário do email enviado

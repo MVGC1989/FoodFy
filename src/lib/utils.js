@@ -40,7 +40,7 @@ return `
                 <img
                     style="display:block;"
                     alt="Logo Foodfy"
-                    src="images/logoadmin.png"
+                    src="/images/logoadmin.png"
                 />
             </td>
         </tr>
@@ -60,7 +60,7 @@ return `
             <td style="padding:15px 10px 15px 10px;" bgcolor="#eee">
                 <table width="100%" cellpadding="0" cellspacing="0">
                     <tr>
-                        <td width="480" style="color:#999;" align="center">Todos direitos reservadosreceitas Foodfy</td>
+                        <td width="480" style="color:#999;" align="center">Todos direitos reservados. Receitas Foodfy &copy; </td>
                     </tr>
                 </table>
             </td>
