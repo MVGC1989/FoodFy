@@ -2,28 +2,20 @@ const User = require("../models/User")
 
 module.exports = {
     index(req, res) {
-        const { user } = req;
-        const { error } = req.session;
-
-        if (error) {
-            res.render('admin/users/index', { user, error });
-            req.session.error = '';
-            return;
-        }
-        
-        return res.render('admin/users/index', { user });
-    },
-    /*async index(req, res) {
         try {          
-            const { userId : id } = req.session
+            const { user } = req
 
-            const user = await User.findOne({where: {id}})
+            const error = req.session.error
+            req.session.error = ""
 
-            return res.render("admin/profile/index", {user})            
+            const success = req.session.success
+            req.session.success = ""
+
+            return res.render("admin/profile/index", {user, error, success})            
         } catch (error) {
             console.error(error)
         }
-    },*/
+    },
 
     async show(req, res){
         const {user} = req
@@ -32,22 +24,22 @@ module.exports = {
     },
 
     async update(req, res) {
-        const { user } = req
-        const { name , email} = req.body
-        
         try {
-            await User.update(user.id, {
-            name,
-            email
-        })
-        req.session.success = "Perfil atualizado com sucesso!"
+            const { user } = req
+            let { name, email } = req.body
 
-        return res.redirect(`/admin/users/index`)
+            await User.update(user.id, {
+                name,
+                email
+        })
+
+        req.session.success = "Perfil atualizado com sucesso!"
+        return res.redirect("/admin/profile")
     } 
     catch (err) {
         console.error(err)
         req.session.error = "Ocorreu um erro inesperado!"
-        return res.redirect("admin/users/index") 
+        return res.redirect("/admin/profile") 
     }
     }
 }

@@ -29,28 +29,25 @@ async function show(req, res, next) {
 }
 
 async function update(req, res, next) {
-    const fillAllFields = checkAllFields(req.body);
-    if (fillAllFields) return res.render('admin/users/index', fillAllFields)
-
     const { userId: id } = req.session
     const user = await User.findOne({ where: { id } })
     const { email, password } = req.body
 
     if (email != user.email) {
         const isNotAvaliable = await User.findOne({ where: { email } })
-        if (isNotAvaliable) return res.render('users/index', {
+        if (isNotAvaliable) return res.render('admin/profile/index', {
             user: req.body,
             error: 'Este email já está cadastrado!'
         })
     }
 
-    if (!password) return res.render('users/index', {
+    if (!password) return res.render('admin/profile/index', {
         user: req.body,
         error: 'Insira sua senha para atualizar seu cadastro.'
     })
     
     const passwordPassed = await compare(password, user.password)
-    if (!passwordPassed) return res.render('users/index', {
+    if (!passwordPassed) return res.render('admin/profile/index', {
         user: req.body,
         error: 'Senha incorreta!'
     })

@@ -9,17 +9,15 @@
 </head>
 
 <body>
-    <header class = "admin">
-        <div>
-            {% include "parts/links-admin.njk" %}
-        </div>
-    </header>
+
+    {% include "parts/links-admin.njk"%}
+
 
     {% include "parts/messages.njk"%}
 
-    {% block content%} 
-        {% include "parts/scripts.njk"%}
-    {% endblock %}
+    {% block content%} {% endblock %}
+    
+    {% include "parts/scripts.njk"%}
 
     <footer class="rodape">
         <p>Todos os direitos reservados, receitas Foodfy &copy;</p>

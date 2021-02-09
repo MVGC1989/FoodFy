@@ -5,15 +5,18 @@
     margin-left: 450px;
     margin-bottom: 56px;
 }
+.loginheader{
+    width: 1400px;
+}
 
 .img-login{
     text-align: center;
-    margin-top: 35px;
+    padding: 32px;
 }
 
 .session-init{
     font-size: 24px;
-    margin-top: 130px;
+    margin-top: 80px;
     text-align: center;
 }
 

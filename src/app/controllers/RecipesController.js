@@ -48,6 +48,51 @@ module.exports = {
         }
     },
 
+    async myRecipes(req, res) {
+        try {
+            let {page, limit} = req.query 
+        
+            page = page || 1 
+            limit = limit || 6 
+            let offset = limit * (page -1)
+        
+            const params = {
+                page,
+                limit,
+                offset
+        }
+        
+        let results = await Recipe.paginate(params)
+        const recipes = results.rows
+
+        const pagination ={
+            total: Math.ceil(recipes[0].total/limit),
+            page
+        }
+
+        async function getImage(recipeId) {
+            let results = await Recipe.files(recipeId);
+            const file = results.rows[0];
+    
+            return `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`;
+        }
+    
+        const recipesPromise = recipes.map(async recipe => {
+            recipe.image = await getImage(recipe.id);
+            return recipe;
+        });
+    
+        const allRecipes = await Promise.all(recipesPromise);
+
+        allRecipes = allRecipes.filter(recipe => recipe.user_id == req.session.userId)
+
+            return res.render('admin/recipes/index', { recipes: allRecipes , pagination })
+        } 
+        catch (err) {
+            console.error(err)
+        }
+    },
+
     async create(req, res) {
         //Pega Chefs
         try {
@@ -67,6 +112,7 @@ module.exports = {
         }
         
         if(req.files.length == 0){res.send("Please, send at least one file")}
+        
         let results = await Recipe.create(req.body)
         const recipeId = results.rows[0].id
 

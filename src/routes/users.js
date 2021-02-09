@@ -13,9 +13,9 @@ const SessionValidator = require("../app/validators/session")
 const {onlyUsers, UserIsAdmin, userIsLogged} = require("../app/middlewares/session")
 
 //LOGIN-LOGOUT 
-routes.get('/login', SessionController.loginForm)
+routes.get('/login', userIsLogged, SessionController.loginForm)
 routes.post('/login', SessionValidator.login, SessionController.login)
-routes.post('/logout', SessionController.logout)
+routes.post('/logout', onlyUsers ,SessionController.logout)
 
 //RECUPERAR SENHA
 routes.get('/forgot-password', SessionController.forgotForm)
@@ -29,18 +29,18 @@ routes.post('/password-reset', SessionValidator.reset, SessionController.reset)
 
 
 //ROTA PARA ADMIN VER A LISTA DE USUÁRIOS
-routes.get('/', UserController.index)
+routes.get('/', onlyUsers , UserController.index)
 
 // ROTAS PARA CRIAR USUÁRIOS - SOMENTE ADMIN PODE
-routes.get('/create', UserController.create)
-routes.post('/create', UserValidator.post, UserController.post)
+routes.get('/create', onlyUsers, UserIsAdmin, UserController.create)
+routes.post('/create', onlyUsers, UserIsAdmin, UserValidator.post, UserController.post)
 
 // ROTAS PARA O ADMIN ATUALIZAR OUTROS USUÁRIOS
-routes.get('/:id/edit',UserValidator.edit, UserController.edit)
-routes.put('/', UserValidator.update, UserController.update)
+routes.get('/:id/edit', onlyUsers, UserIsAdmin, UserValidator.edit, UserController.edit)
+routes.put('/', onlyUsers, UserIsAdmin, UserValidator.update, UserController.update)
 
 // ROTA PARA DELETAR USUÁRIOS
-routes.delete('/', UserValidator.remove, UserController.delete)
+routes.delete('/', onlyUsers, UserIsAdmin, UserValidator.remove, UserController.delete)
 
 
 module.exports = routes

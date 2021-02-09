@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <header>
+    <header class="loginheader">
         <div class="img-login">
             <img src="/images/logo.png" alt="logoadmin">
         </div>
@@ -19,10 +19,11 @@
 
 {% block content%} {% endblock %}
 
+{% include "parts/scripts.njk"%}
+
 <footer class="rodape">
     <p>Todos os direitos reservados, receitas Foodfy &copy;</p>
 </footer>
 
-{% include "parts/scripts.njk"%}
 </body>
 </html>

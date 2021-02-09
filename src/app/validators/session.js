@@ -50,7 +50,7 @@ async function forgot (req, res, next){
 }
 
 async function reset(req, res, next){
-    const {email , password, passwordRepeat, token} = req.body
+    const {email , password, token, passwordRepeat} = req.body
     try{
         //Procurar o usuário
     const user = await User.findOne({where: {email}})

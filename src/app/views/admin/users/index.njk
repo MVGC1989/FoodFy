@@ -3,14 +3,7 @@
 {% block content %}
 
 <section class="users-list">
-    <h2 class="index">Usuários Cadastrados
-
-    <button 
-        class="button_new_user" 
-        onclick="location.href='/admin/users/create'">Novo Usuário
-    </button>
-
-    </h2>
+    <h2 class="index">Usuários Cadastrados</h2>
 
     <div class="index_cards_users">
         {% for user in users %}

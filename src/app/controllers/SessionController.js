@@ -15,18 +15,6 @@ module.exports ={
         req.session.isAdmin = req.user.is_admin
         return res.redirect("/admin/profile")
     },
-    /*async login(req , res){
-        try {
-            const {user} = req
-            
-            req.session.userId = user.id
-            req.session.isAdmin = user.is_admin
-            
-            return res.redirect("/admin/users")
-        } catch (err) {
-            console.error(err)
-        }
-    },*/
 
     logout(req , res){
         req.session.destroy()

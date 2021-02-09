@@ -1,11 +1,71 @@
+<header class="admin">
+    <div>
 <a class="logo_admin" href="/"><img src="/images/logoadmin.png" alt="logoadmin"></a>      
-<a id= "active_adm" class="linkadmin1" href="/admin/recipes">Receitas</a>
-<a id= "active_adm" class="linkadmin2" href="/admin/chefs">Chefs</a>
-<a id= "active_adm" class="linkadmin3" href="/admin/users">Usuários</a>
-<a id= "active_adm" class="linkadmin3" href="/admin/profile">Perfil</a>
 
+<nav class="menu">
+            <ul> 
+                <li class="dropdown">
+                    <a href="#" class="linkadmin1" >Receitas</a>
+                        <ul class="submenu" id="menu-recipe">
+                            <li>
+                                <a href="/admin/recipes/my_recipes_list">Minhas receitas</a>
+                            </li>
+                            <li>
+                                <a href="/admin/recipes">Todas receitas</a>
+                            </li>
+                            <li>
+                                <a href="/admin/recipes/create">Criar receita</a>
+                            </li>                        
+                        </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#" class="linkadmin2" >Chefs</a>
+                        <ul class="submenu" id="menu-chef">
+                            <li>
+                                <a href="/admin/chefs">Listar</a>
+                            </li>
+                            {% if session.isAdmin %}
+                                <li>
+                                    <a href="/admin/chefs/create">Criar</a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#" class="linkadmin3">Usuários</a>
+                        <ul class="submenu" id="menu-user">
+                            <li>
+                                <a href="/admin/users">Listar</a>
+                            </li>
+                            {% if session.isAdmin %}
+                                <li>
+                                    <a href="/admin/users/create">Criar</a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                </li>
+
+                <li>
+                    <a class="linkadmin3" href="/admin/profile">Perfil</a>                    
+                </li> 
+                {% if session.isAdmin %}
+                <p class="administrator">Administrador</p>
+                {% endif %}                              
+            </ul>
+
+            
+            
+            
+        </nav>
+</div>
+
+<div>
 <form action="/admin/users/logout" method="post" class="button-logout">
-    <a id= "active_adm" class="linkadmin3" href="/">Sair
+    <button class="linkexit" href="/">Sair
         <i class="material-icons">power_settings_new</i>
-    </a>
+    </button>
 </form>
+</div>
+</header>

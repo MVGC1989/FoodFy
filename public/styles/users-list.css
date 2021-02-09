@@ -57,10 +57,14 @@
 }
 
 #edit-user:hover{
+    transition: 300ms;
     border: 1px solid #6558C3;
+    box-shadow: 0px 2px 4px 2px  #6558C3;
 }
 
 #remove-user:hover{
+    transition: 300ms;
     border: 1px solid #F55A5A;
+    box-shadow: 0px 2px 4px 2px #F55A5A;
 }
 

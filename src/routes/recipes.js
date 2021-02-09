@@ -9,6 +9,7 @@ const recipes = require("../app/controllers/RecipesController")
 // ROTAS ADMIN RECIPES
 
 routes.get("/", recipes.index)
+routes.get("/my_recipes_list", recipes.myRecipes)
 routes.get("/create", recipes.create)
 routes.get("/:id", recipes.show)
 routes.get("/:id/edit", recipes.edit)
