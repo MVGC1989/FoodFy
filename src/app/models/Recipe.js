@@ -109,7 +109,7 @@ module.exports = {
     },
 
     paginate(params){
-        var { filter, limit, offset } = params
+        const { filter, limit, offset } = params
 
         let query = ""
         let filterQuery = ""

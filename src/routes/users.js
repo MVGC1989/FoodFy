@@ -40,7 +40,7 @@ routes.get('/:id/edit', onlyUsers, UserIsAdmin, UserValidator.edit, UserControll
 routes.put('/', onlyUsers, UserIsAdmin, UserValidator.update, UserController.update)
 
 // ROTA PARA DELETAR USUÁRIOS
-routes.delete('/', onlyUsers, UserIsAdmin, UserValidator.remove, UserController.delete)
+routes.delete('/', onlyUsers, UserIsAdmin, UserController.delete)
 
 
 module.exports = routes

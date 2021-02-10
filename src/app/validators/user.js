@@ -94,23 +94,5 @@ async function update(req, res, next) {
 }
 
 
-async function remove(req, res, next) {
-    const { userId: id } = req.session
-    const deletedUserId = req.body.id
 
-    const user = await User.find(req.body.id)
-    const users = await User.findAll() 
-
-    if(id == deletedUserId) {
-        return res.render('admin/user/index', {
-            user,
-            users,
-            error: 'Não é possível deletar a própria conta.'
-        })
-    } else {
-        next()
-    }
-}
-
-
-module.exports = { show, post, edit, update, remove }
+module.exports = { show, post, edit, update,}

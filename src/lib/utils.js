@@ -81,5 +81,20 @@ checkAllFields(body) {
             };
         }
     }
+},
+getParams(query, limit){
+    let { search, page } = query
+
+    page = page || 1;
+    let offset = limit * (page - 1)
+
+    const params = {
+        search,
+        limit,
+        offset,
+        page
+    }
+
+    return params
 }
 }

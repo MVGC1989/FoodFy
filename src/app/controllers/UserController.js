@@ -2,15 +2,28 @@ const User = require('../models/User')
 const crypto = require('crypto')
 const mailer = require('../../lib/mailer')
 const { hash } = require('bcryptjs')
-const { emailTemplate} = require('../../lib/utils');
+const { emailTemplate , getParams} = require('../../lib/utils');
 
 module.exports = {
     async index(req, res) {
         try {
-        
-            const users = await User.findAll()
+            const params = getParams(req.query, 6);
+            const users = await User.paginate(params);
+            const pagination = { page: params.page };
+    
+            users.length == 0
+            ? pagination.total = 1
+            : pagination.total = Math.ceil(users[0].total / params.limit);
+    
+            const { success } = req.session;
+    
+            if (success) {
+                res.render("admin/users/index", { users, success, pagination });
+                req.session.success = '';
+                return
+            }
 
-            return res.render("admin/users/index", {users})
+            return res.render("admin/users/index", {users, pagination})
         } catch (error) {
             console.error(error)
         }
@@ -109,9 +122,14 @@ module.exports = {
     },
 
     async delete(req, res) {
-        const {id} = req.body
         try {
-            await User.delete(id)
+            if(req.body.id==req.session.userId){
+                req.session.error = `Você não pode deletar a sua própria conta.`
+
+                return res.redirect(`/admin/users/${req.body.id}/edit`)
+            }
+
+            await User.delete(req.body.id)
             req.session.destroy()
 
             return res.render("admin/session/login", {
