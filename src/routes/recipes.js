@@ -5,10 +5,9 @@ const multer = require("../app/middlewares/multer")
 const RecipesController = require("../app/controllers/RecipesController")
 
 
-
 // ROTAS ADMIN RECIPES
 
-routes.get("/", RecipesController.index)
+routes.get("/",RecipesController.index)
 routes.get("/my-recipes", RecipesController.myRecipes)
 routes.get("/create", RecipesController.create)
 routes.get("/:id", RecipesController.show)

@@ -69,24 +69,10 @@ async function update(req, res, next) {
     if(fillAllFields) 
         return res.render('admin/users/edit', fillAllFields)
     
-    const {id , password} = req.body
+    const {id} = req.body
 
-    if(!password){
-        return res.render('admin/users/edit', {
-            user: req.body,
-            error: 'Digite sua senha para atualizar seu cadastro!.'
-        })
-    }
-    
     const user = await User.findOne({where: { id } })
     
-    const passed = await compare(password, user.password)
-    
-    if(!passed) 
-        return res.render('admin/users/edit', {
-            user: req.body,
-            error: 'Senha incorreta.'
-        })
 
     req.user = user
 

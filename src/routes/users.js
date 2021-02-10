@@ -29,7 +29,7 @@ routes.post('/password-reset', SessionValidator.reset, SessionController.reset)
 
 
 //ROTA PARA ADMIN VER A LISTA DE USUÁRIOS
-routes.get('/', onlyUsers , UserController.index)
+routes.get('/', UserIsAdmin, onlyUsers , UserController.index)
 
 // ROTAS PARA CRIAR USUÁRIOS - SOMENTE ADMIN PODE
 routes.get('/create', onlyUsers, UserIsAdmin, UserController.create)

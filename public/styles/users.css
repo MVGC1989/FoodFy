@@ -34,8 +34,7 @@ h4{
     width: 100%;
     border-radius: 4px;
 }
-
-.input-login .error{
+div .error{
     background-color: #DC4747;
     padding: 4px;
     border-radius: 4px;
@@ -43,7 +42,7 @@ h4{
     text-align: center;
     margin-top: 6px;
     font-weight: bold;
-    
+
 }
 
 .input-login input::placeholder{

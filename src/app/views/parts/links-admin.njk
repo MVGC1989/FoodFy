@@ -5,10 +5,10 @@
 <nav class="menu">
             <ul> 
                 <li class="dropdown">
-                    <a href="/admin/recipes" class="linkadmin1" id="active_adm">Receitas</a>
+                    <a  class="linkadmin1">Receitas</a>
                         <ul class="submenu" id="menu-recipe">
                             <li>
-                                <a href="/admin/recipes/my-recipes">Minhas receitas</a>
+                                <a href="/admin/recipes/my-recipes" id="active_adm">Minhas receitas</a>
                             </li>
                             {% if session.isAdmin %}
                             <li>
@@ -45,7 +45,7 @@
                                 <li>
                                     <a href="/admin/users/create">Criar</a>
                                 </li>
-                            }
+                            
                         </ul>
                 </li>
                 {% endif %}

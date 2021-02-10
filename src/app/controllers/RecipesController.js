@@ -2,11 +2,13 @@
 const Recipe = require("../models/Recipe")
 const File = require("../models/Files")
 const {date, getParams} = require("../../lib/utils")
+const { UserIsAdmin } = require("../middlewares/session")
 
 
 module.exports = {
     async index(req, res) {
         try {
+
             let {page, limit} = req.query 
         
             page = page || 1 
@@ -16,7 +18,7 @@ module.exports = {
             const params = {
                 page,
                 limit,
-                offset
+                offset,
         }
         
         let results = await Recipe.paginate(params)
@@ -28,18 +30,18 @@ module.exports = {
         }
 
         async function getImage(recipeId) {
-            let results = await Recipe.files(recipeId);
-            const file = results.rows[0];
+            let results = await Recipe.files(recipeId)
+            const file = results.rows[0]
     
-            return `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`;
+            return `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`
         }
     
         const recipesPromise = recipes.map(async recipe => {
-            recipe.image = await getImage(recipe.id);
-            return recipe;
-        });
+            recipe.image = await getImage(recipe.id)
+            return recipe
+        })
     
-        const allRecipes = await Promise.all(recipesPromise);
+        const allRecipes = await Promise.all(recipesPromise)
 
             return res.render('admin/recipes/index', { recipes: allRecipes , pagination })
         } 
@@ -49,18 +51,23 @@ module.exports = {
     },
 
     async myRecipes(req, res) {
-        try {
+        try {   
 
-                let {page, limit} = req.query 
-        
+                let {page, limit, user, user_is_admin} = req.query 
+            
                 page = page || 1 
                 limit = limit || 6 
                 let offset = limit * (page -1)
+
+                user = req.session.userId
+                user_is_admin = req.session.isAdmin
             
                 const params = {
                     page,
                     limit,
-                    offset
+                    offset,
+                    user,
+                    user_is_admin
             }
             
             let results = await Recipe.paginate(params)
@@ -72,21 +79,22 @@ module.exports = {
             }
     
             async function getImage(recipeId) {
-                let results = await Recipe.files(recipeId);
-                const file = results.rows[0];
+                let results = await Recipe.files(recipeId)
+                const file = results.rows[0]
         
-                return `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`;
+                return `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`
             }
         
             const recipesPromise = recipes.map(async recipe => {
-                recipe.image = await getImage(recipe.id);
-                return recipe;
-            });
+                recipe.image = await getImage(recipe.id)
+                return recipe
+            })
         
-            const allRecipes = await Promise.all(recipesPromise);
+            const allRecipes = await Promise.all(recipesPromise)
             
     
-                return res.render('admin/recipes/index', { recipes: allRecipes , pagination })
+                return res.render('admin/recipes/index', { recipes: allRecipes , pagination})
+                
         }catch (err) {
             console.error(err)
         }
@@ -105,7 +113,7 @@ module.exports = {
     },
     async post(req, res){
         try{
-            const keys = Object.keys(req.body);
+            const keys = Object.keys(req.body)
         for( key of keys ){
             if(req.body[key] == ""){return res.send("PREENCHA TODOS OS CAMPOS!")}
         }
@@ -229,17 +237,17 @@ module.exports = {
 
     async delete(req, res){
         try {   
-            const { id } = req.body;
+            const { id } = req.body
 
-            let files = (await Recipe.files(id)).rows;
+            let files = (await Recipe.files(id)).rows
     
-            let removeFilesPromise = files.map((file) => File.RecipeDelete(file.id));
-            await Promise.all(removeFilesPromise);
+            let removeFilesPromise = files.map((file) => File.RecipeDelete(file.id))
+            await Promise.all(removeFilesPromise)
     
-            removeFilesPromise = files.map((file) => File.delete(file.id));
-            await Promise.all(removeFilesPromise);
+            removeFilesPromise = files.map((file) => File.delete(file.id))
+            await Promise.all(removeFilesPromise)
     
-            await Recipe.delete(id);
+            await Recipe.delete(id)
     
                 return res.redirect(`/admin/recipes`)
             

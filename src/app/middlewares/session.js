@@ -18,14 +18,9 @@ function userIsLogged(req, res, next){
 
 
 async function UserIsAdmin (req, res, next) {
-    const {userId : id} = req.session
-
-    const user = await User.findOne({where: {id}})
-
-    if(!user.is_admin == true) {
-        return res.render("admin/users/index", {
-            error:" Esta área é restrita aos administradores !"
-        })
+    if (!req.session.isAdmin) {
+        req.session.error = 'Descupe, você não tem permisão para acessar esta página!'
+        return res.redirect('/admin/profile')
     }
 
     next()

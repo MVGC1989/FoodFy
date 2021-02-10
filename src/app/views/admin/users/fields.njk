@@ -23,25 +23,16 @@
             </div>
     </div>
 
-    <!--<div class="item">
-        <div id="name-user">Senha:</div>
-        <div>
-            <input class="user-input1"
-                type="password" 
-                name="password" 
-                placeholder=" Digite sua  senha de usuário..." >
-        </div>        
-    </div><-->
 </div>
 
 <div class="item">
     <input 
         type="checkbox"
         name="is_admin"
-        value="true"
         {% if user.is_admin == true %}
         checked
         {% endif %}
+        value="true"
         >
 <label>Administrador</label>
 </div>

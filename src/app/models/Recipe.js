@@ -4,11 +4,15 @@ const {date} = require('../../lib/utils')
 
 module.exports = {
     all(){ 
-        return db.query(`SELECT recipes.*, chefs.name AS chef_name
-        FROM recipes
-        LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
-        ORDER BY created_at DESC`
-        )    
+        try {
+            return db.query(`SELECT recipes.*, chefs.name AS chef_name
+                FROM recipes
+                LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
+                ORDER BY created_at DESC`
+            ) 
+        } catch (error) {
+            console.error(error)
+        }
     },
 
     create(data){
@@ -47,15 +51,6 @@ module.exports = {
         )
     },
 
-    userRecipes(id) {
-        return db.query(`
-        SELECT recipes.*, chefs.name AS chef_name
-        FROM recipes
-        LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
-        WHERE user_id = $1
-        ORDER BY created_at DESC`, [id])
-    },
-
     search(filter) {
         return db.query(`
             SELECT recipes.*, chefs.name AS chef_name
@@ -86,7 +81,6 @@ module.exports = {
         ]
 
         db.query(query, values)
-    
     },
 
     async delete(id) {
@@ -120,10 +114,12 @@ module.exports = {
     },
 
     paginate(params){
-        const { filter, limit, offset } = params
+        const { filter, limit, offset, user, user_is_admin} = params
 
         let query = ""
         let filterQuery = ""
+        let = userQuery = ""
+        
         let totalQuery = `(
             SELECT count(*) FROM recipes
         ) AS total` 
@@ -140,12 +136,22 @@ module.exports = {
                 ${filterQuery}
             ) AS total`
         }
+
+        if (user || user_is_admin) {
+            if (user_is_admin) {
+                userQuery = '';
+                totalQuery = '(SELECT COUNT(*) FROM recipes) AS total';
+            } else {
+                userQuery = `WHERE user_id = ${user}`;
+                totalQuery = `(SELECT COUNT(*) FROM recipes WHERE user_id = ${user}) AS total`;
+            }
+        }
         
         query = `
         SELECT recipes.*, ${totalQuery}, chefs.name AS chef_name
         FROM recipes
         LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
-        ${filterQuery}
+        ${filterQuery} ${userQuery}
         ORDER BY created_at DESC LIMIT $1 OFFSET $2`
         
         return db.query(query , [limit, offset])
@@ -166,5 +172,4 @@ module.exports = {
         }
         
     },
-
 }
