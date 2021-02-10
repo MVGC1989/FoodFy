@@ -8,11 +8,13 @@
                     <a href="/admin/recipes" class="linkadmin1" id="active_adm">Receitas</a>
                         <ul class="submenu" id="menu-recipe">
                             <li>
-                                <a href="/admin/recipes/my_recipes_list">Minhas receitas</a>
+                                <a href="/admin/recipes/my-recipes">Minhas receitas</a>
                             </li>
+                            {% if session.isAdmin %}
                             <li>
                                 <a href="/admin/recipes">Todas receitas</a>
                             </li>
+                            {% endif %}
                             <li>
                                 <a href="/admin/recipes/create">Criar receita</a>
                             </li>                        
@@ -32,21 +34,21 @@
                             {% endif %}
                         </ul>
                 </li>
-
+                {% if session.isAdmin %}
                 <li class="dropdown">
                     <a href="/admin/users" class="linkadmin3" id="active_adm">Usuários</a>
                         <ul class="submenu" id="menu-user">
                             <li>
                                 <a href="/admin/users">Listar</a>
                             </li>
-                            {% if session.isAdmin %}
+                            
                                 <li>
                                     <a href="/admin/users/create">Criar</a>
                                 </li>
-                            {% endif %}
+                            }
                         </ul>
                 </li>
-
+                {% endif %}
                 <li>
                     <a class="linkadmin3" href="/admin/profile" id="active_adm">Perfil</a>                    
                 </li> 
@@ -54,10 +56,6 @@
                 <p class="administrator">Administrador</p>
                 {% endif %}                              
             </ul>
-
-            
-            
-            
         </nav>
 </div>
 

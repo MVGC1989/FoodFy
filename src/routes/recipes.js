@@ -2,19 +2,19 @@ const express = require("express")
 const routes = express.Router()
 const multer = require("../app/middlewares/multer")
 
+const RecipesController = require("../app/controllers/RecipesController")
 
-const recipes = require("../app/controllers/RecipesController")
 
 
 // ROTAS ADMIN RECIPES
 
-routes.get("/", recipes.index)
-routes.get("/my_recipes_list", recipes.myRecipes)
-routes.get("/create", recipes.create)
-routes.get("/:id", recipes.show)
-routes.get("/:id/edit", recipes.edit)
-routes.post("/", multer.array("photos", 5), recipes.post)
-routes.put("/", multer.array("photos", 5), recipes.put)
-routes.delete("/", recipes.delete)
+routes.get("/", RecipesController.index)
+routes.get("/my-recipes", RecipesController.myRecipes)
+routes.get("/create", RecipesController.create)
+routes.get("/:id", RecipesController.show)
+routes.get("/:id/edit", RecipesController.edit)
+routes.post("/", multer.array("photos", 5), RecipesController.post)
+routes.put("/", multer.array("photos", 5), RecipesController.put)
+routes.delete("/", RecipesController.delete)
 
 module.exports = routes

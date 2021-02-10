@@ -63,6 +63,7 @@ header .menu ul li a.activeadm{
     text-decoration: none;
     text-align: center;
     margin-left: -15px;
+    border-top: 1px solid white;
 }
 
 .dropdown .submenu li:first-child a {
@@ -70,7 +71,6 @@ header .menu ul li a.activeadm{
 }
 
 .dropdown .submenu li a:hover{
-    border-bottom: 1px solid white;
     color: white;
     font-weight: bold;
 }

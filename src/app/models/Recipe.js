@@ -19,9 +19,10 @@ module.exports = {
                 ingredients,
                 preparation,
                 information,
-                created_at
+                created_at,
+                user_id
                 
-            ) VALUES ($1, $2, $3, $4, $5, $6)
+            ) VALUES ($1, $2, $3, $4, $5, $6, $7)
                 RETURNING id
         `
         const values = [
@@ -30,7 +31,8 @@ module.exports = {
             data.ingredients,
             data.preparation,
             data.information,
-            date(Date.now()).iso
+            date(Date.now()).iso,
+            data.user_id
         ]
         
         return db.query(query, values)
@@ -43,6 +45,15 @@ module.exports = {
             LEFT JOIN chefs ON (chefs.id = recipes.chef_id)
             WHERE recipes.id = $1`, [id]
         )
+    },
+
+    userRecipes(id) {
+        return db.query(`
+        SELECT recipes.*, chefs.name AS chef_name
+        FROM recipes
+        LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
+        WHERE user_id = $1
+        ORDER BY created_at DESC`, [id])
     },
 
     search(filter) {

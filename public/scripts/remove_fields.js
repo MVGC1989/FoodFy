@@ -1,9 +1,9 @@
 // REMOVENDO OS CAMPOS DAS RECEITAS
 
 
-const btnRemove = document.querySelectorAll('#remove')
+const Remove = document.querySelectorAll('#remove')
 
-for (const button of btnRemove) {
+for (const button of Remove) {
     let element = button.parentElement    
     button.addEventListener("click", function(){        
         if(element.firstElementChild.value==""){

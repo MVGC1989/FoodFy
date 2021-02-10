@@ -7,19 +7,19 @@ const { emailTemplate , getParams} = require('../../lib/utils');
 module.exports = {
     async index(req, res) {
         try {
-            const params = getParams(req.query, 6);
-            const users = await User.paginate(params);
-            const pagination = { page: params.page };
+            const params = getParams(req.query, 6)
+            const users = await User.paginate(params)
+            const pagination = { page: params.page }
     
             users.length == 0
             ? pagination.total = 1
-            : pagination.total = Math.ceil(users[0].total / params.limit);
+            : pagination.total = Math.ceil(users[0].total / params.limit)
     
-            const { success } = req.session;
+            const { success } = req.session
     
             if (success) {
-                res.render("admin/users/index", { users, success, pagination });
-                req.session.success = '';
+                res.render("admin/users/index", { users, success, pagination })
+                req.session.success = ''
                 return
             }
 
