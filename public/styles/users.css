@@ -36,13 +36,19 @@ h4{
 }
 div .error{
     background-color: #DC4747;
-    padding: 4px;
+    width: 340px;
+    height: 130px;
+    padding: 16px;
     border-radius: 4px;
     color: white;
-    text-align: center;
     margin-top: 6px;
     font-weight: bold;
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 8px;
+    right: 8px;
 }
 
 .input-login input::placeholder{
@@ -146,7 +152,6 @@ div .error{
     cursor: pointer;
     
 }
-
 
 .user-save{
     background-color: #6558C3;

@@ -52,7 +52,6 @@ module.exports = {
 
     async myRecipes(req, res) {
         try {   
-
                 let {page, limit, user, user_is_admin} = req.query 
             
                 page = page || 1 
@@ -121,6 +120,7 @@ module.exports = {
         if(req.files.length == 0){res.send("Please, send at least one file")}
         
         req.body.user_id = req.session.userId
+        req.body.is_admin = req.session.isAdmin
 
         let results = await Recipe.create(req.body)
         const recipeId = results.rows[0].id
