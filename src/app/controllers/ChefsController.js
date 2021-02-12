@@ -107,18 +107,18 @@ module.exports = {
 
       //mostra a imagem de cada receita
       async function getImage(recipeId) {
-        let results = await Recipe.files(recipeId);
-        const file = results.rows[0];
+        let results = await Recipe.files(recipeId)
+        const file = results.rows[0]
 
-        return `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`;
+        return `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`
     }
 
       const recipesPromise = recipes.map(async recipe => {
-        recipe.image = await getImage(recipe.id);
-        return recipe;
-    });
+        recipe.image = await getImage(recipe.id)
+        return recipe
+    })
 
-      const allChefRecipes = await Promise.all(recipesPromise);
+      const allChefRecipes = await Promise.all(recipesPromise)
 
       return res.render("admin/chefs/show", { chef, recipes:allChefRecipes, files })
     
@@ -183,28 +183,31 @@ module.exports = {
   
 async delete(req, res) {
   try {
-    const { id } = req.body;
+    const { id } = req.body
+
+    
+
 
     // --> Buscando o chefe para excluir
-    const chef = (await Chef.find(id)).rows[0];
+    const chef = (await Chef.find(id)).rows[0]
 
-    if (!chef) return res.send("Chef não encontrado!");
+    if (!chef) return res.send("Chef não encontrado!")
 
     if(chef.total_recipes >= 1){
-      res.send("Chefes que possuem receitas não podem ser excluídos!")
-    } 
+      
+      res.redirect(`/admin/chefs/${req.body.id}/edit` )
     
-    else {
+    }else {
       // --> Deletando o chef e o arquivo do chefe buscado
-    await Chef.delete(id);
-    await File.delete(chef.file_id);
+    await Chef.delete(id)
+    await File.delete(chef.file_id)
 
     // --> Redirecionando para a pagina com todos os chefs.
-    return res.redirect("/admin/chefs");
+    return res.redirect("/admin/chefs")
     }
     
   } catch (error) {
-    throw new Error(error);
+    throw new Error(error)
   }
 },
 

@@ -49,6 +49,14 @@ function create_pagination(pagination){
     }
     
     pagination.innerHTML = elements
+    selectedPage(page)
+}
+
+function selectedPage(page) {
+    const pagesSelected = document.querySelectorAll('.pagination a')
+    pagesSelected.forEach(current_page => {
+        if (Number(current_page.innerHTML) == page) current_page.classList.add('activepage')
+    })
 }
 
 const pagination = document.querySelector(".pagination")

@@ -11,16 +11,20 @@
 
 .pagination a,
 .pagination span {
-    color: black;
+    color:gray;
     text-decoration: none;
     margin-right: 16px;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .pagination a:hover{
-    color: gray;
+    color: black;
     filter: brightness(0.9); /*deixa mais escuro quando passo mouse*/
-    border-bottom: 2px solid gray;
+    border-bottom: 2px solid black;
     transition: 300ms;
+}
+.pagination a.activepage{
+    color: black;
+    border-bottom: 2px solid black;
 }
