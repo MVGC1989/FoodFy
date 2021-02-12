@@ -99,7 +99,7 @@ module.exports = {
 
     async update(req, res) {
         try {
-
+            const {user} = req
 
             let { id, name, email, is_admin } = req.body
             is_admin = is_admin || false
@@ -109,8 +109,8 @@ module.exports = {
                 email,
                 is_admin
             })
-
-            return res.redirect('/admin/users')
+            req.session.success = "Usuário atualizado!"
+            return res.redirect(`/admin/users/${req.user.id}/edit`)
         } catch (err) {
             console.error(err)
             return res.render('admin/users/edit', {
