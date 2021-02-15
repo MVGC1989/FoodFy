@@ -6,12 +6,12 @@
 
 {% block content %}
 
-
+{% if session.isAdmin%}
 <button 
     class="button_edit_recipe" 
     onclick="window.location.href='/admin/recipes/{{recipe.id}}/edit'">Editar Receita
 </button>
-
+{% endif %}
 
 <div class="show_title">
     <h3 class="show">

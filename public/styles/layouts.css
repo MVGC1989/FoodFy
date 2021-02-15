@@ -2,7 +2,7 @@
 
 .layout{
     background-color: white;
-    width: 1400px;
+    width: 100%;
     padding-top: 32px;
 
 }
@@ -48,8 +48,9 @@
 }
 
 .rodape{
-    width: 1400px;
+    width: 100%;
     padding: 32px;
+    box-sizing: border-box;
     margin-top: auto;
     text-align: center;
     color: #999999;
@@ -91,8 +92,9 @@ input::placeholder{
 
 .admin{
     background-color:#111111;
-    width: 1400px;
-    padding: 32px;
+    width: 100%;
+    box-sizing: border-box;
+    padding:  32px;
 }
 
 .logo_admin{

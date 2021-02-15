@@ -1,9 +1,6 @@
 //CONFIRMAÇÃO SE DESEJA DELETAR
 
 const formDelete = document.querySelector("#del")
-formDelete.addEventListener("submit", function(event){
-    const confirmation = confirm("Deseja Deletar?")
-    if(!confirmation){
-        event.preventDefault()
-    }
-})
+formDelete.forEach(form => form.addEventListener("submit", e =>{
+    confirm("Tem certeza que deseja deletar ?") ? null: e.preventDefault()
+}))

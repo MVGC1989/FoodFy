@@ -19,8 +19,7 @@ function userIsLogged(req, res, next){
 
 async function UserIsAdmin (req, res, next) {
     if (!req.session.isAdmin) {
-        req.session.error = 'Descupe, você não tem permisão para acessar esta página!'
-        return res.redirect('/admin/profile')
+        return res.render("admin/profile/index")
     }
 
     next()

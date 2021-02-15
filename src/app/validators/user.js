@@ -1,6 +1,6 @@
 const User = require('../models/User')
 const {compare} = require('bcryptjs')
-const Recipe = require("../models/Recipe")
+
 
 function checkAllFields(body) {
     const keys = Object.keys(body);
@@ -10,7 +10,7 @@ function checkAllFields(body) {
             return {
                 user: body,
                 error: 'Por favor, preencha todos os campos!'
-            };
+            }
         }
     }
 }

@@ -9,6 +9,7 @@
 }
 
 .index_cards{
+    max-width: 940px;
     margin-top: 30px;
     margin-left: 230px;
     margin-bottom: 48px;
@@ -19,7 +20,7 @@
 
 .cardindex{
     display: grid;
-    grid-template-columns: 172px 1fr;
+    grid-template-columns: 172px 350px;
     gap: 0;
 }
 
@@ -60,6 +61,12 @@
     text-decoration: none;
     color: #6558C3;
     margin: 0;
+}
+
+.cardindex a:hover,
+.cardindex_chefs a:hover{
+    color: #F55A5A;
+    transition: 300ms;
 }
 
 .button_new_recipe,

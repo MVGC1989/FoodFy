@@ -1,8 +1,8 @@
 
 const Recipe = require("../models/Recipe")
 const File = require("../models/Files")
-const {date, getParams} = require("../../lib/utils")
-const { UserIsAdmin } = require("../middlewares/session")
+const {date} = require("../../lib/utils")
+
 
 
 module.exports = {
@@ -43,7 +43,9 @@ module.exports = {
     
         const allRecipes = await Promise.all(recipesPromise)
 
-            return res.render('admin/recipes/index', { recipes: allRecipes , pagination })
+        const idUser = req.session.userId
+
+            return res.render('admin/recipes/index', { recipes: allRecipes , pagination, idUser})
         } 
         catch (err) {
             console.error(err)
@@ -51,48 +53,56 @@ module.exports = {
     },
 
     async myRecipes(req, res) {
-        try {   
-                let {page, limit, user, user_is_admin} = req.query 
-            
+        try {  
+
+            let {page, limit, user, user_is_admin} = req.query 
+                
                 page = page || 1 
                 limit = limit || 6 
                 let offset = limit * (page -1)
-
+                
                 user = req.session.userId
                 user_is_admin = req.session.isAdmin
-            
+                
                 const params = {
                     page,
                     limit,
                     offset,
                     user,
                     user_is_admin
-            }
-            
-            let results = await Recipe.paginate(params)
-            const recipes = results.rows
-    
-            const pagination ={
-                total: Math.ceil(recipes[0].total/limit),
-                page
-            }
-    
-            async function getImage(recipeId) {
-                let results = await Recipe.files(recipeId)
-                const file = results.rows[0]
-        
-                return `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`
-            }
-        
-            const recipesPromise = recipes.map(async recipe => {
-                recipe.image = await getImage(recipe.id)
-                return recipe
-            })
-        
-            const allRecipes = await Promise.all(recipesPromise)
-            
-    
-                return res.render('admin/recipes/index', { recipes: allRecipes , pagination})
+                }
+                
+                let results = await Recipe.paginate(params)
+
+                if(results.rows.length == 0){
+                    return res.render("admin/recipes/index")
+                } else{
+
+                    const recipes = results.rows
+                    
+                    const pagination ={
+                        total: Math.ceil(recipes[0].total/limit),
+                        page
+                    }
+                    
+                    async function getImage(recipeId) {
+                        let results = await Recipe.files(recipeId)
+                        const file = results.rows[0]
+                        
+                        return `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`
+                    }
+                    
+                    const recipesPromise = recipes.map(async recipe => {
+                        recipe.image = await getImage(recipe.id)
+                        return recipe
+                    })
+                    
+                    const allRecipes = await Promise.all(recipesPromise)
+                    
+                    const idUser = req.session.userId
+                    
+                }
+                return res.render('admin/recipes/index', { recipes: allRecipes , pagination, idUser})
                 
         }catch (err) {
             console.error(err)
@@ -168,6 +178,7 @@ module.exports = {
 
     async edit(req, res){
         try{
+  
             let results = await Recipe.find(req.params.id)
             const recipes = results.rows[0]
 
@@ -187,7 +198,7 @@ module.exports = {
             }))
 
             return res.render('admin/recipes/edit', { recipes, chef_selection, files })
-        
+            
         }catch (err) {
             console.error(err)
         } 

@@ -139,7 +139,7 @@ module.exports = {
 
         if (user || user_is_admin) {
             if (user_is_admin) {
-                userQuery = '';
+                userQuery = `WHERE user_id = ${user}`;
                 totalQuery = '(SELECT COUNT(*) FROM recipes) AS total';
             } else {
                 userQuery = `WHERE user_id = ${user}`;

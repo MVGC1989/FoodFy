@@ -2,7 +2,7 @@ const User = require("../models/User")
 const {compare} = require('bcryptjs')
 
 async function login (req, res, next){    
-    
+    try {
         const { email, password } = req.body
 
         if (!email || !password) return res.render('admin/session/login', {
@@ -27,12 +27,14 @@ async function login (req, res, next){
         req.user = user
 
         next()
+    } catch (error) {
+        console.error(error)
+    }
 }
 
 async function forgot (req, res, next){
-    const {email} = req.body
-
     try{
+        const {email} = req.body
         let user =await User.findOne({ where: {email}})
 
         if(!user) return res.render("admin/session/forgot-password", {
@@ -50,54 +52,51 @@ async function forgot (req, res, next){
 }
 
 async function reset(req, res, next){
-    const {email , password, token, passwordRepeat} = req.body
     try{
+        const {email , password, token, passwordRepeat} = req.body
+        
         //Procurar o usuário
-    const user = await User.findOne({where: {email}})
+        const user = await User.findOne({where: {email}})
 
-    if(!user) return res.render("admin/session/password-reset", {
+        if(!user) return res.render("admin/session/password-reset", {
         user: req.body,
         token,
         error: "Usuário não cadastrado !"
-    })
-
-    //Checar se a senha corresponde
-    if(password != passwordRepeat){
-        return res.render("admin/session/password-reset", {
-            user: req.body,
-            token,
-            error: "As senhas digitadas são diferentes !"
-    })}
-
-    //Verificar se token corresponde
-    if(token != user.reset_token){
-        return res.render("admin/session/password-reset", {
-            user: req.body,
-            token,
-            error: "Token inválido ! Solicite uma nova recuperação de senha."
         })
-    }
-    //Verificar se token expirou
-    let now = new Date()
-    now.setHours(now.getHours())
 
-    if(now > user.reset_token_expires){
-        return res.render("admin/session/password-reset", {
-            user: req.body,
-            token,
-            error: "Token expirado! Por favor solicite uma nova recuperação de senha."
-        })
-    }
+        //Checar se a senha corresponde
+        if(password != passwordRepeat){
+            return res.render("admin/session/password-reset", {
+                user: req.body,
+                token,
+                error: "As senhas digitadas são diferentes !"
+            })
+        }
 
-    req.user = user
-    next()
+        //Verificar se token corresponde
+        if(token != user.reset_token){
+            return res.render("admin/session/password-reset", {
+                user: req.body,
+                token,
+                error: "Token inválido ! Solicite uma nova recuperação de senha."
+            })
+        }
+        
+        //Verificar se token expirou
+        let now = new Date()
+        now.setHours(now.getHours())
+
+        if(now > user.reset_token_expires)
+            return res.render("admin/session/password-reset", {
+                user: req.body,
+                token,
+                error: "Token expirado! Por favor solicite uma nova recuperação de senha."
+            })
+        req.user = user
+        next()
 
     }catch (error) {
         console.error(error)
-        return res.render('admin/session/reset-password', {
-            token,
-            error: "Erro inesperado. Por favor, tente novamente."
-        })
     }
 }
 

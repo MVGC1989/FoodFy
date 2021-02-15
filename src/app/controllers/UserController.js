@@ -7,6 +7,9 @@ const { emailTemplate , getParams} = require('../../lib/utils');
 module.exports = {
     async index(req, res) {
         try {
+            const error = req.session.error
+            req.session.error = ""
+
             const params = getParams(req.query, 6)
             const users = await User.paginate(params)
             const pagination = { page: params.page }
@@ -18,7 +21,7 @@ module.exports = {
             const { success } = req.session
     
             if (success) {
-                res.render("admin/users/index", { users, success, pagination })
+                res.render("admin/users/index", { users, success, pagination, error })
                 req.session.success = ''
                 return
             }
@@ -30,14 +33,19 @@ module.exports = {
     },
 
     create(req, res) {
-        return res.render("admin/users/create")
+        try {
+            const success = req.session.success
+            req.session.success = ''
+
+            return res.render("admin/users/create", {success})
+        } catch (error) {
+            console.error(error)
+        }
     },
 
     async post(req, res) {
         try {
             let { name, email, is_admin } = req.body
-
-            
 
             is_admin = is_admin || false
 
@@ -79,7 +87,8 @@ module.exports = {
                 password,
                 is_admin
             })
-            
+            req.session.success = "Usuário criado com sucesso !"
+
             return res.redirect(`/admin/users/${userId}/edit`)
         } catch (err) {
             console.error(err)
@@ -89,8 +98,14 @@ module.exports = {
     async edit(req, res) {
         try {
             const { user }= req
+
+            const error = req.session.error
+            req.session.error = ""
+
+            const success = req.session.success
+            req.session.success = ""
             
-            return res.render('admin/users/edit', {user})
+            return res.render('admin/users/edit', {user, error, success})
 
         } catch (err) {
             console.error(err)
@@ -101,10 +116,10 @@ module.exports = {
         try {
             const {user} = req
 
-            let { id, name, email, is_admin } = req.body
+            let { name, email, is_admin } = req.body
             is_admin = is_admin || false
 
-            await User.update(id, {
+            await User.update(user.id, {
                 name,
                 email,
                 is_admin
@@ -123,7 +138,7 @@ module.exports = {
     async delete(req, res) {
         try {
             if(req.body.id==req.session.userId){
-                req.session.error = `Você não pode deletar a sua própria conta.`
+                req.session.error = `Você não pode deletar sua própria conta.`
 
                 return res.redirect(`/admin/users/${req.body.id}/edit`)
             }

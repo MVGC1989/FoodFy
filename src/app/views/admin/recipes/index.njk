@@ -4,6 +4,7 @@
 
 <h3 class="index">Gerenciar Receitas</h3>
 
+{% if recipes %}
 <div class="index_cards">
     {% for recipe in recipes %}
         <div class="cardindex">
@@ -16,11 +17,17 @@
                 <div>
                     <h1>{{recipe.title}}</h1>
                     <h2>por {{recipe.chef_name}}</h2>
-                    <a href="/admin/recipes/{{recipe.id}}">Visualizar</a>
+                    {% if recipe.user_id == idUser %}
+                        <a href="/admin/recipes/{{recipe.id}}/edit">Editar</a>
+                    {% endif %}
+                        <a href="/admin/recipes/{{recipe.id}}">Visualizar</a>
                 </div>
         </div>
     {% endfor %}
 </div> 
+{% else %}
+coco
+{% endif %}
 
 <div 
     class="pagination"
