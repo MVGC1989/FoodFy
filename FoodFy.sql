@@ -38,15 +38,17 @@ CREATE TABLE "recipes_files"(
 
 CREATE TABLE "users"(
   "id" SERIAL PRIMARY KEY,
-  "name" TEXT NOT NULL,
-  "email" TEXT UNIQUE NOT NULL,
-  "password" TEXT NOT NULL,
-  "reset_token" TEXT,
-  "reset_token_expires" TEXT,
+  "name" text NOT NULL,
+  "email" text UNIQUE NOT NULL,
+  "password" text NOT NULL,
+  "reset_token" text,
+  "reset_token_expires" text,
   "is_admin" BOOLEAN DEFAULT false,
   "created_at" TIMESTAMP DEFAULT(now()),
   "updated_at" TIMESTAMP DEFAULT(now())
-)
+);
+
+--CONNECT PG SIMPLE TABLE
 
 CREATE TABLE "session" (
   "sid" varchar NOT NULL COLLATE "default",
@@ -57,6 +59,14 @@ WITH (OIDS=FALSE);
 ALTER TABLE "session" 
 ADD CONSTRAINT "session_pkey" 
 PRIMARY KEY ("sid") NOT DEFERRABLE INITIALLY IMMEDIATE;
+
+-- TABLE RELATIONS FOREING KEYS
+
+ALTER TABLE "chefs" ADD FOREIGN KEY ("file_id") REFERENCES "files" ("id");    
+ALTER TABLE "recipes" ADD FOREIGN KEY ("chef_id") REFERENCES "chefs" ("id");
+ALTER TABLE "recipes_files" ADD FOREIGN KEY ("recipe_id") REFERENCES "recipes" ("id");
+ALTER TABLE "recipes_files" ADD FOREIGN KEY ("file_id") REFERENCES "files" ("id");
+ALTER TABLE "recipes" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 
 --CREATE PROCEDURE
 
@@ -89,10 +99,4 @@ BEFORE UPDATE ON users
 FOR EACH ROW
 EXECUTE PROCEDURE trigger_set_timestamp();
 
--- TABLE RELATIONS
 
-ALTER TABLE "chefs" ADD FOREIGN KEY ("file_id") REFERENCES "files" ("id");    
-ALTER TABLE "recipes" ADD FOREIGN KEY ("chef_id") REFERENCES "chefs" ("id");
-ALTER TABLE "recipes_files" ADD FOREIGN KEY ("recipe_id") REFERENCES "recipes" ("id");
-ALTER TABLE "recipes_files" ADD FOREIGN KEY ("file_id") REFERENCES "files" ("id");
-ALTER TABLE "recipes" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
