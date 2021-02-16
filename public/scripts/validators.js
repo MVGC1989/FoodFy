@@ -13,14 +13,14 @@ const Validate ={
 
     displayError(input , error){
         const div = document.createElement('div')
-        div.classList.add('error')
+        div.classList.add('error-mail')
         div.innerHTML = error
         input.parentNode.appendChild(div)
         input.focus()
     },
 
     clearErrors(input){
-        const errorDiv = input.parentNode.querySelector(".error")
+        const errorDiv = input.parentNode.querySelector(".error-mail")
 
         if(errorDiv){
             errorDiv.remove()
@@ -44,12 +44,11 @@ const Validate ={
     },
 }
 
-//const inputInvalid = document.querySelectorAll(".error-input")
 
-const formError = document.querySelector('.error.messages');
+const formError = document.querySelector('.error.messages')
 if (formError) {
-    const fields = document.querySelectorAll('input');
-    fields.forEach(field => field.style.borderColor = '#ff3131');
+    const fields = document.querySelectorAll('input')
+    fields.forEach(field => field.style.borderColor = '#ff3131')
 }
 
 

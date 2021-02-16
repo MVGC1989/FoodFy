@@ -25,8 +25,15 @@
         </div>
     {% endfor %}
 </div> 
+
 {% else %}
-coco
+    <div class="modal">
+        <p>Você não tem receitas cadastradas !</p>
+
+        <button onclick="window.location.href='/admin/recipes/create'"
+            class="modal-new-recipe">Cadastre uma receita
+        </button>
+    </div>
 {% endif %}
 
 <div 

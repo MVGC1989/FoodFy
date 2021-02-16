@@ -4,10 +4,14 @@ const File = require("../models/Files")
 const {date} = require("../../lib/utils")
 
 
-
 module.exports = {
     async index(req, res) {
         try {
+            const error = req.session.error
+            req.session.error = ""
+
+            const success = req.session.success
+            req.session.success = ""
 
             let {page, limit} = req.query 
         
@@ -45,7 +49,7 @@ module.exports = {
 
         const idUser = req.session.userId
 
-            return res.render('admin/recipes/index', { recipes: allRecipes , pagination, idUser})
+            return res.render('admin/recipes/index', { recipes: allRecipes , pagination, idUser, error, success})
         } 
         catch (err) {
             console.error(err)
@@ -54,30 +58,28 @@ module.exports = {
 
     async myRecipes(req, res) {
         try {  
-
             let {page, limit, user, user_is_admin} = req.query 
                 
-                page = page || 1 
-                limit = limit || 6 
-                let offset = limit * (page -1)
+            page = page || 1 
+            limit = limit || 6 
+            let offset = limit * (page -1)
                 
-                user = req.session.userId
-                user_is_admin = req.session.isAdmin
+            user = req.session.userId
+            user_is_admin = req.session.isAdmin
                 
-                const params = {
-                    page,
-                    limit,
-                    offset,
-                    user,
-                    user_is_admin
-                }
-                
-                let results = await Recipe.paginate(params)
+            const params = {
+                page,
+                limit,
+                offset,
+                user,
+                user_is_admin
+            }
 
-                if(results.rows.length == 0){
+            let results = await Recipe.paginate(params)
+
+            if(results.rows.length == 0){
                     return res.render("admin/recipes/index")
-                } else{
-
+            } else{
                     const recipes = results.rows
                     
                     const pagination ={
@@ -101,9 +103,8 @@ module.exports = {
                     
                     const idUser = req.session.userId
                     
-                }
-                return res.render('admin/recipes/index', { recipes: allRecipes , pagination, idUser})
-                
+                    return res.render('admin/recipes/index', { recipes: allRecipes , pagination, idUser})
+            }
         }catch (err) {
             console.error(err)
         }
@@ -141,7 +142,7 @@ module.exports = {
         }))
 
         await Promise.all(filesPromise)
-
+        req.session.success = "Receita criada com sucesso!"
         return res.redirect(`/admin/recipes/${recipeId}`)
         }
         catch (err) {
@@ -152,6 +153,9 @@ module.exports = {
 
     async show(req, res) {
         try {
+            const success = req.session.success
+            req.session.success = ""
+
             let results = await Recipe.find(req.params.id)
             const recipe = results.rows[0]
             
@@ -168,7 +172,7 @@ module.exports = {
                 src: `${req.protocol}://${req.headers.host}${file.path.replace("public", "")}`
             }))
 
-            return res.render("admin/recipes/show", { recipe, files })
+            return res.render("admin/recipes/show", { recipe, files, success })
         
         }catch (err) {
             console.error (err)
@@ -178,7 +182,9 @@ module.exports = {
 
     async edit(req, res){
         try{
-  
+            const success = req.session.success
+            req.session.success = ""
+
             let results = await Recipe.find(req.params.id)
             const recipes = results.rows[0]
 
@@ -197,7 +203,7 @@ module.exports = {
                 src: `${req.protocol}://${req.headers.host}${file.path.replace("public", "")}`
             }))
 
-            return res.render('admin/recipes/edit', { recipes, chef_selection, files })
+            return res.render('admin/recipes/edit', { recipes, chef_selection, files, success})
             
         }catch (err) {
             console.error(err)
@@ -237,9 +243,9 @@ module.exports = {
                 await Promise.all(newFilesPromise)
             }
             }
-            
             await Recipe.update(req.body)
-            return res.redirect(`/admin/recipes/${req.body.id}`) 
+            req.session.success = "Receita atualizada!"
+            return res.redirect(`/admin/recipes/${req.body.id}/edit`) 
             
         }catch (err) {
             console.error(err)
@@ -259,11 +265,12 @@ module.exports = {
             await Promise.all(removeFilesPromise)
     
             await Recipe.delete(id)
-    
-                return res.redirect(`/admin/recipes`)
             
-            }catch (error) {
+            req.session.success = "Receita deletada com sucesso!"
+            return res.redirect(`/admin/recipes`)
+            
+        }catch (error) {
             console.log(error)   
-            }
+        }
     }
 }

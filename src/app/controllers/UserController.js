@@ -87,7 +87,7 @@ module.exports = {
                 password,
                 is_admin
             })
-            req.session.success = "Usuário criado com sucesso !"
+            req.session.success = "Usuário criado com sucesso!"
 
             return res.redirect(`/admin/users/${userId}/edit`)
         } catch (err) {
@@ -130,7 +130,7 @@ module.exports = {
             console.error(err)
             return res.render('admin/users/edit', {
                 user: req.body,
-                error: 'Ops, algum erro aconteceu!'
+                error: 'Erro inesperado !'
             })
         }
     },
@@ -138,24 +138,20 @@ module.exports = {
     async delete(req, res) {
         try {
             if(req.body.id==req.session.userId){
+                
                 req.session.error = `Você não pode deletar sua própria conta.`
-
                 return res.redirect(`/admin/users/${req.body.id}/edit`)
             }
 
             await User.delete(req.body.id)
-            req.session.destroy()
 
-            return res.render("admin/session/login", {
-                success: "Conta deletada com sucesso !"
-            })
+            req.session.success = "Conta deletada com sucesso !"
+            return res.redirect("/admin/users")
 
         } catch (error) {
             console.error(error)
-            return res.render("admin/users/index", {
-                user:req.body,
-                error: "Erro ao deletar conta !"
-            })
+            req.session.error = "Erro ao deletar conta !"
+            return res.redirect(`/admin/users/${req.user.id}/edit`)
         }
     }
 }

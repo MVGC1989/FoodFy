@@ -1,6 +1,4 @@
 const User = require('../models/User')
-const {compare} = require('bcryptjs')
-
 
 function checkAllFields(body) {
     const keys = Object.keys(body);
@@ -15,19 +13,6 @@ function checkAllFields(body) {
     }
 }
 
-async function show(req, res, next) {
-    const { userId: id } = req.session
-    const user = await User.findOne({ where: { id } })
-
-    if (!user) return res.render('admin/users/create', {
-        error: 'Usuário não encontrado!'
-    });
-
-    req.user = user
-
-    next()
-}
-
 async function post(req, res, next) {
     try{
         const fillAllFields = checkAllFields(req.body)
@@ -38,7 +23,7 @@ async function post(req, res, next) {
             
         if (user) return res.render('admin/users/create', {
             user: req.body,
-            error: 'Usuário já cadastrado. Tente outro email.'
+            error: 'Usuário já cadastrado. Tente outro email!'
         })
         
         next()
@@ -54,10 +39,10 @@ async function edit(req, res, next) {
 
         if (!user) return res.render('admin/users/create', {
             error: 'Usuário não encontrado!'
-        });
+        })
         req.user = user
         
-        next();
+        next()
     }catch (error) {
         console.error(error)
     }
@@ -73,12 +58,10 @@ async function update(req, res, next) {
 
     const user = await User.findOne({where: { id } })
     
-
     req.user = user
 
     next()
 }
 
 
-
-module.exports = { show, post, edit, update,}
+module.exports = { post, edit, update,}

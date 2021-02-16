@@ -2,6 +2,7 @@ const db = require('../../config/db')
 const fs = require('fs')
 const Base = require('./Base')
 
+
 Base.init({table: 'users'})
 
 module.exports = {
@@ -33,7 +34,7 @@ module.exports = {
             }))
 
             files.map(async file => {
-                fs.unlinkSync(`public/${file.path}`)
+                fs.unlinkSync(`${file.path}`)
             })
 
             await db.query(`
@@ -46,6 +47,7 @@ module.exports = {
             console.error(err)
         }
     },
+
 
     async paginate(params) {
         const { limit, offset } = params

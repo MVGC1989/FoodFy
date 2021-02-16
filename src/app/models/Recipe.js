@@ -1,6 +1,6 @@
 const db = require('../../config/db')
 const {date} = require('../../lib/utils')
-
+const fs = require('fs')
 
 module.exports = {
     all(){ 
@@ -140,7 +140,7 @@ module.exports = {
         if (user || user_is_admin) {
             if (user_is_admin) {
                 userQuery = `WHERE user_id = ${user}`;
-                totalQuery = '(SELECT COUNT(*) FROM recipes) AS total';
+                totalQuery = `(SELECT COUNT(*) FROM recipes WHERE user_id = ${user}) AS total`;
             } else {
                 userQuery = `WHERE user_id = ${user}`;
                 totalQuery = `(SELECT COUNT(*) FROM recipes WHERE user_id = ${user}) AS total`;

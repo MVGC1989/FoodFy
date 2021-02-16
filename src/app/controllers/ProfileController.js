@@ -1,7 +1,7 @@
 const User = require("../models/User")
 
 module.exports = {
-    index(req, res) {
+    show(req, res) {
         try {          
             const { user } = req
 
@@ -15,12 +15,6 @@ module.exports = {
         } catch (error) {
             console.error(error)
         }
-    },
-
-    async show(req, res){
-        const {user} = req
-
-        return res.render("admin/profile/index", {user})
     },
 
     async update(req, res) {
