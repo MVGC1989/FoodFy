@@ -123,12 +123,7 @@ module.exports = {
     },
     async post(req, res){
         try{
-            const keys = Object.keys(req.body)
-        for( key of keys ){
-            if(req.body[key] == ""){return res.send("PREENCHA TODOS OS CAMPOS!")}
-        }
-        
-        if(req.files.length == 0){res.send("Please, send at least one file")}
+            
         
         req.body.user_id = req.session.userId
         req.body.is_admin = req.session.isAdmin
@@ -185,6 +180,9 @@ module.exports = {
             const success = req.session.success
             req.session.success = ""
 
+            const error = req.session.error
+            req.session.error = ""
+
             let results = await Recipe.find(req.params.id)
             const recipes = results.rows[0]
 
@@ -203,23 +201,16 @@ module.exports = {
                 src: `${req.protocol}://${req.headers.host}${file.path.replace("public", "")}`
             }))
 
-            return res.render('admin/recipes/edit', { recipes, chef_selection, files, success})
+            return res.render('admin/recipes/edit', { recipes, chef_selection, files, success, error})
             
         }catch (err) {
             console.error(err)
         } 
     },
 
-    async put(req, res){
+    async update(req, res){
         try{
-            console.log(req.files)
-            const keys = Object.keys(req.body)
-                for( key of keys ){
-                    if(req.body[key] == "" && key != "removed_files"){
-                return res.send("PREENCHA TODOS OS CAMPOS!")
-            }
-        }
-        
+    
             if(req.body.removed_files){//removendo foto
                 const removedFiles = req.body.removed_files.split(",")
                 const last_index = removedFiles.length -1

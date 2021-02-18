@@ -1,20 +1,23 @@
 const express = require("express")
 const routes = express.Router()
 const multer = require("../app/middlewares/multer")
-const  {UserIsAdmin}= require("../app/middlewares/session")
+const  {onlyUsers}= require("../app/middlewares/session")
 
 const RecipesController = require("../app/controllers/RecipesController")
+const RecipeValidator = require("../app/validators/recipes")
 
 
 // ROTAS ADMIN RECIPES
 
-routes.get("/",RecipesController.index)
-routes.get("/my-recipes", RecipesController.myRecipes)
-routes.get("/create", RecipesController.create)
-routes.post("/", multer.array("photos", 5), RecipesController.post)
-routes.get("/:id", RecipesController.show)
-routes.get("/:id/edit", RecipesController.edit)
-routes.put("/", multer.array("photos", 5), RecipesController.put)
-routes.delete("/", RecipesController.delete)
+routes.get("/", onlyUsers,RecipesController.index)
+routes.get("/my-recipes", onlyUsers, RecipesController.myRecipes)
+
+routes.get("/create", onlyUsers, RecipesController.create)
+routes.post("/", onlyUsers, multer.array("photos", 5), RecipeValidator.post, RecipesController.post)
+routes.get("/:id", onlyUsers, RecipesController.show)
+
+routes.get("/:id/edit", onlyUsers, RecipesController.edit)
+routes.put("/", multer.array("photos", 5), RecipeValidator.update, RecipesController.update)
+routes.delete("/", onlyUsers, RecipesController.delete)
 
 module.exports = routes
