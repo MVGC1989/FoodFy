@@ -157,7 +157,7 @@
     color: #111;
     margin-bottom: 10px;
     margin-left: 230px;
-    margin-top: 30px;
+    margin-top: 40px;
 }
 
 .item .input,
@@ -216,7 +216,7 @@ input::placeholder{
     cursor: pointer;
     text-align: center;
     border-radius: 50%;
-    margin-left: -220px;
+    
 
 
 }
@@ -225,11 +225,15 @@ input::placeholder{
 
 .create{
     font-size: 24px;
-    margin: 55px 230px 0 230px;
+    box-sizing: border-box;
+    width: 1300;
+    margin-left: 230px;
+    margin-top: 32px;
 }
 .button_save{
     width: 139px;
     height: 37px;
+    margin-left: 615px;
     background-color: #6558C3;
     color: #FFFFFF;
     font-size: 16px;
@@ -237,8 +241,6 @@ input::placeholder{
     text-align: center;
     border-radius: 4px;
     cursor: pointer;
-
-
 }
 
 /*=== EDIT ADMIN RECIPES/CHEFS ===*/
@@ -249,6 +251,18 @@ input::placeholder{
     width: 1300;
     margin-left: 230px;
     margin-top: 32px;
+}
+
+.button_save_edit{
+    width: 139px;
+    height: 37px;
+    background-color: #6558C3;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
 /*=== DELETE ADMIN RECIPES/CHEFS ===*/
@@ -331,22 +345,8 @@ gap: 0;
 }
 
 .name_chef p{
-
     font-size: 20px;
     color: #777777;
-    
-}
-
-.button_create_recipe{
-    background-color: #6558C3;
-    color: #FFFFFF;
-    padding: 8px 16px;
-    font-size: 16px;
-    font-weight: bold;
-    text-align: center;
-    border-radius: 4px;
-    cursor: pointer;
-    margin: 56px 0 64px 600px;
 }
 
 .chef_recipe{

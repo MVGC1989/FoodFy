@@ -25,18 +25,13 @@ async function post(req, res, next) {
 
 async function update(req, res, next) {
     try {
-        let results = await Recipe.chef_selection()
-        const chef_selection = results.rows
+
 
         const keys = Object.keys(req.body)
 
         for (key of keys) {
             if (req.body[key] == "" && key != "removed_files") {
-                return res.render('admin/recipes/edit', {
-                    recipes: req.body,
-                    chef_selection,
-                    error: 'Por favor, preencha todos os campos'
-                })
+                return res.send("Por favor, preencha todos os campos!")
             }    
         }
 
