@@ -147,11 +147,15 @@ body{
 
 .title_recipe h2,
 .name_chef{
-    width: 1400px;
+    width: 940px;
     text-align: center;
-    font-size: 36px
+    font-size: 36px;
+    margin-top: 8px;
+    margin-left: 230px;
 }
 .author p{
+    width: 940px;
+    margin-left: 230px;
     font-size: 20px;
     color: #777777;
     text-align: center;
@@ -159,9 +163,11 @@ body{
 }
 
 .register p{
+    width: 940px;
     text-align: center;
     margin-top: 8px;
     color: #777777;
+    margin-left: 230px;
 }
 
 .ingredients h2{

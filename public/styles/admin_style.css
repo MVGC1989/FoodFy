@@ -172,7 +172,6 @@
     color: #666;
     margin-top: 10px;
     margin-left: 230px;
-    margin-right: 230px;
 }
 
 .item select{
@@ -217,9 +216,9 @@ input::placeholder{
     cursor: pointer;
     text-align: center;
     border-radius: 50%;
-    position: relative;
-    left: 1200px;
-    bottom: 40px;
+    margin-left: -220px;
+
+
 }
 
 /*=== CREATE ADMIN RECIPES/CHEFS ===*/
@@ -238,17 +237,18 @@ input::placeholder{
     text-align: center;
     border-radius: 4px;
     cursor: pointer;
-    float: left;
-    position: relative;
-    bottom: 37px;
-    left: 1050px;
+
+
 }
 
 /*=== EDIT ADMIN RECIPES/CHEFS ===*/
 
 .edit{
     font-size: 24px;
-    margin: 55px 230px 0 230px;
+    box-sizing: border-box;
+    width: 1300;
+    margin-left: 230px;
+    margin-top: 32px;
 }
 
 /*=== DELETE ADMIN RECIPES/CHEFS ===*/
@@ -263,7 +263,7 @@ input::placeholder{
     text-align: center;
     border-radius: 4px;
     cursor: pointer;
-    margin-left: 500px;   
+    margin-left: 510px;   
 }
 
 .button_delete_recipe{
@@ -276,7 +276,8 @@ input::placeholder{
     text-align: center;
     border-radius: 4px;
     cursor: pointer;
-    margin-left: 470px;
+    margin-left: 450px;
+    margin-right: 8px;
 }
 
 /*=== INDEX ADMIN CHEFS ===*/
@@ -330,8 +331,10 @@ gap: 0;
 }
 
 .name_chef p{
+
     font-size: 20px;
     color: #777777;
+    
 }
 
 .button_create_recipe{

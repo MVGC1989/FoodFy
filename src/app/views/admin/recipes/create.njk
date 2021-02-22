@@ -4,14 +4,12 @@
 
 <form method="POST" action="/admin/recipes" enctype="multipart/form-data">
     <h3 class="create">Criando Receitas</h3> 
-    
-    <button 
+        <button 
         class= "button_save" 
         type="submit" 
-        onclick="Validate.allFields(event)"> Salvar Receita
-    </button>
-        
-        {% include "admin/recipes/fields.njk" %}
+        > Salvar Receita
+        </button>
+    {% include "admin/recipes/fields.njk" %}
 </form>
 
 {% endblock content%}

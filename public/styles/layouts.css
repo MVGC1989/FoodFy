@@ -158,3 +158,14 @@ input::placeholder{
     margin-top: -5px;
     margin-left: 2px;
 }
+
+/*=== Layout Login ===*/
+.loginheader{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 32px;
+}
+
+.img-login{
+    text-align: center;
+}
