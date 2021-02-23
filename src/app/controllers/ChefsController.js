@@ -92,6 +92,8 @@ module.exports = {
       let result = await Chef.find(id)
       const chef = result.rows[0]
 
+      if(!chef) return res.render("parts/page-not-found")
+
       chef.created_at = date(chef.created_at).format
 
       //Mostra as receitas de cada chef
@@ -132,7 +134,7 @@ module.exports = {
       let results = await Chef.find(req.params.id)
       const chef = results.rows[0]
       
-      if (!chef) return res.send('Chef não encontrado!')
+      if (!chef) return res.render("parts/page-not-found")
 
       results = await Chef.files(chef.id)
       let files = results.rows
@@ -159,11 +161,13 @@ module.exports = {
         }
 
         let results = await Chef.find(req.body.id)
-        let file_id = results.rows[0].file_id
+        const chef = results.rows[0].file_id
+
+        if(!chef) return res.render("parts/page-not-found")
 
         if (req.file) {
           const results = await File.update(
-            file_id,
+            chef,
             {...req.file}
           )
 
@@ -185,13 +189,10 @@ async delete(req, res) {
   try {
     const { id } = req.body
 
-    
-
-
     // --> Buscando o chefe para excluir
     const chef = (await Chef.find(id)).rows[0]
 
-    if (!chef) return res.send("Chef não encontrado!")
+    if (!chef) return res.render("parts/page-not-found")
 
     if(chef.total_recipes >= 1){
       

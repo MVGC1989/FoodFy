@@ -99,21 +99,7 @@
     margin-top: 48px;
     margin-left: 150px;
     cursor: pointer;
-}
-
-.button_new_recipe,
-.button_new_chef{
-    font-weight: bold;
-    font-size: 16px;
-    width: 139px;
-    height: 37px;
-    text-decoration: none;
-    background-color:#6558C3;
-    color: white;
-    border-radius: 4px;
-    cursor: pointer;
-    position: relative;
-    left: 610px;
+    box-shadow: 2px 2px 4px 0px #6558C3;
 }
 
 /*=== SHOW- DETALHE DA RECEITA ADMIN ====*/
@@ -147,6 +133,7 @@
     position: relative;
     left: 1030px;
     top: 64px;
+    box-shadow: 2px 2px 4px 0px #6558C3;
 }
 
 /*=== FIELDS ADMIN RECIPES ===*/
@@ -216,9 +203,6 @@ input::placeholder{
     cursor: pointer;
     text-align: center;
     border-radius: 50%;
-    
-
-
 }
 
 /*=== CREATE ADMIN RECIPES/CHEFS ===*/
@@ -241,6 +225,36 @@ input::placeholder{
     text-align: center;
     border-radius: 4px;
     cursor: pointer;
+    box-shadow: 2px 2px 4px 0px #6558C3;
+}
+
+.button_edit_chef_save{
+    width: 139px;
+    height: 37px;
+    background-color: #6558C3;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 2px 2px 4px 0px #6558C3;
+}
+
+
+.button_create_recipe{
+    font-weight: bold;
+    font-size: 16px;
+    padding: 8px 16px;
+    text-decoration: none;
+    background-color:#6558C3;
+    color: white;
+    border-radius: 4px;
+    margin-top: 32px;
+    margin-left: 600px;
+    margin-bottom: 56px;
+    cursor: pointer;
+    box-shadow: 0px 2px 4px 2px  #6558C3;
 }
 
 /*=== EDIT ADMIN RECIPES/CHEFS ===*/
@@ -253,7 +267,7 @@ input::placeholder{
     margin-top: 32px;
 }
 
-.button_save_edit{
+.button_save_edit_recipe{
     width: 139px;
     height: 37px;
     background-color: #6558C3;
@@ -263,7 +277,9 @@ input::placeholder{
     text-align: center;
     border-radius: 4px;
     cursor: pointer;
+    box-shadow: 2px 2px 4px 0px #6558C3;
 }
+
 
 /*=== DELETE ADMIN RECIPES/CHEFS ===*/
 
@@ -277,7 +293,8 @@ input::placeholder{
     text-align: center;
     border-radius: 4px;
     cursor: pointer;
-    margin-left: 510px;   
+    margin-left: 510px; 
+    box-shadow: 2px 2px 4px 0px #DC4747;
 }
 
 .button_delete_recipe{
@@ -292,6 +309,7 @@ input::placeholder{
     cursor: pointer;
     margin-left: 450px;
     margin-right: 8px;
+    box-shadow: 2px 2px 4px 0px #DC4747;
 }
 
 /*=== INDEX ADMIN CHEFS ===*/

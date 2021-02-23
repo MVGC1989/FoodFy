@@ -143,6 +143,7 @@ h4{
     position: absolute;
     left: 885px;
     top: 140px;
+    box-shadow: 2px 2px 4px 0px #6558C3;
 }
 
 .user-cancel{
@@ -172,11 +173,13 @@ h4{
     background-color: #7159C1;
     position: absolute;
     left:1030px;
+    box-shadow: 2px 2px 4px 0px #6558C3;
 }
 
 .button-del-user{
     background-color: #DC4747;
     margin-left: 475px;
+    box-shadow: 2px 2px 4px 0px #DC4747;
 }
 
 

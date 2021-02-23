@@ -1,0 +1,26 @@
+.page-not-found{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 32px;
+    background-color: #F55A5A;
+    margin-bottom: 56px;
+}
+
+.page-not-found a{
+    text-decoration: none;
+    font-size: 20px;
+    color: black;
+    font-weight: bold;
+}
+
+.page-not-found a:hover{
+    color: white;
+    border-bottom: 2px solid white;
+    transition: 300ms ease-in-out;
+}
+
+.page-not-found img{
+    position: absolute;
+    left: 45%;
+    width: 100px;
+}

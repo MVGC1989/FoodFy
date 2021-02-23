@@ -81,6 +81,7 @@
     cursor: pointer;
     position: relative;
     bottom: 28px;
+    box-shadow: 2px 2px 4px 0px #6558C3;
 }
 
 input::placeholder{

@@ -121,26 +121,26 @@ module.exports = {
         }
 
     },
+
     async post(req, res){
         try{
-            
-        
-        req.body.user_id = req.session.userId
-        req.body.is_admin = req.session.isAdmin
+            req.body.user_id = req.session.userId
+            req.body.is_admin = req.session.isAdmin
 
-        let results = await Recipe.create(req.body)
-        const recipeId = results.rows[0].id
+            let results = await Recipe.create(req.body)
+            const recipeId = results.rows[0].id
 
-        const filesPromise = req.files.map( file => File.createRecipeFile({
-            ...file,
-            recipe_id: recipeId
-        }))
+            const filesPromise = req.files.map( file => File.createRecipeFile({
+                ...file,
+                recipe_id: recipeId
+            }))
 
-        await Promise.all(filesPromise)
-        req.session.success = "Receita criada com sucesso!"
-        return res.redirect(`/admin/recipes/${recipeId}`)
-        }
-        catch (err) {
+            await Promise.all(filesPromise)
+
+            req.session.success = "Receita criada com sucesso!"
+            return res.redirect(`/admin/recipes/${recipeId}`)
+
+        }catch (err) {
             console.error (err)
         }
         
@@ -155,7 +155,7 @@ module.exports = {
             const recipe = results.rows[0]
             
             if(!recipe) {
-                return res.send("Receita não encontrada!")
+                return res.render("parts/page-not-found")
             } 
             
             recipe.created_at = date(recipe.created_at).format
@@ -186,7 +186,9 @@ module.exports = {
             let results = await Recipe.find(req.params.id)
             const recipes = results.rows[0]
 
-            if(!recipes) return res.send("Recipe not found!")
+            if(!recipes) {
+                return res.render("parts/page-not-found")
+            }
             
             //pega chefs
             results = await Recipe.chef_selection()
@@ -258,7 +260,7 @@ module.exports = {
             await Recipe.delete(id)
             
             req.session.success = "Receita deletada com sucesso!"
-            return res.redirect(`/admin/recipes`)
+            return res.redirect("/admin/recipes")
             
         }catch (error) {
             console.log(error)   

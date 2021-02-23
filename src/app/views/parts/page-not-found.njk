@@ -1,0 +1,27 @@
+{% block head %}
+    <title>FoodFy - Page Not-found</title>
+    {% include "parts/styles.njk"%}
+{% endblock %}
+
+<header class="page-not-found">
+    <a href="/">Página Inicial</a>
+    <img src="/images/logo.png" alt="logo">
+</header>
+
+{% block content %}
+<header class="megacard">
+    <div class="titlecard">
+        <h1>Erro 404 - Page Not Found</h1>
+        <h2>Ops, alguma coisa deu errado. Essa página não está mais disponível ou não existe!</h2>
+    </div>
+    <div class="imgchef">
+            <img
+                src= "/images/chef.png" 
+                alt="chefe">
+        </div>
+</header>
+{% endblock%}
+
+<footer class="rodape">
+    <p>Todos os direitos reservados, receitas Foodfy &copy;</p>
+</footer>

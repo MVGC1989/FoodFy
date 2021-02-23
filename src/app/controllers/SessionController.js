@@ -1,7 +1,7 @@
+const User = require('../models/User')
 const crypto = require('crypto')
 const mailer = require('../../lib/mailer')
 const {hash} = require('bcryptjs')
-const User = require('../models/User')
 const {emailTemplate} = require('../../lib/utils')
 
 
@@ -26,10 +26,10 @@ module.exports ={
     },
 
     async forgot(req , res){
+        const user = req.user
+        
         try{
-            const {user} = req
-
-             //Criar Token
+            //Criar Token
             const token = crypto.randomBytes(20).toString("hex")
 
             //Criar uma expiração do token
@@ -55,8 +55,8 @@ module.exports ={
                 <a
                     style="display: block; margin: 32px auto; padding: 16px; width:150px; color: #fff;
                     background-color: #6558C3; text-decoration: none; border-radius: 4px;"
-                    href="http:localhost:3000/admin/users/password-reset?token=${token}" target="_blank"
-                >Recuperar</a> 
+                    href="http://localhost:3000/admin/users/password-reset?token=${token}" target="_blank"
+                >Recuperar Senha</a> 
             </p>
             <p style="padding-top:16px; border-top: 2px solid #ccc">Te esperamos lá!</p>
             <p>Equipe Foodfy.</p>
@@ -86,7 +86,7 @@ module.exports ={
     },
 
     async reset(req, res){
-        const user = req.user
+        const {user} = req
         const {password , token} = req.body
 
         try{

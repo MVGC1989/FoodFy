@@ -10,22 +10,26 @@ form .item .avatar_upload{
     margin-left: 230px;
     margin-top: 10px;
     margin-bottom: 64px;
+    border-radius: 4px;
+    box-shadow: 2px 2px 4px 0px #6558C3;
+    cursor: pointer;
 }
 form .item .avatar_upload p{
     padding: 8px 16px;
     border-radius: 4px;
-    box-shadow: 0 2px 2px -6px #333;
     background-color:#6558C3;
     color: white;
     font-weight: bold;
     font-size: 16px;
     text-align: center;
+    cursor: pointer;
+    
 }
 
 
 form .item #avatar_input{ 
     position: absolute;
-    top: -25px;
+    top: -30px;
     left: -240px;
     display: block;
     overflow: hidden;

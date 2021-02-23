@@ -13,6 +13,16 @@ function addIngredient() {
     //DEIXA O NOVO CAMPO VAZIO
     newField.children[0].value = ""
     ingredients.appendChild(newField)
+
+    //REMOVER CAMPO DE INGREDIENTE
+    document.querySelectorAll("#remove").forEach(btn =>{
+        btn.addEventListener('click', ()=> {
+            const element = btn.parentElement
+            if(element.firstElementChild.value == "" || element.firstElementChild.value != ""){
+                element.remove()
+            }
+        })
+    })
 }
 document.querySelector(".add_new_ingredient").addEventListener("click", addIngredient)
 
@@ -26,6 +36,15 @@ function addPreparation() {
 
     newPass.children[0].value = ""
     preparations.appendChild(newPass)
+
+    document.querySelectorAll("#remove").forEach(btn =>{
+        btn.addEventListener('click', ()=> {
+            const element = btn.parentElement
+            if(element.firstElementChild.value == "" || element.firstElementChild.value != "" ){
+                element.remove()
+            }
+        })
+    })
 }
 
 document.querySelector(".add_new_pass").addEventListener("click", addPreparation)
