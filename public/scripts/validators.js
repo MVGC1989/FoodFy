@@ -44,12 +44,30 @@ const Validate ={
     },
 
     allFields(event) {
-        const items = document.querySelectorAll('.item input, .item select')
+        const items = document.querySelectorAll('.item input, .item select, .item textarea .item.photos_preview');
+
+        for (item of items) {
+            if (item.value == '') {
+                const message = document.createElement('div');
+                message.classList.add('messages');
+                message.classList.add('error');
+                message.style.position = 'fixed';
+                message.innerHTML = 'Todos os campos são obrigatórios!';
+                document.querySelector('body').appendChild(message);
+
+                event.preventDefault();
+            }
+        }
+    }
+
+    /*allFields(event) {
+        const items = document.querySelectorAll('.item input, .item select .item textarea')
         const divPhotos = document.querySelector('.item .photos_preview')
         
+        const message = document.createElement('div')
+        const divError = document.querySelector('div .messages.error')
+        
         for (const item of items) {
-            const message = document.createElement('div')
-            const divError = document.querySelector('div.messages.error')
             if(item.value == '' && item.name != 'is_admin') {
                 message.classList.add('messages', 'error')
                 message.style.position = 'fixed'
@@ -69,7 +87,7 @@ const Validate ={
                 event.preventDefault()
             }
         }
-    }
+    }*/
 }
 
 

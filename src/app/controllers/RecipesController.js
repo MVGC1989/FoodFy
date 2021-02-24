@@ -14,44 +14,49 @@ module.exports = {
             req.session.success = ""
 
             let {page, limit} = req.query 
-        
+                
             page = page || 1 
             limit = limit || 6 
             let offset = limit * (page -1)
-        
+                
             const params = {
                 page,
                 limit,
                 offset,
-        }
-        
-        let results = await Recipe.paginate(params)
-        const recipes = results.rows
+            }
+                
+            let results = await Recipe.paginate(params)
+            if(results.rows.length == 0){
+                return res.render("admin/recipes/index")
+            } else{
 
-        const pagination ={
-            total: Math.ceil(recipes[0].total/limit),
-            page
-        }
-
-        async function getImage(recipeId) {
-            let results = await Recipe.files(recipeId)
-            const file = results.rows[0]
-    
-            return `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`
-        }
-    
-        const recipesPromise = recipes.map(async recipe => {
-            recipe.image = await getImage(recipe.id)
-            return recipe
-        })
-    
-        const allRecipes = await Promise.all(recipesPromise)
-
-        const idUser = req.session.userId
-
+                const recipes = results.rows
+                
+                const pagination ={
+                    total: Math.ceil(recipes[0].total/limit),
+                    page
+                }
+                
+                async function getImage(recipeId) {
+                    let results = await Recipe.files(recipeId)
+                    const file = results.rows[0]
+                    
+                    return `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`
+                }
+                
+            const recipesPromise = recipes.map(async recipe => {
+                recipe.image = await getImage(recipe.id)
+                return recipe
+            })
+            
+            const allRecipes = await Promise.all(recipesPromise)
+            
+            const idUser = req.session.userId
+            
             return res.render('admin/recipes/index', { recipes: allRecipes , pagination, idUser, error, success})
-        } 
-        catch (err) {
+            
+        }
+        }catch (err) {
             console.error(err)
         }
     },
