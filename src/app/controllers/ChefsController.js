@@ -55,17 +55,6 @@ module.exports = {
 
   async post(req, res) {
     try {
-      const keys = Object.keys(req.body)
-      
-      for (key of keys) {
-        if (req.body[key] == "")
-        return res.send("PREENCHA TODOS OS CAMPOS!")
-      }
-
-      if (req.files == 0){
-        return res.send("ENVIE PELO MENOS UMA IMAGEM!")
-      }
-      
       const filePromise = req.files.map( file => File.create({...file}))
 
       let results = await filePromise[0]
@@ -153,13 +142,6 @@ module.exports = {
 
   async update(req, res) { 
     try{
-      const keys = Object.keys(req.body)
-        for (key of keys) {
-          if (req.body[key] == "" && key != "removed_files"){
-            return res.send("PREENCHA TODOS OS CAMPOS!")
-          }
-        }
-
         let results = await Chef.find(req.body.id)
         const chef = results.rows[0].file_id
 
@@ -189,7 +171,7 @@ async delete(req, res) {
   try {
     const { id } = req.body
 
-    // --> Buscando o chefe para excluir
+    //Buscando o chefe para excluir
     const chef = (await Chef.find(id)).rows[0]
 
     if (!chef) return res.render("parts/page-not-found")
@@ -199,11 +181,11 @@ async delete(req, res) {
       res.redirect(`/admin/chefs/${req.body.id}/edit` )
     
     }else {
-      // --> Deletando o chef e o arquivo do chefe buscado
+      //Deletando o chef e o arquivo do chefe buscado
     await Chef.delete(id)
     await File.delete(chef.file_id)
 
-    // --> Redirecionando para a pagina com todos os chefs.
+    //Redirecionando para a pagina com todos os chefs.
     return res.redirect("/admin/chefs")
     }
     

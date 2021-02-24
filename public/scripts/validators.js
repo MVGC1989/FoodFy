@@ -43,18 +43,29 @@ const Validate ={
         }
     },
 
-    allFields(event){
-        const items = document.querySelectorAll('.item input, .item select, .item textarea')
+    allFields(event) {
+        const items = document.querySelectorAll('.item input, .item select')
+        const divPhotos = document.querySelector('.item #photos-preview')
         
-        for(item of items){
-            if(item.value == "" && item.name != "removed_files" && item.name != "photos"){
-                const message = document.createElement('div')
-                message.classList.add('messages')
-                message.classList.add('error')
-                messages.style.position = 'fixed'
-                message.innerHTML = "Por favor preencha todos os campos!"
-                document.querySelector('body').appendChild(message)
-
+        for (const item of items) {
+            const message = document.createElement('div')
+            const divError = document.querySelector('div.messages.error')
+            if(item.value == '' && item.name != 'is_admin') {
+                message.classList.add('messages', 'error')
+                message.style.position = 'fixed'
+                
+                if((!divPhotos || !divPhotos.children[0]) && item.name == 'photos') {
+                    message.innerHTML = 'Envie ao menos uma imagem!'
+                    event.preventDefault()
+                    
+                    if(divError) divError.parentNode.replaceChild(message, divError)
+                    document.body.append(message)
+                    return
+                }
+                
+                message.innerHTML = 'Preencha todos os campos.'
+                if(divError) divError.parentNode.replaceChild(message, divError)
+                document.body.append(message)
                 event.preventDefault()
             }
         }
