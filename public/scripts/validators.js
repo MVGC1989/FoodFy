@@ -45,7 +45,7 @@ const Validate ={
 
     allFields(event) {
         const items = document.querySelectorAll('.item input, .item select')
-        const divPhotos = document.querySelector('.item #photos-preview')
+        const divPhotos = document.querySelector('.item .photos_preview')
         
         for (const item of items) {
             const message = document.createElement('div')
