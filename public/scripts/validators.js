@@ -47,13 +47,13 @@ const Validate ={
         const items = document.querySelectorAll('.item input, .item select, .item textarea')
         
         for(item of items){
-            if(item.value == ""){
+            if(item.value == "" && item.name != "removed_files" && item.name != "photos"){
                 const message = document.createElement('div')
                 message.classList.add('messages')
                 message.classList.add('error')
                 messages.style.position = 'fixed'
                 message.innerHTML = "Por favor preencha todos os campos!"
-                document.querySelector('body').append(message)
+                document.querySelector('body').appendChild(message)
 
                 event.preventDefault()
             }
