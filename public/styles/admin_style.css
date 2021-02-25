@@ -87,6 +87,16 @@
     color: #777777;
 }
 
+ .alert{
+    width: 450px;
+    color: red;
+    text-align: center;
+    margin-left: 445px;
+    margin-top: 10px;
+    font-size: 16px;
+    font-style: italic;
+}
+
 .modal button{
     width: 200px;
     text-align: center;

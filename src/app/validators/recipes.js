@@ -1,4 +1,3 @@
-
 async function post(req, res, next) {
     try {
         const keys = Object.keys(req.body)
@@ -29,8 +28,9 @@ async function update(req, res, next) {
             }    
         }
 
-        if (!req.files || req.files.length == 0) 
+        if (!req.files || req.files.length == 0){
             return res.send("Envie pelo menos uma imagem !")
+        }
 
         next()
 

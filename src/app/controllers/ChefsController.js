@@ -1,13 +1,16 @@
 const Chef = require("../models/Chef")
 const Recipe = require("../models/Recipe")
 const File = require("../models/Files")
-const {date} = require("../../lib/utils")
+const {date, getParams} = require("../../lib/utils")
 
 
 module.exports = {
 
   async index(req, res){
     try{
+      const success = req.session.success
+      req.session.success = ""
+
       let {page, limit} = req.query 
 
       page = page || 1 
@@ -21,30 +24,34 @@ module.exports = {
       }
       
       let results = await Chef.paginate(params)
-      const chef = results.rows
-
-      const pagination ={
+      if(results.rows.length == 0){
+        return res.render("admin/chefs/index")
+      }else{
+        
+        const chef = results.rows
+        
+        const pagination ={
           total: Math.ceil(chef[0].total/limit),
           page
-      }
-      
-      let chefs = (await Chef.all()).rows
-      const chefTemp = []
-
-        for(let chef of chefs){
-          const file = (await File.find(chef.file_id)).rows[0]
-
-          chefTemp.push({
-            ...chef,
-            image: `${req.protocol}://${req.headers.host}${file.path.replace("public", "")}`
-          })
         }
-
-      chefs = chefTemp
-
-      return res.render('admin/chefs/index', { chefs , pagination})
-    }
-    catch (err) {
+        
+        async function getImage(chefId) {
+          let results = await Chef.files(chefId)
+          const file = results.rows[0]
+          
+          return `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`
+        }
+        
+        const chefsPromise = chef.map(async chef => {
+          chef.image = await getImage(chef.id)
+          return chef
+        })
+        
+        const allChefs = await Promise.all(chefsPromise)
+        return res.render('admin/chefs/index', { chefs: allChefs , pagination, success})
+        
+      }
+      }catch (err) {
       console.error(err)
     }
   },
@@ -65,7 +72,8 @@ module.exports = {
         fileId
         )
       const chefId = results.rows[0].id
-  
+      
+      req.session.success = "Chef criado com sucesso!"
       return res.redirect(`/admin/chefs/${chefId}`)
     } 
     catch (err) {
@@ -75,6 +83,9 @@ module.exports = {
 
   async show(req, res) {
     try {
+      const success = req.session.success
+      req.session.success = ""
+
       const id  = req.params.id
 
       //Pega os dados do chef
@@ -111,7 +122,7 @@ module.exports = {
 
       const allChefRecipes = await Promise.all(recipesPromise)
 
-      return res.render("admin/chefs/show", { chef, recipes:allChefRecipes, files })
+      return res.render("admin/chefs/show", { chef, recipes:allChefRecipes, files, success })
     
     }catch (err) {
       console.error(err)
@@ -120,6 +131,9 @@ module.exports = {
 
   async edit(req, res) {
     try {
+      const error = req.session.error
+      req.session.error = ""
+
       let results = await Chef.find(req.params.id)
       const chef = results.rows[0]
       
@@ -132,8 +146,8 @@ module.exports = {
         ...file,
         src: `${req.protocol}://${req.headers.host}${file.path.replace("public", "")}`
       }))
-  
-      return res.render("admin/chefs/edit", { chef, files }) 
+      
+      return res.render("admin/chefs/edit", { chef, files, error }) 
     } 
     catch (err) {
       console.error(err)
@@ -159,7 +173,7 @@ module.exports = {
         else{
           await Chef.update_name(req.body)
         }
-
+      req.session.success = "Chefe atualizado !"
       return res.redirect(`/admin/chefs/${req.body.id}`)
   
     }catch (err) {
@@ -177,15 +191,17 @@ async delete(req, res) {
     if (!chef) return res.render("parts/page-not-found")
 
     if(chef.total_recipes >= 1){
-      
+      req.session.error = "Chefes que possuem receitas não podem ser deletados!"
       res.redirect(`/admin/chefs/${req.body.id}/edit` )
     
     }else {
       //Deletando o chef e o arquivo do chefe buscado
-    await Chef.delete(id)
-    await File.delete(chef.file_id)
+      const file = await Chef.files(id)
+      await Chef.delete(id)
+      await File.delete(file.id)
 
     //Redirecionando para a pagina com todos os chefs.
+    req.session.success = "Chef deletado!"
     return res.redirect("/admin/chefs")
     }
     

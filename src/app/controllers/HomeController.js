@@ -58,30 +58,34 @@ module.exports = {
                 offset
         }
         
-        let results = await Recipe.paginate(params)
-        const recipes = results.rows
-
-        const pagination ={
-            total: Math.ceil(recipes[0].total/limit),
-            page
-        }
-
-        async function getImage(recipeId) {
-            let results = await Recipe.files(recipeId);
-            const file = results.rows[0];
-    
-            return `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`;
-        }
-    
-        const recipesPromise = recipes.map(async recipe => {
-            recipe.image = await getImage(recipe.id);
-            return recipe;
-        });
-    
-        const allRecipes = await Promise.all(recipesPromise);
+            let results = await Recipe.paginate(params)
+            
+            if(results.rows.length == 0){
+                return res.render("home/recipes")
         
-        return res.render("home/recipes", {recipes : allRecipes, pagination, filter})
+            }else{
+                const recipes = results.rows
+
+                const pagination ={
+                    total: Math.ceil(recipes[0].total/limit),
+                    page
+                }
+
+                async function getImage(recipeId) {
+                    let results = await Recipe.files(recipeId)
+                    const file = results.rows[0]
+                    return `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`
+                }
     
+                const recipesPromise = recipes.map(async recipe => {
+                    recipe.image = await getImage(recipe.id)
+                    return recipe
+                })
+    
+                const allRecipes = await Promise.all(recipesPromise)
+        
+                return res.render("home/recipes", {recipes : allRecipes, pagination, filter})
+            }
         }catch (err){
         console.error(err)
         }
@@ -125,31 +129,36 @@ module.exports = {
                 page,
                 limit,
                 offset
-        }
-        
-        let results = await Chef.paginate(params)
-        const chef = results.rows
-
-        const pagination ={
-            total: Math.ceil(chef[0].total/limit),
-            page
-        }
-            let chefs = (await Chef.all()).rows
-            const chefTemp = []
-
-            for(let chef of chefs){
-                const file = (await File.find(chef.file_id)).rows[0]
-
-                chefTemp.push({
-                    ...chef,
-                    image: `${req.protocol}://${req.headers.host}${file.path.replace("public", "")}`
-                })
             }
-
-            chefs = chefTemp
-
-            return res.render("home/chefs", {chefs , pagination})
         
+            let results = await Chef.paginate(params)
+            
+            if(results.rows.length == 0){
+                return res.render("home/chefs")
+            
+            }else{
+                const chef = results.rows
+
+                const pagination ={
+                    total: Math.ceil(chef[0].total/limit),
+                    page
+                }
+
+                async function getImage(chefId) {
+                    let results = await Chef.files(chefId)
+                    const file = results.rows[0]
+                    return `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`
+                }
+        
+                const chefsPromise = chef.map(async chef => {
+                    chef.image = await getImage(chef.id)
+                    return chef
+                })
+    
+                const allChefs = await Promise.all(chefsPromise)
+
+                return res.render("home/chefs", {chefs: allChefs , pagination})
+            }
         }catch (err){
             console.error(err)
         }
@@ -188,9 +197,9 @@ module.exports = {
                 recipe.image = await getImage(recipe.id);
                 return recipe;
             });
-      
+
             const allChefRecipes = await Promise.all(recipesPromise);
-      
+
             return res.render("home/show_chef", { chef, recipes:allChefRecipes, files })
             
         }catch(err){

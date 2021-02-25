@@ -1,5 +1,6 @@
 const db = require("../../config/db")
 const {date} = require('../../lib/utils')
+const fs = require('fs')
 
 
 module.exports = {
@@ -146,28 +147,27 @@ module.exports = {
       let query = ""
       let filterQuery = ""
       let totalQuery = `(
-          SELECT count(*) FROM recipes
+          SELECT count(*) FROM chefs
       ) AS total` 
       
       if (filter) { 
 
           filterQuery = `
-          WHERE recipes.title ILIKE '%${filter}%'
-          OR recipes.ingredients ILIKE '%${filter}%'
+          WHERE chefs.name ILIKE '%${filter}%'
           `
 
           totalQuery = `(
-              SELECT count(*) FROM recipes
+              SELECT count(*) FROM chefs
               ${filterQuery}
           ) AS total`
       }
       
       query = `
-      SELECT recipes.*, ${totalQuery}, chefs.name AS chef_name
-      FROM recipes
-      LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
+      SELECT chefs.*, ${totalQuery}, chefs.name AS total
+      FROM chefs
+      WHERE 1=1
       ${filterQuery}
-      ORDER BY recipes.title ASC LIMIT $1 OFFSET $2`
+      ORDER BY chefs.name ASC LIMIT $1 OFFSET $2`
       
       return db.query(query , [limit, offset])
   },

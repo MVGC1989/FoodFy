@@ -4,6 +4,7 @@
 
 <h3 class="index">Gerenciar Chefs</h3>
 
+{% if chefs %}
 <div class="index_cards_chefs">
     {% for chef in chefs %}
         <div class="cardindex_chefs">
@@ -20,6 +21,15 @@
         </div>
     {% endfor %}
 </div> 
+
+{% else %}
+<div class="modal">
+    <p>Ops...não existem chefs cadastrados!</p>
+    <button onclick="window.location.href='/admin/chefs/create'"
+            class="modal-new-recipe">Cadastre um Chef
+        </button>
+</div>
+{% endif %}
 
 <div 
     class="pagination"
