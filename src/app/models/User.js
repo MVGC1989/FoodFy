@@ -2,6 +2,7 @@ const db = require('../../config/db')
 const fs = require('fs')
 const Base = require('./Base')
 const Recipe = require('../models/Recipe')
+const File = require('../models/Files')
 
 
 Base.init({table: 'users'})
@@ -11,7 +12,12 @@ module.exports = {
 
     async delete(id) {
         try {
-            let results = await db.query("SELECT * FROM recipes WHERE user_id = $1", [id])
+            let results = await db.query(`
+                SELECT recipes.*, recipe_id, file_id
+                FROM recipes
+                LEFT JOIN recipes_files ON (recipes.id = recipes_files.recipe_id)
+                WHERE recipes.user_id =$1
+            `, [id])
             const recipes = results.rows
 
             //dos produtos, pegar todas as imagens
@@ -25,7 +31,10 @@ module.exports = {
 
             //remover as imagens da pasta public
             promiseResults.map(results => {
-                results.rows.map(file => fs.unlinkSync(file.path))
+                results.rows.map(file => {
+                    fs.unlinkSync(file.path)
+                    File.delete(file.file_id)
+                })
             })
 
     }catch (err) {

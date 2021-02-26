@@ -22,7 +22,7 @@ routes.get('/password-reset', SessionController.resetForm)
 routes.post('/password-reset', SessionValidator.reset, SessionController.reset) 
 
 
-//CADASTRO DE USUÁRIOS
+//ROTAS DE USUÁRIOS
 
 routes.get('/', onlyUsers , UserController.index)
 

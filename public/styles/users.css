@@ -90,6 +90,7 @@ h4{
     height: 50px;
     border: 1px solid #DDDDDD;
     margin-left: 230px;
+    font-size: 16px;
 }
 
 .user-input2{
@@ -97,6 +98,7 @@ h4{
     height: 50px;
     border: 1px solid #DDDDDD;
     margin-left: 40px;
+    font-size: 16px;
 }
 
 #name-user,

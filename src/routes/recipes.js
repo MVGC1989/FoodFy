@@ -1,6 +1,7 @@
 const express = require("express")
 const routes = express.Router()
 const multer = require("../app/middlewares/multer")
+
 const  {onlyUsers}= require("../app/middlewares/session")
 
 const RecipesController = require("../app/controllers/RecipesController")
@@ -17,7 +18,7 @@ routes.post("/", onlyUsers, multer.array("photos", 5), RecipeValidator.post, Rec
 routes.get("/:id", onlyUsers, RecipesController.show)
 
 routes.get("/:id/edit", onlyUsers, RecipesController.edit)
-routes.put("/", multer.array("photos", 5), RecipeValidator.update, RecipesController.update)
+routes.put("/", onlyUsers, multer.array("photos", 5), RecipeValidator.update, RecipesController.update)
 routes.delete("/", onlyUsers, RecipesController.delete)
 
 module.exports = routes
