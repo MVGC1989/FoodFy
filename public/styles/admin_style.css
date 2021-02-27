@@ -9,16 +9,18 @@
 }
 
 .index_cards{
-    max-width: 940px;
+    max-width: 500px;
     margin-top: 30px;
     margin-left: 230px;
     margin-bottom: 48px;
     display: grid;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 1fr 1fr;
     gap: 20px;
 }
 
 .cardindex{
+    word-wrap: break-word;
+    max-width: 940px;
     display: grid;
     grid-template-columns: 172px 350px;
     gap: 0;
@@ -116,9 +118,10 @@
 
 .show{
     font-size: 24px;
-    color: #111111 100%;
+    color: #111111;
     margin-left: 230px;
     margin-top: 30px;
+    word-wrap: break-word;
 }
 
 .show_title p{

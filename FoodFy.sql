@@ -2,6 +2,13 @@
 DROP DATABASE IF EXISTS foodfy;
 CREATE DATABASE foodfy;
 
+--RESTART ID SEQUENCE
+ALTER SEQUENCE recipes_files_id_seq RESTART WITH 1;
+ALTER SEQUENCE recipes_id_seq RESTART WITH 1;
+ALTER SEQUENCE chefs_id_seq RESTART WITH 1;
+ALTER SEQUENCE users_id_seq RESTART WITH 1;
+ALTER SEQUENCE files_id_seq RESTART WITH 1;
+
 --CREATE TABLES
 
 CREATE TABLE "recipes" (
@@ -64,9 +71,9 @@ PRIMARY KEY ("sid") NOT DEFERRABLE INITIALLY IMMEDIATE;
 
 ALTER TABLE "chefs" ADD FOREIGN KEY ("file_id") REFERENCES "files" ("id");    
 ALTER TABLE "recipes" ADD FOREIGN KEY ("chef_id") REFERENCES "chefs" ("id");
-ALTER TABLE "recipes_files" ADD FOREIGN KEY ("recipe_id") REFERENCES "recipes" ("id") ON DELETE CASCADE;
-ALTER TABLE "recipes_files" ADD FOREIGN KEY ("file_id") REFERENCES "files" ("id") ON DELETE CASCADE;
-ALTER TABLE "recipes" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id") ON DELETE CASCADE;
+ALTER TABLE "recipes_files" ADD FOREIGN KEY ("recipe_id") REFERENCES "recipes" ("id");
+ALTER TABLE "recipes_files" ADD FOREIGN KEY ("file_id") REFERENCES "files" ("id");
+ALTER TABLE "recipes" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 
 --CREATE PROCEDURE
 
@@ -99,9 +106,44 @@ BEFORE UPDATE ON users
 FOR EACH ROW
 EXECUTE PROCEDURE trigger_set_timestamp();
 
---RESTART ID SEQUENCE
-ALTER SEQUENCE recipes_files_id_seq RESTART WITH 1;
-ALTER SEQUENCE recipes_id_seq RESTART WITH 1;
-ALTER SEQUENCE chefs_id_seq RESTART WITH 1;
-ALTER SEQUENCE users_id_seq RESTART WITH 1;
-ALTER SEQUENCE files_id_seq RESTART WITH 1;
+--DELETE CASCADE
+
+CREATE OR REPLACE FUNCTION delete_files_when_recipes_files_row_was_deleted()
+RETURNS TRIGGER AS $$
+BEGIN
+EXECUTE ('DELETE FROM files
+WHERE id = $1')
+USING OLD.file_id;
+RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- USER CASCADE TRIGGER
+CREATE TRIGGER delete_recipes_files
+AFTER DELETE ON recipes_files
+FOR EACH ROW
+EXECUTE PROCEDURE delete_files_when_recipes_files_row_was_deleted();
+
+-- DELETE CASCADE
+ALTER TABLE "recipes"
+DROP CONSTRAINT recipes_user_id_fkey,
+ADD CONSTRAINT recipes_user_id_fkey
+FOREIGN KEY ("user_id")
+REFERENCES users("id")
+ON DELETE CASCADE;
+
+ALTER TABLE "recipes_files"
+DROP CONSTRAINT recipes_files_recipe_id_fkey,
+ADD CONSTRAINT recipes_files_recipe_id_fkey
+FOREIGN KEY ("recipe_id")
+REFERENCES recipes("id")
+ON DELETE CASCADE;
+
+ALTER TABLE "recipes_files"
+DROP CONSTRAINT recipes_files_file_id_fkey,
+ADD CONSTRAINT recipes_files_file_id_fkey
+FOREIGN KEY ("file_id")
+REFERENCES files("id")
+ON DELETE CASCADE;
+
+

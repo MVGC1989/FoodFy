@@ -1,8 +1,11 @@
-const User = require('../models/User')
 const crypto = require('crypto')
 const mailer = require('../../lib/mailer')
 const { hash } = require('bcryptjs')
 const { emailTemplate , getParams} = require('../../lib/utils');
+
+const Recipe = require("../models/Recipe")
+const User = require('../models/User')
+const File = require("../models/Files")
 
 module.exports = {
     async index(req, res) {
@@ -142,8 +145,18 @@ module.exports = {
                 req.session.error = `Você não pode deletar sua própria conta.`
                 return res.redirect(`/admin/users/${req.body.id}/edit`)
             }
+            const { id } = req.body
 
-            await User.delete(req.body.id)
+            let files = (await Recipe.files(id)).rows
+    
+            let removeFilesPromise = files.map((file) => File.RecipeDelete(file.id))
+            await Promise.all(removeFilesPromise)
+    
+            removeFilesPromise = files.map((file) => File.delete(file.id))
+            await Promise.all(removeFilesPromise)
+    
+            await Recipe.delete(id)
+            await User.delete(id)
 
             req.session.success = "Conta deletada com sucesso !"
             return res.redirect("/admin/users")

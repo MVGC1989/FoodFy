@@ -14,14 +14,14 @@
                     alt="{{recipe.title}}" 
                     srcset="">
             </div>
-                <div>
+            <div>
                     <h1>{{recipe.title}}</h1>
                     <h2>por {{recipe.chef_name}}</h2>
                     {% if recipe.user_id == idUser %}
                         <a href="/admin/recipes/{{recipe.id}}/edit">Editar</a>
                     {% endif %}
                         <a href="/admin/recipes/{{recipe.id}}">Visualizar</a>
-                </div>
+            </div>
         </div>
     {% endfor %}
 </div> 
