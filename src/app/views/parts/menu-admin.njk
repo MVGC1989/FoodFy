@@ -55,19 +55,19 @@
                 <li>
                     <a class="linkadmin3" href="/admin/profile" id="active_adm">Perfil</a>                    
                 </li> 
-            
+                
                 {% if session.isAdmin %}
                 <p class="administrator">Administrador</p>
                 {% endif %}                              
             </ul>
         </nav>
     </div>
-       <div>
+
+    <div>
         <form action="/admin/users/logout" method="post" class="button-logout">
             <button class="linkexit" href="/">Sair
                 <i class="material-icons">power_settings_new</i>
             </button>
         </form>
     </div>
- 
 </header>
