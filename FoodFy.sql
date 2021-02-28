@@ -8,6 +8,7 @@ DELETE FROM files;
 DELETE FROM recipes_files;
 DELETE FROM chefs;
 DELETE FROM recipes;
+DELETE FROM session;
 
 --RESTART ID SEQUENCE
 ALTER SEQUENCE recipes_files_id_seq RESTART WITH 1;
