@@ -43,26 +43,10 @@ const Validate ={
         }
     },
 
-    /*allFields(event) {
-        const items = document.querySelectorAll('.item input, .item select, .item textarea ')
-        for (item of items) {
-            if (item.value == '') {
-                const message = document.createElement('div')
-                message.classList.add('messages')
-                message.classList.add('error')
-                message.style.position = 'fixed'
-                message.innerHTML = 'Todos os campos são obrigatórios!'
-                document.querySelector('body').appendChild(message)
-
-                event.preventDefault()
-            }
-        }
-    }*/
-
     allFields(event) {
-        const items = document.querySelectorAll('.item .input, .item select')
-        const divPhotos = document.querySelector('.item .photo')
-        
+        const items = document.querySelectorAll(' .item input, .item select, .item textarea')
+        const divPhotos = document.querySelector('.item .photo_preview')
+        const photoInput = document.querySelector("input[type='file']")
         const message = document.createElement('div')
         
         for ( item of items) {
@@ -71,7 +55,7 @@ const Validate ={
                 message.classList.add('messages', 'error')
                 message.style.position = 'fixed'
                 
-                if(!divPhotos ) {
+                if(!divPhotos || photoInput == "") {
                     message.innerHTML = 'Envie ao menos uma imagem!'
                     event.preventDefault()
                     
@@ -87,6 +71,8 @@ const Validate ={
             }
         }
     }
+
+    
 }
 
 
@@ -98,3 +84,27 @@ if (formError) {
 
 
 
+
+    document.querySelector(".formSubmit").addEventListener('submit',(e)=>{
+    const photo = document.querySelector(".photo")
+    const photoInput = document.querySelector("input[type='file']")
+   
+    document.querySelectorAll("input[type='text']").forEach(input =>{
+        if(input.value == '' || !photo && photoInput.files.length == 0){
+            if(input.value == ''){
+                const div = document.createElement('div')
+                div.classList.add("messages", "error")
+                div.textContent = `Verifique o campo ${input.name}`
+                document.querySelector("body").appendChild(div)
+            } else {
+                const div = document.createElement('div')
+                div.classList.add("messages", "error")
+                div.textContent = `Envie pelo menos 1 foto`
+                document.querySelector("body").appendChild(div)
+            }
+
+            e.preventDefault()
+        }
+
+    })
+})

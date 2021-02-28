@@ -27,7 +27,7 @@ routes.post('/password-reset', SessionValidator.reset, SessionController.reset)
 routes.get('/', onlyUsers , UserController.index)
 
 routes.get('/create', onlyUsers,  UserController.create)
-routes.post('/create', onlyUsers, UserValidator.post, UserController.post)
+routes.post('/create', onlyUsers ,UserValidator.post, UserController.post)
 
 routes.get('/:id/edit', onlyUsers, UserValidator.edit, UserController.edit)
 routes.put('/', onlyUsers, UserValidator.update, UserController.update)
