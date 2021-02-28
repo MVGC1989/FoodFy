@@ -55,7 +55,7 @@ async function createFiles() {
     while (files.length < totalFiles) {
         files.push({
             name: faker.image.image(),
-            path: `/images/placeholder.png`,
+            path: `/images/recipe-placeholder.png`,
         })
     }
 

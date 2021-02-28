@@ -19,24 +19,24 @@ module.exports = {
         const query =  `
             INSERT INTO recipes (
                 chef_id,
+                user_id,
                 title,
                 ingredients,
                 preparation,
                 information,
-                created_at,
-                user_id
+                created_at
                 
             ) VALUES ($1, $2, $3, $4, $5, $6, $7)
                 RETURNING id
         `
         const values = [
             data.chef_id,
+            data.user_id,
             data.title,
             data.ingredients,
             data.preparation,
             data.information,
-            date(Date.now()).iso,
-            data.user_id
+            date(Date.now()).iso
         ]
         
         return db.query(query, values)

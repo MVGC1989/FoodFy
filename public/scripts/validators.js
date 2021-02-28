@@ -42,69 +42,36 @@ const Validate ={
             value
         }
     },
-
-    allFields(event) {
-        const items = document.querySelectorAll(' .item input, .item select, .item textarea')
-        const divPhotos = document.querySelector('.item .photo_preview')
-        const photoInput = document.querySelector("input[type='file']")
-        const message = document.createElement('div')
-        
-        for ( item of items) {
-            const divError = document.querySelector('div.messages.error')
-            if(item.value === '') {
-                message.classList.add('messages', 'error')
-                message.style.position = 'fixed'
-                
-                if(!divPhotos || photoInput == "") {
-                    message.innerHTML = 'Envie ao menos uma imagem!'
-                    event.preventDefault()
-                    
-                    if(divError) divError.parentNode.replaceChild(message, divError)
-                    document.body.append(message)
-                    return
-                }
-                
-                message.innerHTML = 'Preencha todos os campos.'
-                if(divError) divError.parentNode.replaceChild(message, divError)
-                document.body.append(message)
-                event.preventDefault()
-            }
-        }
-    }
-
-    
 }
 
-
+//INPUT VERMELHO AO DAR ERRO
 const formError = document.querySelector('.error.messages')
 if (formError) {
     const fields = document.querySelectorAll('input')
     fields.forEach(field => field.style.borderColor = '#ff3131')
 }
 
-
-
-
-    document.querySelector(".formSubmit").addEventListener('submit',(e)=>{
+//VALIDAÇÃO DE UPDATE
+document.querySelector(".formSubmit").addEventListener('submit',(e)=>{
     const photo = document.querySelector(".photo")
     const photoInput = document.querySelector("input[type='file']")
-   
-    document.querySelectorAll("input[type='text']").forEach(input =>{
-        if(input.value == '' || !photo && photoInput.files.length == 0){
-            if(input.value == ''){
-                const div = document.createElement('div')
-                div.classList.add("messages", "error")
-                div.textContent = `Verifique o campo ${input.name}`
-                document.querySelector("body").appendChild(div)
-            } else {
-                const div = document.createElement('div')
-                div.classList.add("messages", "error")
-                div.textContent = `Envie pelo menos 1 foto`
-                document.querySelector("body").appendChild(div)
+    
+        document.querySelectorAll("input[type='text'], .item textarea, .item select").forEach(input =>{
+            if(input.value == '' || !photo && photoInput.files.length == 0){
+                if(!photo && photoInput.files.length == 0){
+                    const div = document.createElement('div')
+                    div.classList.add("messages", "error")
+                    div.textContent = `Envie pelo menos uma imagem !`
+                    document.querySelector("body").appendChild(div)
+
+                } else {
+                    const div = document.createElement('div')
+                    div.classList.add("messages", "error")
+                    div.textContent = "Por favor preencha todos os campos!"
+                    document.querySelector("body").appendChild(div)
+                }
+                e.preventDefault()
             }
-
-            e.preventDefault()
-        }
-
+    
+        })
     })
-})
