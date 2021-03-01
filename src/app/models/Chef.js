@@ -142,33 +142,19 @@ module.exports = {
     },
 
     paginate(params){
-      var { filter, limit, offset } = params
+      var { limit, offset } = params
 
-      let query = ""
-      let filterQuery = ""
-      let totalQuery = `(
-          SELECT count(*) FROM chefs
-      ) AS total` 
-      
-      if (filter) { 
-
-          filterQuery = `
-          WHERE chefs.name ILIKE '%${filter}%'
-          `
-
-          totalQuery = `(
-              SELECT count(*) FROM chefs
-              ${filterQuery}
-          ) AS total`
-      }
-      
-      query = `
-      SELECT chefs.*, ${totalQuery}, chefs.name AS total
-      FROM chefs
-      WHERE 1=1
-      ${filterQuery}
-      ORDER BY chefs.name ASC LIMIT $1 OFFSET $2`
-      
+      const query = `
+        SELECT chefs.*, (
+            SELECT count(*) FROM chefs
+        ) AS total,
+        count(recipes) AS total_recipes
+        FROM chefs
+        LEFT JOIN recipes ON (chefs.id = recipes.chef_id)
+        GROUP BY chefs.id
+        ORDER BY chefs.created_at DESC
+        LIMIT $1 OFFSET $2`
+        
       return db.query(query , [limit, offset])
   },
 
