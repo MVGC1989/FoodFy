@@ -2,6 +2,10 @@ const { hash } = require('bcryptjs')
 const faker = require('faker')
 
 const User = require('./src/app/models/User')
+const Chef = require('./src/app/models/Chef')
+const File = require('./src/app/models/Files')
+const Recipe = require('./src/app/models/Recipe')
+const Base = require('./src/app/models/Base')
 
 let usersIds = []
 let chefsIds = []

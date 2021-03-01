@@ -63,8 +63,8 @@ module.exports = {
         LIMIT $1 OFFSET $2
         `
 
-        const results = await db.query(query, [limit, offset])
-        return results.rows
+        return db.query(query, [limit, offset])
+        
     },
 
 }

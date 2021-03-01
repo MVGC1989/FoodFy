@@ -13,13 +13,32 @@ module.exports = {
             const error = req.session.error
             req.session.error = ""
 
-            const params = getParams(req.query, 6)
+            let {page, limit} = req.query
+
+            page = page || 1
+            limit = limit || 6
+            let offset = limit * (page - 1)
+
+            const params = {
+                page,
+                limit,
+                offset
+            }
+
+            let results = await User.paginate(params)
+            const users = results.rows
+
+            const pagination = {
+                total: Math.ceil(users[0].total/limit),
+                    page
+            }
+            /*const params = getParams(req.query, 6)
             const users = await User.paginate(params)
             const pagination = { page: params.page }
     
             users.length == 0
             ? pagination.total = 1
-            : pagination.total = Math.ceil(users[0].total / params.limit)
+            : pagination.total = Math.ceil(users[0].total / params.limit)*/
 
             return res.render("admin/users/index", {users, pagination, error})
         } catch (error) {

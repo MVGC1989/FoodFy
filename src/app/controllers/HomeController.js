@@ -1,6 +1,6 @@
 const Recipe = require("../models/Recipe")
 const Chef = require("../models/Chef")
-const {date} = require("../../lib/utils")
+const {date, getParams} = require("../../lib/utils")
 
 module.exports = {
     async index(req , res){
@@ -55,7 +55,7 @@ module.exports = {
                 page,
                 limit,
                 offset
-        }
+            }
         
             let results = await Recipe.paginate(params)
             
@@ -69,13 +69,6 @@ module.exports = {
                     total: Math.ceil(recipes[0].total/limit),
                     page
                 }
-
-                async function getImage(recipeId) {
-                    let results = await Recipe.files(recipeId)
-                    const file = results.rows[0]
-                    return `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`
-                }
-    
                 const recipesPromise = recipes.map(async recipe => {
                     recipe.image = await getImage(recipe.id)
                     return recipe
@@ -96,7 +89,7 @@ module.exports = {
             const recipe = result.rows[0]
 
             if(!recipe){
-                return res.render("home/notfound")
+                return res.render("parts/page-not-found")
             }
             
             recipe.created_at = date(recipe.created_at).format
@@ -171,6 +164,10 @@ module.exports = {
             let result = await Chef.find(id)
             const chef = result.rows[0]
 
+            if(!chef){
+                return res.render("parts/page-not-found")
+            }
+
             chef.created_at = date(chef.created_at).format
 
             //Mostra as receitas de cada chef
@@ -186,15 +183,15 @@ module.exports = {
 
             //mostra a imagem de cada receita
             async function getImage(recipeId) {
-                let results = await Recipe.files(recipeId);
-                const file = results.rows[0];
+                let results = await Recipe.files(recipeId)
+                const file = results.rows[0]
 
-                return `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`;
+                return `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`
             }
 
             const recipesPromise = recipes.map(async recipe => {
-                recipe.image = await getImage(recipe.id);
-                return recipe;
+                recipe.image = await getImage(recipe.id)
+                return recipe
             });
 
             const allChefRecipes = await Promise.all(recipesPromise);
@@ -214,21 +211,21 @@ module.exports = {
             const recipes = results.rows
 
             async function getImage(recipeId) {
-                let results = await Recipe.files(recipeId);
-                const file = results.rows[0];
+                let results = await Recipe.files(recipeId)
+                const file = results.rows[0]
         
-                return `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`;
+                return `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`
             }
         
             const recipesPromise = recipes.map(async recipe => {
-                recipe.image = await getImage(recipe.id);
+                recipe.image = await getImage(recipe.id)
                 return recipe;
             });
         
-            const allRecipes = await Promise.all(recipesPromise);
+            const allRecipes = await Promise.all(recipesPromise)
             
             
-            return res.render("home/search",{ recipes: allRecipes, filter});
+            return res.render("home/search",{ recipes: allRecipes, filter})
         
         } catch (err){
             console.error(err)

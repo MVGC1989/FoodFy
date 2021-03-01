@@ -22,7 +22,7 @@ ALTER SEQUENCE files_id_seq RESTART WITH 1;
 CREATE TABLE "recipes" (
   "id" SERIAL PRIMARY KEY,
   "chef_id" int NOT NULL,
-  "user_id" int NOT NULL
+  "user_id" int NOT NULL,
   "title" text NOT NULL,
   "ingredients" text[],
   "preparation" text[],
