@@ -69,6 +69,14 @@ module.exports = {
                     total: Math.ceil(recipes[0].total/limit),
                     page
                 }
+
+                async function getImage(recipeId) {
+                    let results = await Recipe.files(recipeId)
+                    const file = results.rows[0]
+    
+                    return `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`
+                }
+                
                 const recipesPromise = recipes.map(async recipe => {
                     recipe.image = await getImage(recipe.id)
                     return recipe

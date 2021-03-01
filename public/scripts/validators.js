@@ -47,7 +47,7 @@ const Validate ={
 //INPUT VERMELHO AO DAR ERRO
 const formError = document.querySelector('.error.messages')
 if (formError) {
-    const fields = document.querySelectorAll('input')
+    const fields = document.querySelectorAll('input , .item textarea')
     fields.forEach(field => field.style.borderColor = '#ff3131')
 }
 
