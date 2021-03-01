@@ -20,16 +20,8 @@ module.exports = {
             users.length == 0
             ? pagination.total = 1
             : pagination.total = Math.ceil(users[0].total / params.limit)
-    
-            const { success } = req.session
-    
-            if (success) {
-                res.render("admin/users/index", { users, success, pagination, error })
-                req.session.success = ''
-                return
-            }
 
-            return res.render("admin/users/index", {users, pagination})
+            return res.render("admin/users/index", {users, pagination, error})
         } catch (error) {
             console.error(error)
         }
