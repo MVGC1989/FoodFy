@@ -2,7 +2,7 @@
 <img  alt="Launchbase"  src="https://user-images.githubusercontent.com/63380367/110002753-829b1c80-7cf4-11eb-99c9-ea2abf316fe1.png"  width="400px" />
 </h1>
 
-<h1 align="center"> FoodFy 🍽️ Bootcamp Launchbase </h1>
+<h1 align="center"> 🍽️ FoodFy - Bootcamp Launchbase </h1>
 
 <h4 align="center"><i>Site de gerencimaneto de receitas feito durante o Bootcamp LaunchBase da <a href="https:://rocketseat.com.br">Rocketseat!🚀</a></i></h4> 
 
