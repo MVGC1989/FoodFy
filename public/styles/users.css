@@ -6,6 +6,20 @@
     margin-bottom: 56px;
 }
 
+.login-form a{
+    font-size: 16px;
+    color: #969696;
+    font-weight: bold;
+    text-decoration: none;
+    position: absolute;
+    margin-top: 28px;
+}
+
+.login-form a:hover{
+    transition: 500ms;
+    color: #6558C3;
+}
+
 .session-init{
     font-size: 24px;
     margin-top: 56px;
@@ -72,7 +86,22 @@ h4{
     padding: 8px 16px;
     width: 134px;
     height: 37px;
-    margin-top: 40px;
+    margin-top: 30px;
+    margin-left: 368px;
+    cursor: pointer;
+}
+
+.button_forgot{
+    background: #6558C3;
+    border-radius: 4px;
+    color:#FFFFFF ;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    padding: 8px 16px;
+    width: 134px;
+    height: 37px;
+    margin-top: 20px;
     margin-left: 368px;
     cursor: pointer;
 }
