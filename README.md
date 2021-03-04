@@ -4,7 +4,7 @@
 
 <h2 align="center"> FoodFy 🍽️ Bootcamp Launchbase </h2>
 
-*Site de gerencimaneto de receitas feito durante o Bootcamp LaunchBase da [Rocketseat!](https:://rocketseat.com.br)* 🚀
+<a align="center"><i>Site de gerencimaneto de receitas feito durante o Bootcamp LaunchBase da [Rocketseat!](https:://rocketseat.com.br)</i></a> 🚀
 
 
 
