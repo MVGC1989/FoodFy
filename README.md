@@ -31,3 +31,6 @@ ___
 * [Node.js](https://nodejs.org/)
 * [Nunjucks](https://mozilla.github.io/nunjucks/)
 * [PostgreSQL](https://www.postgresql.org/)
+___
+
+## 🛠️ Instalação
