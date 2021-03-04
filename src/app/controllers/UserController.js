@@ -67,13 +67,13 @@ module.exports = {
             const welcomeEmail = `
                 <h2 style="font-size: 24px; font-weight: normal;">Olá <strong>${name}</strong>,</h2>
                 <p>Seja muito bem-vindo(a) ao <strong>Foodfy</strong> :)</p>
-                <p>Seu cadastro foi realizado com sucesso! Confira seus dados de acesso:</p>
+                <p>Seu cadastro foi realizado com sucesso em nossa plataforma! Confira seus dados de acesso:</p>
                 <p>Login: ${email}</p>
                 <p>Senha: ${userPassword}</p>
                 <br>
-                <h3>Como eu acesso minha Conta?</h3>
+                <h3>Para acessar sua conta:</h3>
                 <p>
-                    Bem simples, você só precisa clicar no botão abaixo e entrar com seu email e senha informados acima.
+                    Clique no botão abaixo e digite seu email e senha informados acima.
 				</p>
 				<p style="text-align: center;">
                     <a

@@ -37,15 +37,14 @@ async function createUsers() {
 
 async function createChefs() {
     const chefs = []
-
-    for (let i = 1; chefs.length < totalChefs; i++) {
-
+    let filesCount = 0
+    for (let i = totalFiles +1; chefs.length < totalChefs; i++) {
+        filesCount++
         chefs.push({
             name: faker.name.firstName(),
-            file_id: i
+            file_id: filesCount[i]
         })
     }
-
     const chefsPromise = chefs.map(chef => Chef.create(chef))
     chefsIds = await Promise.all(chefsPromise)
 }
@@ -56,7 +55,7 @@ async function createFiles() {
     while (files.length < totalFiles) {
         files.push({
             name: faker.image.image(),
-            path: `/images/placeholder.png`,
+            path: `/images/chef_placeholder.png`,
         })
     }
 
