@@ -61,3 +61,4 @@ _**Recomendações de uso do Foodfy :**_
    * *Efetuar o login ;*
    * *É preciso criar um chefe antes de adicionar uma receita ;*
    * *Depois de criar um chefe, crie uma receita.*
+* *O usuário administrador pode criar mais usuários. Para isso é necessário configurar o arquivo "src/lib/mailer.js" com seus dados.*
