@@ -56,11 +56,11 @@ ___
 
 _**Abaixo seguem instruções para instalação do FoodFy :**_
 
-1. *É necessário instalar o [Node.Js](https://nodejs.org/en/), o [PostgreSQL](https://www.postgresql.org/) e o [Postbird](https://www.electronjs.org/apps/postbird) ;* 
+1. *É necessário instalar o **[Node.Js](https://nodejs.org/en/)**, o **[PostgreSQL](https://www.postgresql.org/)** e o **[Postbird](https://www.electronjs.org/apps/postbird)** ;* 
 2. *Clone este repositório e abra-o em seu editor de códigos ;* 
-3. *Crie o banco de dados e as tabelas usando o arquivo "FoodFy.sql" ;* 
-4. *Configure o arquivo "src/config/db.js" com seu nome de usuário e senha do Postgres ;* 
-5. *Popule o banco de dados com o arquivo "seeds.js" (rodar no terminal - node seeds.js) ;* 
+3. *Crie o banco de dados e as tabelas usando o arquivo **"FoodFy.sql"** ;* 
+4. *Configure o arquivo **"src/config/db.js"** com seu nome de usuário e senha do Postgres ;* 
+5. *Popule o banco de dados com o arquivo **"seeds.js"** (rodar no terminal - node seeds.js) ;* 
 6. *Iniciar a aplicação (rodar no terminal - npm start).*
 ___
 
@@ -70,11 +70,11 @@ _**Recomendações de uso do Foodfy :**_
 
 * *Ao iniciar a aplicação não haverá nenhuma receita ou chefe cadastrados.*
 * *Para realizar o cadastro de chefes e receitas pela primeira vez :*
-   * *No banco de dados copiar e-mail de acesso de um usuário marcado como "true" no campo is_admin ;*
-   * *Efetuar o login. A senha padrão é "1234" ;*
+   * *No banco de dados copiar e-mail de acesso de um usuário marcado como **"true"** no campo is_admin ;*
+   * *Efetuar o login. A senha padrão é **"1234"** ;*
    * *É preciso criar um chefe antes de adicionar uma receita ;*
    * *Depois de criar um chefe, crie uma receita.*
-* *O usuário administrador pode criar mais usuários. Para isso é necessário configurar o arquivo "src/lib/mailer.js" com seus dados. O mesmo vale para a modificação ou recuperação de senha.*
+* *O usuário administrador pode criar mais usuários. Para isso é necessário configurar o arquivo **"src/lib/mailer.js"** com seus dados. O mesmo vale para a modificação ou recuperação de senha.*
 ___
 
 ## :warning: Atenção Rocketseat
@@ -85,10 +85,15 @@ ___
 
 ## :handshake: Agradecimentos
 
-*Gostaria de agradecer a todo time da Rocketseat pelas aulas fornecidas e pelo ambiente amistoso criado no grupo do Discord. Um agradecimento ao [Guilherme](https://github.com/GuilhermeB-Silva) pela troca de ideias e pela ajuda e tambem ao [Luiz](https://github.com/luizbatanero) quem me apresentou à Rocketseat.*
+*Gostaria de agradecer a todo time da Rocketseat pelas aulas fornecidas e pelo ambiente amistoso criado no grupo do Discord. Um agradecimento ao **[Guilherme](https://github.com/GuilhermeB-Silva)** pela troca de ideias e pela ajuda e tambem ao **[Luiz](https://github.com/luizbatanero)** quem me apresentou à Rocketseat.*
 
-*Também quero agradecer ao Saudoso Professor [Gustavo Guanabara](https://github.com/gustavoguanabara) cujo projeto gratuito e maravilhoso proporcionou o meu primeiro contato com o mundo da programação.*
+*Também quero agradecer ao Saudoso Professor **[Gustavo Guanabara](https://github.com/gustavoguanabara)** cujo projeto gratuito e maravilhoso proporcionou o meu primeiro contato com o mundo da programação.*
 ___
 
 ## :balance_scale: Licença
-*Este projeto está sob a **Licença MIT**. Para mais informações ou dúvidas, por favor acesse a [LICENÇA](LICENSE).*
+*Este projeto está sob a **Licença MIT**. Para mais informações ou dúvidas, por favor acesse a **[LICENÇA](LICENSE)**.*
+
+___
+## 👷 Desenvolvimento
+
+*Projeto desenvolvido por **[Marcos Carvalho](https://github.com/MVGC1989)**.*
