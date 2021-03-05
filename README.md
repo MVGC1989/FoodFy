@@ -58,7 +58,14 @@ _**Recomendações de uso do Foodfy :**_
 * *Ao iniciar a aplicação não haverá nenhuma receita ou chefe cadastrados.*
 * *Para realizar o cadastro de chefes e receitas pela primeira vez :*
    * *No banco de dados copiar login e senha de um usuário marcado como "true" no campo is_admin ;*
-   * *Efetuar o login ;*
+   * *Efetuar o login. A senha padrão é "1234" ;*
    * *É preciso criar um chefe antes de adicionar uma receita ;*
    * *Depois de criar um chefe, crie uma receita.*
 * *O usuário administrador pode criar mais usuários. Para isso é necessário configurar o arquivo "src/lib/mailer.js" com seus dados.*
+___
+
+## ⚠️ Atenção Rocketseat
+
+_**Ao Time da Rocketseat:**_
+*Por favor, ao utilizar a aplicação, efetue o login como usuário administrativo e também como usuário comum. Muitas funcionalidades e botões permaneceram ocultos quando um usuário comum estiver logado.*
+___
