@@ -8,23 +8,28 @@
     align-self: center;
     display: flex;
 }
-
+.pagination a{
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 2px solid #6558C3;
+}
 .pagination a,
 .pagination span {
-    color:gray;
-    text-decoration: none;
-    margin-right: 16px;
+    margin-right: 8px;
     font-weight: bold;
     font-size: 18px;
+    transition: 300ms;
+    text-decoration: none;
+    color: #6558C3;
 }
 
 .pagination a:hover{
-    color: black;
-    filter: brightness(0.9); /*deixa mais escuro quando passo mouse*/
-    border-bottom: 2px solid black;
+    color: white;
+    background-color: #6558C3;
     transition: 300ms;
 }
 .pagination a.activepage{
-    color: black;
-    border-bottom: 2px solid black;
+    color: white;
+    background-color: #6558C3;
+    text-decoration: none;
 }

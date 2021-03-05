@@ -2,15 +2,9 @@ const { hash } = require('bcryptjs')
 const faker = require('faker')
 
 const User = require('./src/app/models/User')
-const Chef = require('./src/app/models/Chef')
-const File = require('./src/app/models/Files')
-const Recipe = require('./src/app/models/Recipe')
-const Base = require('./src/app/models/Base')
 
 let usersIds = []
-
-let totalUsers = 6
-
+let totalUsers = 3
 
 
 async function createUsers() {
@@ -30,7 +24,6 @@ async function createUsers() {
     const usersPromise = users.map(user => User.create(user))
     usersIds = await Promise.all(usersPromise)
 }
-
 
 
 async function init() {      

@@ -130,7 +130,6 @@ module.exports = {
     async post(req, res){
         try{
             req.body.user_id = req.session.userId
-            req.body.is_admin = req.session.isAdmin
 
             let results = await Recipe.create(req.body)
             const recipeId = results.rows[0].id

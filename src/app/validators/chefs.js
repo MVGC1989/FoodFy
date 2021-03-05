@@ -16,7 +16,8 @@ async function post(req, res, next) {
                 error: "Envie pelo menos uma imagem!"
             })
         }
-
+        next()
+        
     } catch (error) {
         console.error(error)
     }
