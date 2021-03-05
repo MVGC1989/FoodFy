@@ -16,6 +16,8 @@ ___
 <a  href="#hammer_and_wrench-instalação">Instalação</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
 <a  href="#joystick-usando-foodfy">Usando FoodFy</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
 <a  href="#warning-atenção-rocketseat"> Ao Time Rocketseat</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+<a  href="#handshake-agradecimentos"> Agradecimentos</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+<a  href="#balance_scale-licença">Licença</a>
 </b></p>
 
 ___
@@ -80,3 +82,13 @@ ___
 _**Ao Time da Rocketseat:**_
 *Por favor, ao utilizar a aplicação, efetue o login como usuário administrativo e também como usuário comum. Muitas funcionalidades e botões permaneceram ocultos quando um usuário comum estiver logado.*
 ___
+
+## :handshake: Agradecimentos
+
+*Gostaria de agradecer a todo time da Rocketseat pelas aulas fornecidas e pelo ambiente amistoso criado no grupo do Discord. Um agradecimento ao [Guilherme](https://github.com/GuilhermeB-Silva) pela troca de ideias e pela ajuda e tambem ao [Luiz](https://github.com/luizbatanero) quem me apresentou à Rocketseat.*
+
+*Também quero agradecer ao Saudoso Professor [Gustavo Guanabara](https://github.com/gustavoguanabara) cujo projeto gratuito e maravilhoso proporcionou o meu primeiro contato com o mundo da programação.*
+___
+
+## :balance_scale: Licença
+*Este projeto está sob a **Licença MIT**. Para mais informações ou dúvidas, por favor acesse a [LICENÇA](LICENSE).*
