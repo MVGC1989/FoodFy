@@ -10,13 +10,16 @@ ___
 
 ## 📝 Descrição
 
-Este trabalho foi desenvolvido como requisito para obtenção do certificado de conclusão do curso Bootcamp Lanchbase da RocketSeat.
+Este trabalho foi desenvolvido como requisito para obtenção do certificado de conclusão do curso Bootcamp Launchbase da RocketSeat.
 Consiste em um site de gerenciamento de receitas com as seguintes funcionalidades:
 
+* *Homepage com acesso livre a chefes e receitas* ;
+* *Pesquisa de receitas cadastradas* ;
 * *Sistema de login para usuários previamente cadastrados* ;
+* *Área administrativa restrita a usuários cadastrados* ;
 * *Cadastramento de novos usuários realizado pelo usuário administrador, bem como sua edição e exclusão* ;
 * *Cadastramento, edição e exclusão de chefes realizado pelo usuário administrador* ;
-* *Cadastramento de receitas, edição e exclusão realizado por qualquer usuário previamente cadastrado*
+* *Cadastramento de receitas, edição e exclusão realizado por qualquer usuário previamente cadastrado* ;
 ___
 ## 💻 Tecnologias Utilizadas
 
@@ -25,11 +28,14 @@ ___
 * [Bcryptjs](https://www.npmjs.com/package/bcryptjs)
 * [CSS3](https://developer.mozilla.org/docs/Web/CSS)
 * [Express](https://expressjs.com/)
+* [Express Session](https://www.npmjs.com/package/express-session)
 * [HTML5](https://developer.mozilla.org/docs/Web/HTML)
 * [Javascript](https://developer.mozilla.org/docs/Web/JavaScript)
-* [Multer](https://github.com/expressjs/multer)
+* [Multer](https://www.npmjs.com/package/multer)
 * [Node.js](https://nodejs.org/)
+* [Nodemailer](https://nodemailer.com/about/)
 * [Nunjucks](https://mozilla.github.io/nunjucks/)
+* [NPM](https://docs.npmjs.com/about-npm)
 * [PostgreSQL](https://www.postgresql.org/)
 ___
 
