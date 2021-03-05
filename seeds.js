@@ -4,7 +4,7 @@ const faker = require('faker')
 const User = require('./src/app/models/User')
 
 let usersIds = []
-let totalUsers = 3
+let totalUsers = 5
 
 
 async function createUsers() {
