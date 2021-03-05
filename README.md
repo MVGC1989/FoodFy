@@ -10,8 +10,8 @@ ___
 
 ## 📝 Descrição
 
-Este trabalho foi desenvolvido como requisito para obtenção do certificado de conclusão do curso Bootcamp Launchbase da RocketSeat.
-Consiste em um site de gerenciamento de receitas com as seguintes funcionalidades:
+_**Este trabalho foi desenvolvido como requisito para obtenção do certificado de conclusão do curso Bootcamp Launchbase da RocketSeat.
+Consiste em um site de gerenciamento de receitas com as seguintes funcionalidades:**_
 
 * *Homepage com acesso livre a chefes e receitas* ;
 * *Pesquisa de receitas cadastradas* ;
