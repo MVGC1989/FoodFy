@@ -40,3 +40,12 @@ ___
 ___
 
 ## 🛠️ Instalação
+
+_**Abaixo seguem instruções para instalação e uso do FoodFy.**_
+
+1. *É necessário instalar o [Node.Js](https://nodejs.org/en/), o [PostgreSQL](https://www.postgresql.org/) e o [Postbird](https://www.electronjs.org/apps/postbird)* ;
+2. *Clone este repositório e abra-o em seu editor de códigos* ;
+3. *Crie o banco de dados e as tabelas usando o arquivo "FoodFy.sql"* ;
+4. *Configure o arquivo "src/config/db.js" com seu nome de usuário e senha do Postgres* ;
+5. *Popule o banco de dados com o arquivo "seeds.js" (rodar no terminal - node seeds.js)* ;
+6. *Iniciar a aplicação (rodar no terminal - npm start)* ;
