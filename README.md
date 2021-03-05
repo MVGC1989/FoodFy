@@ -57,7 +57,7 @@ _**Recomendações de uso do Foodfy :**_
 
 * *Ao iniciar a aplicação não haverá nenhuma receita ou chefe cadastrados.*
 * *Para realizar o cadastro de chefes e receitas pela primeira vez :*
-   * *No banco de dados copiar login e senha de um usuário marcado como "true" no campo is_admin ;*
+   * *No banco de dados copiar e-mail de acesso de um usuário marcado como "true" no campo is_admin ;*
    * *Efetuar o login. A senha padrão é "1234" ;*
    * *É preciso criar um chefe antes de adicionar uma receita ;*
    * *Depois de criar um chefe, crie uma receita.*
