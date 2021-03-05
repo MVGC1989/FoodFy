@@ -41,7 +41,7 @@ ___
 
 ## 🛠️ Instalação
 
-_**Abaixo seguem instruções para instalação do FoodFy.**_
+_**Abaixo seguem instruções para instalação do FoodFy :**_
 
 1. *É necessário instalar o [Node.Js](https://nodejs.org/en/), o [PostgreSQL](https://www.postgresql.org/) e o [Postbird](https://www.electronjs.org/apps/postbird)* ;
 2. *Clone este repositório e abra-o em seu editor de códigos* ;
@@ -50,3 +50,14 @@ _**Abaixo seguem instruções para instalação do FoodFy.**_
 5. *Popule o banco de dados com o arquivo "seeds.js" (rodar no terminal - node seeds.js)* ;
 6. *Iniciar a aplicação (rodar no terminal - npm start)* ;
 ___
+
+## 🕹️ Usando Foodfy
+
+_**Recomendações de uso do Foodfy :**_
+
+* *Ao iniciar a aplicação não haverá nenhuma receita ou chefe cadastrados.*
+* *Para realizar o cadastro de chefes e receitas pela primeira vez :*
+   * *No banco de dados copiar login e senha de um usuário marcado como "true" no campo is_admin ;*
+   * *Efetuar o login ;*
+   * *É preciso criar um chefe antes de adicionar uma receita ;*
+   * *Depois de criar um chefe, crie uma receita.*
